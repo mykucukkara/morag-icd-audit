@@ -1,11 +1,10 @@
-# Audit and verification code for "Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding"
+# Code and audit protocol for "Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding"
 
-This repository holds the audit protocol from the paper, not the pipeline it audits. The point of
-the paper is the protocol: a way to check whether an evidence-grounded LLM coding system actually
-does what it reports. Everything needed to apply that protocol to another system, and to re-derive
-every number the paper reports from stored model outputs, is here.
-
-The pipeline implementation is available from the author on request.
+This repository holds both the RAG-LLM ICD-10 coding pipeline the paper studies and the audit
+protocol it is studied with. The paper is a component-wise autopsy of a system that loses to
+TF-IDF, so withholding the system would leave the central question unanswerable: a reader could not
+check whether the weak result comes from the design or from a defect in the prompting, parsing,
+ranking or retrieval code. An independent reviewer made exactly that objection, and it was right.
 
 ## What the protocol does
 
@@ -61,19 +60,42 @@ To regenerate the tables:
   is available to credentialed researchers through PhysioNet under its data use agreement and is
   not redistributed here. The stored artifacts in `tables/generated/artifacts/` are aggregates —
   metrics, contrasts, confidence intervals — and were scanned for identifiers before release.
-- **No credentials or infrastructure.** Cluster hostnames, account names, absolute paths and job
-  scripts were removed. Model paths in `configs/models*.yaml` are `${MODELS_ROOT}` placeholders.
-- **No pipeline.** `src/` contains only the evaluation and reporting modules the audit scripts
-  import.
+- **No credentials or infrastructure.** Cluster hostnames, account names, absolute paths and the
+  SLURM job scripts are not part of the release; model paths in `configs/models*.yaml` are
+  `${MODELS_ROOT}` placeholders. `scripts/generate_*_campaign.py` shows how the runs were laid out.
 
 ## Layout
 
-    scripts/         the audit, analysis, verification and build scripts
-    src/morag_icd/   evaluation metrics and the provenance guard
+    scripts/         data preparation, index building, experiment runner, audit and analysis
+    src/morag_icd/   the full pipeline: retrieval, LLM scoring, evidence, verification, baselines,
+                     optimization, evaluation metrics, provenance guard
     figures/         the five figure generators and their captions
     tables/          generated tables and the aggregate artifacts they read
     configs/         run configurations referenced in the Methods section
     data_summaries/  split sizes and label-space counts (no identifiers)
+
+## Running the pipeline
+
+The pipeline needs MIMIC-IV (PhysioNet credentialed access), a local instruction-tuned LLM and a
+local embedding model; nothing is downloaded at run time. In order:
+
+    python scripts/01_preprocess_mimic.py     # discharge summaries -> working corpus
+    python scripts/02_build_icd_kb.py         # ICD-10 knowledge base from the code descriptions
+    python scripts/03_create_splits.py        # subject-disjoint train/validation/test, Top-N label sets
+    python scripts/04_build_bm25_index.py
+    python scripts/05_generate_embeddings.py
+    python scripts/06_build_faiss_index.py
+    python scripts/07_run_experiment.py --experiment-id E14 --seed 42 --top-n 50 --split test ...
+    python scripts/10_evaluate_results.py     # metrics over the stored predictions
+
+Model paths live in `configs/models*.yaml` as `${MODELS_ROOT}` placeholders. Runtime behaviour —
+candidate count, evidence budget, whether the scorer sees the note — is in `configs/real_*.yaml`;
+the difference between `real_batched.yaml` and `real_steelman.yaml` is the `prompt_note_max_chars`
+key, which is what supplies the discharge note to the scorer.
+
+The prompts are in `src/morag_icd/llm/prompts.py`, `code_scorer.py` and `contrastive_verifier.py`;
+the JSON parser and schema handling, where a missing confidence field once corrupted ranking, are in
+`llm/json_parser.py` and `code_scorer.py`. The few-shot examples are synthetic, not MIMIC excerpts.
 
 ## Citation
 

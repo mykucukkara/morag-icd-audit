@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "morag_icd"
+version = "0.1.0"
+description = "MORAG-ICD: Hybrid RAG-LLM framework for ICD-10 recommendation"
+authors = [
+    {name = "AI Researcher"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "torch",
+    "transformers",
+    "sentence-transformers",
+    "pymoo",
+    "typer",
+    "pyyaml",
+    "pydantic"
+]
+
+[project.scripts]
+morag-icd = "morag_icd.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["morag_icd*"]
