@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this audit protocol, please cite both the software and the paper it comes from."
+title: "Audit and verification code for a component-wise study of RAG-LLM ICD-10 coding"
+type: software
+license: MIT
+authors:
+  - family-names: "Küçükkara"
+    given-names: "Muhammed Yusuf"
+    orcid: "https://orcid.org/0000-0003-0600-3651"
+    affiliation: "Sakarya University of Applied Sciences"
+    email: "muhammedkucukkara@subu.edu.tr"
+keywords:
+  - ICD-10 coding
+  - retrieval-augmented generation
+  - large language models
+  - clinical NLP
+  - evaluation validity
+preferred-citation:
+  type: article
+  title: "Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding: A Component-Wise Cautionary Study"
+  authors:
+    - family-names: "Küçükkara"
+      given-names: "Muhammed Yusuf"
+      orcid: "https://orcid.org/0000-0003-0600-3651"
+  year: 2026
+  notes: "Manuscript under review."
