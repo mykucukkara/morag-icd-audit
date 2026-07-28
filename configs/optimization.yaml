@@ -1,0 +1,38 @@
+# optimization.yaml
+# Search space restricted to hyperparameters that actually influence inference at query time.
+# Removed as INERT (no effect on inference, would make the optimization meaningless):
+#   - chunk_size / chunk_overlap : used only at index-build time; indexes are pre-built.
+#   - section_weight_*           : sections are never passed to the candidate generator.
+#   - prompt_template_id         : prompts.py has no p1/p2/p3 variants (re-add if implemented).
+search_space:
+  top_k_evidence: [3, 5, 8, 10]
+  top_k_icd_candidates: [20, 30, 50, 75]
+  bm25_dense_alpha: [0.0, 0.25, 0.5, 0.75, 1.0]
+  llm_confidence_threshold: [0.3, 0.5, 0.7]
+  evidence_similarity_threshold: [0.2, 0.35, 0.5]
+  max_final_codes: [5, 10, 15, 20]
+
+objectives:
+  # The optimizer's objective set is defined in code (optimization/objective.py:OBJECTIVES);
+  # this block documents it and MUST stay in sync. Removed vs. the earlier draft:
+  #   - p_at_5      : reported as a metric but not optimized.
+  #   - avg_token_cost : never measured (the LLM wrapper does not count tokens), so the
+  #                      computational-cost objective is avg_runtime_sec instead.
+  maximize:
+    - micro_f1
+    - macro_f1
+    - evidence_support_rate
+  minimize:
+    # unsupported_code_rate removed 2026-07-23: it is identically 1 - evidence_support_rate
+    # (every code is exactly one of supported/unsupported), so as a separate objective it
+    # made the Pareto front degenerate. See optimization/objective.py OBJECTIVES (now 5).
+    - similar_code_confusion_rate
+    - avg_runtime_sec
+
+mopso_params:
+  n_particles: 20
+  n_iterations: 30
+
+nsga2_params:
+  pop_size: 20
+  n_gen: 30

@@ -1,0 +1,59 @@
+# experiments.yaml
+seeds: [42, 52, 62]
+top_n_codes_default: 50
+
+experiments:
+  - id: E1
+    name: tfidf_logistic_regression
+    type: baseline
+  - id: E2
+    name: tfidf_svm
+    type: baseline
+  - id: E3
+    name: clinicalbert_classifier
+    type: baseline
+  - id: E4
+    name: bm25_only
+    type: retrieval_only
+  - id: E5
+    name: dense_only
+    type: retrieval_only
+  - id: E6
+    name: hybrid_only
+    type: retrieval_only
+  - id: E7
+    name: llm_only_zero_shot
+    type: llm_only
+  - id: E8
+    name: llm_only_few_shot
+    type: llm_only
+  - id: E9
+    name: bm25_rag
+    type: simple_rag
+  - id: E10
+    name: dense_rag
+    type: simple_rag
+  - id: E11
+    name: hybrid_rag
+    type: simple_rag
+  - id: E12
+    name: hybrid_rag_evidence_constraint
+    type: enhanced_rag
+  - id: E13
+    name: hybrid_rag_contrastive_verifier
+    type: enhanced_rag
+  - id: E14
+    name: full_model_no_opt
+    type: full_model
+  - id: E15
+    name: full_model_random_search
+    type: optimized_full_model
+  - id: E16
+    name: full_model_mopso
+    type: optimized_full_model
+  - id: E17
+    name: full_model_nsga2
+    type: optimized_full_model
+  - id: E18
+    name: scalability_analysis
+    type: scale_test

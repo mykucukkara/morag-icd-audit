@@ -1,0 +1,22 @@
+{
+  "top_n": 50,
+  "max_features": 20000,
+  "n_test": 17151,
+  "fixed_budget_15": {
+    "precision": 0.3051,
+    "recall": 0.8505,
+    "micro_f1": 0.4491
+  },
+  "tuned_global_threshold": {
+    "threshold": 0.25,
+    "precision": 0.5852,
+    "recall": 0.6267,
+    "micro_f1": 0.6053
+  },
+  "tuned_per_label_threshold": {
+    "precision": 0.5349,
+    "recall": 0.6785,
+    "micro_f1": 0.5982,
+    "avg_codes_per_note": 6.83
+  }
+}

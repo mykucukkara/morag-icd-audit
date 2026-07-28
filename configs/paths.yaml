@@ -1,0 +1,9 @@
+# paths.yaml
+project_root: .
+# For local testing, you can override project_root or use absolute paths below
+raw_data_dir: ${project_root}/data/raw
+processed_dir: ${project_root}/data/processed
+results_dir: ${project_root}/results
+logs_dir: ${project_root}/logs
+indexes_dir: ${project_root}/indexes
+models_dir: ${project_root}/models

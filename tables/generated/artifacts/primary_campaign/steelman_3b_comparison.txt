@@ -1,0 +1,12 @@
+
+=== E11  (shared notes: 1008) ===
+  ORIGINAL (note-blind scorer, 200-char): F1=0.1893 P=0.1286 R=0.3587 codes/note=15.0 lift=1.222
+  STEELMAN (note given, 6000-char)      : F1=0.1873 P=0.1272 R=0.3549 codes/note=15.0 lift=1.702
+  delta F1 = -0.0020
+
+=== E14  (shared notes: 1008) ===
+  ORIGINAL (note-blind scorer, 200-char): F1=0.1381 P=0.1581 R=0.1225 codes/note=4.17 lift=None
+  STEELMAN (note given, 6000-char)      : F1=0.1054 P=0.2208 R=0.0692 codes/note=1.68 lift=None
+  delta F1 = -0.0327
+
+reference: note-blind floor 0.304 | oracle-on-shortlist 0.386 | E1 TF-IDF 0.449

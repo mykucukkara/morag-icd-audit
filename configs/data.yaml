@@ -1,0 +1,21 @@
+# data.yaml
+mimic_note_path: ${raw_data_dir}/mimiciv_note/discharge.csv.gz
+mimic_hosp_diagnoses_path: ${raw_data_dir}/mimiciv_hosp/diagnoses_icd.csv.gz
+mimic_hosp_d_icd_path: ${raw_data_dir}/mimiciv_hosp/d_icd_diagnoses.csv.gz
+
+# Preprocessing
+chunk_size: 256
+chunk_overlap: 32
+train_split: 0.70
+val_split: 0.15
+test_split: 0.15
+
+# Sectioning
+important_sections:
+  - "Chief Complaint"
+  - "History of Present Illness"
+  - "Past Medical History"
+  - "Hospital Course"
+  - "Discharge Diagnosis"
+  - "Discharge Medications"
+  - "Follow-up"

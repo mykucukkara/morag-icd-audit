@@ -1,0 +1,53 @@
+# Runtime config for the BATCHED note-local design on real data (H100, device=cuda).
+# Revised after the 1000-note pilot diagnosis (see CORRECTION_PLAN.md / pilot findings).
+
+# --- Candidate space -------------------------------------------------------------
+# The retriever now ranks INSIDE the Top-50 label space, so we can hand the LLM the
+# whole label space instead of a retrieval-truncated shortlist. Measured on the pilot,
+# the old "top-1000 of 97k KB, then filter to 50" gave 3.29 candidates/note and a hard
+# candidate-recall ceiling of 0.107; passing all 50 removes that ceiling entirely (1.0).
+top_k_icd_candidates: 50
+max_candidate_codes: 50
+top_k_evidence: 2
+# Match the baselines' prediction budget (E1/E2 emit exactly 15) so micro-F1 compares
+# systems, not prediction-count policies.
+max_final_codes: 15
+min_final_codes: 1
+
+# --- Decision thresholds ---------------------------------------------------------
+# OFF by default: at 0.5 it removed 51.3% of retrievable gold codes while carrying no
+# discriminative signal (kept 17.21% gold vs dropped 17.94%). The optimizer may tune it.
+llm_confidence_threshold: 0.0
+# Evidence constraint drops codes the LLM judged unsupported (E12/E14) so the ablation is
+# observable in the predicted SET, not just in flag fields.
+evidence_constraint_mode: filter
+evidence_similarity_threshold: 0.0
+
+# --- Note / evidence budgets (evidence is note-local) ----------------------------
+note_max_chars: 6000
+evidence_snippet_max_chars: 200
+
+# --- Prompt / generation budgets --------------------------------------------------
+# The batch prompt now holds 50 candidate blocks (code + title + short note evidence).
+prompt_max_chars: 4000            # single-candidate & contrastive prompts
+batch_prompt_max_chars: 24000     # batched per-note prompt (~6k tokens)
+max_input_tokens: 8192
+max_new_tokens: 256               # single/contrastive responses
+batch_max_new_tokens: 2200        # compact schema: ~40 tokens/candidate
+
+# --- Decoding / memory ------------------------------------------------------------
+temperature: 0.0
+do_sample: false
+num_beams: 1
+use_fp16: true
+torch_inference_mode: true
+clear_cuda_cache_between_samples: true
+
+# --- LLM-only closed-set repair (revision round 1) --------------------------------
+# E7/E8 as originally run generated over the full ~16k ICD vocabulary and were then filtered
+# to the Top-50 label space, leaving 97.4% (E7) and 88.0% (E8) of notes with zero in-vocabulary
+# codes. That measures label-space mismatch, not coding ability. In closed-set mode the model is
+# shown the benchmark's 50 codes and selects from them.
+llm_only_closed_set: true
+max_new_tokens: 512
+max_input_tokens: 16384

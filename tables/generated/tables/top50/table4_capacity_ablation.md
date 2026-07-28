@@ -1,0 +1,7 @@
+### Table 4. Capacity ablation: Qwen2.5-3B vs 7B on an identical paired 200-note subset
+
+| Arm | 3B micro-F1 | 7B micro-F1 | ΔF1 (7B − 3B) | 95% CI | AR p | Verdict |
+|---|---|---|---|---|---|---|
+| E11 | 0.2032 | 0.211 | +0.0078 | [-0.0049, +0.0205] | 0.2542 | not significant |
+| E14 | 0.1291 | 0.1138 | -0.0153 | [-0.0484, +0.0178] | 0.3829 | not significant |
+| Evidence-judgement lift (E11) | 1.02 | 1.49 | +0.47 | [+0.10, +0.84] | — | significant |

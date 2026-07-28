@@ -1,0 +1,27 @@
+{
+  "shared_notes": 17151,
+  "n_boot": 10000,
+  "n_perm": 10000,
+  "seed": 42,
+  "E6_hybrid_retrieval": {
+    "micro_f1": 0.2027,
+    "discriminative_lift": null
+  },
+  "E12_evidence_constraint": {
+    "micro_f1": 0.1335,
+    "discriminative_lift": null
+  },
+  "delta_micro_f1": {
+    "point": -0.0692,
+    "ci95": [
+      -0.072,
+      -0.0664
+    ],
+    "verdict": "SIGNIFICANT (excludes 0)",
+    "approx_randomization_p": 0.0001
+  },
+  "delta_lift": {
+    "point": null,
+    "note": "lift undefined in one or both systems"
+  }
+}

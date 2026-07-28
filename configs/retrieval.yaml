@@ -1,0 +1,23 @@
+# retrieval.yaml — Hybrid retrieval configuration
+top_k_evidence: 5
+top_k_icd_candidates: 50
+bm25_dense_alpha: 0.5          # 1.0 = BM25 only, 0.0 = Dense only
+
+# Evidence filtering
+evidence_similarity_threshold: 0.0   # 0.0 = disabled (all chunks kept)
+
+# Chunking (for preprocessing)
+chunk_size: 256
+chunk_overlap: 32
+
+# Section weights for candidate generation
+section_weight_discharge_diagnosis: 3.0
+section_weight_hospital_course: 2.0
+section_weight_chief_complaint: 1.5
+section_weight_history_of_present_illness: 1.25
+section_weight_past_medical_history: 1.0
+section_weight_other: 0.5
+
+# LLM scoring threshold
+llm_confidence_threshold: 0.5
+max_final_codes: 10

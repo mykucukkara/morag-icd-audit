@@ -1,0 +1,386 @@
+{
+  "top_n": 50,
+  "n_boot": 2000,
+  "seed": 42,
+  "A_note_blind_floor": {
+    "description": "constant predictor: K most frequent TRAIN codes, note never read",
+    "by_K": {
+      "K=5": {
+        "n": 17151,
+        "precision": 0.3072,
+        "recall": 0.2855,
+        "micro_f1": 0.2959,
+        "codes_per_note": 5.0
+      },
+      "K=10": {
+        "n": 17151,
+        "precision": 0.2338,
+        "recall": 0.4345,
+        "micro_f1": 0.304,
+        "codes_per_note": 10.0
+      },
+      "K=15": {
+        "n": 17151,
+        "precision": 0.1936,
+        "recall": 0.5398,
+        "micro_f1": 0.285,
+        "codes_per_note": 15.0
+      },
+      "K=20": {
+        "n": 17151,
+        "precision": 0.1701,
+        "recall": 0.6322,
+        "micro_f1": 0.2681,
+        "codes_per_note": 20.0
+      }
+    },
+    "best_K": "K=10"
+  },
+  "A_arms_vs_floor": {
+    "note": "delta = floor - arm; positive & significant => the note-blind floor BEATS the arm",
+    "per_arm": {
+      "E4": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1329,
+          "recall": 0.3705,
+          "micro_f1": 0.1957,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.0894,
+          "ci95": [
+            0.0866,
+            0.0919
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1084,
+          "ci95": [
+            0.1056,
+            0.1112
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E5": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1259,
+          "recall": 0.3508,
+          "micro_f1": 0.1852,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.0998,
+          "ci95": [
+            0.0974,
+            0.1021
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1188,
+          "ci95": [
+            0.1162,
+            0.1214
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E6": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1377,
+          "recall": 0.3839,
+          "micro_f1": 0.2027,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.0823,
+          "ci95": [
+            0.0796,
+            0.0849
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1013,
+          "ci95": [
+            0.0986,
+            0.1041
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E9": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1227,
+          "recall": 0.3422,
+          "micro_f1": 0.1807,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.1043,
+          "ci95": [
+            0.1019,
+            0.1067
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1234,
+          "ci95": [
+            0.1208,
+            0.1259
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E10": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1239,
+          "recall": 0.3454,
+          "micro_f1": 0.1824,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.1027,
+          "ci95": [
+            0.1003,
+            0.1051
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1217,
+          "ci95": [
+            0.1191,
+            0.1243
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E11": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1267,
+          "recall": 0.3532,
+          "micro_f1": 0.1865,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.0985,
+          "ci95": [
+            0.0961,
+            0.1011
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1175,
+          "ci95": [
+            0.1149,
+            0.1202
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E12": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1385,
+          "recall": 0.1289,
+          "micro_f1": 0.1335,
+          "codes_per_note": 5.01
+        },
+        "vs_floor_K15": {
+          "delta": 0.1515,
+          "ci95": [
+            0.1483,
+            0.1547
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1705,
+          "ci95": [
+            0.1673,
+            0.1738
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E13": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1324,
+          "recall": 0.369,
+          "micro_f1": 0.1948,
+          "codes_per_note": 15.0
+        },
+        "vs_floor_K15": {
+          "delta": 0.0902,
+          "ci95": [
+            0.0877,
+            0.0927
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1092,
+          "ci95": [
+            0.1066,
+            0.1118
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      },
+      "E14": {
+        "arm": {
+          "n": 17151,
+          "precision": 0.1503,
+          "recall": 0.1191,
+          "micro_f1": 0.1329,
+          "codes_per_note": 4.26
+        },
+        "vs_floor_K15": {
+          "delta": 0.1521,
+          "ci95": [
+            0.1487,
+            0.1554
+          ],
+          "p": 0.0005,
+          "significant": true
+        },
+        "vs_floor_bestK": {
+          "delta": 0.1711,
+          "ci95": [
+            0.1676,
+            0.1744
+          ],
+          "p": 0.0005,
+          "significant": true
+        }
+      }
+    }
+  },
+  "B_loss_decomposition": {
+    "shortlist_size_mean": 15.0,
+    "budget_used": 4,
+    "shortlist_all_kept_E11": {
+      "n": 17151,
+      "precision": 0.1267,
+      "recall": 0.3532,
+      "micro_f1": 0.1865,
+      "codes_per_note": 15.0
+    },
+    "oracle_selector_at_budget": {
+      "n": 17151,
+      "precision": 0.4526,
+      "recall": 0.3364,
+      "micro_f1": 0.3859,
+      "codes_per_note": 4.0
+    },
+    "random_pruning_null_at_budget": {
+      "n": 17151,
+      "precision": 0.127,
+      "recall": 0.0944,
+      "micro_f1": 0.1083,
+      "codes_per_note": 4.0
+    },
+    "actual_full_model_E14": {
+      "n": 17151,
+      "precision": 0.1503,
+      "recall": 0.1191,
+      "micro_f1": 0.1329,
+      "codes_per_note": 4.26
+    },
+    "interpretation": "oracle - actual = F1 recoverable by a perfect selector on the SAME shortlist; actual vs random = how far the LLM filter beats chance"
+  },
+  "C_operating_point": {
+    "untuned_E11_as_run": {
+      "n": 17151,
+      "precision": 0.1267,
+      "recall": 0.3532,
+      "micro_f1": 0.1865,
+      "codes_per_note": 15.0
+    },
+    "split_half_folds": [
+      {
+        "tuned_on_half": 0,
+        "selected": {
+          "threshold": 0.0,
+          "max_codes": 15,
+          "supported_only": false
+        },
+        "tuning_half_f1": 0.1859,
+        "heldout": {
+          "n": 8576,
+          "precision": 0.1271,
+          "recall": 0.3537,
+          "micro_f1": 0.187,
+          "codes_per_note": 15.0
+        }
+      },
+      {
+        "tuned_on_half": 1,
+        "selected": {
+          "threshold": 0.0,
+          "max_codes": 15,
+          "supported_only": false
+        },
+        "tuning_half_f1": 0.187,
+        "heldout": {
+          "n": 8575,
+          "precision": 0.1262,
+          "recall": 0.3527,
+          "micro_f1": 0.1859,
+          "codes_per_note": 15.0
+        }
+      }
+    ],
+    "honest_tuned_micro_f1": 0.1865,
+    "test_optimal_oracle": {
+      "micro_f1": 0.1865,
+      "threshold": 0.0,
+      "max_codes": 15,
+      "supported_only": false,
+      "caveat": "selected ON test: an upper bound, NOT a tuned result"
+    },
+    "note": "no validation-split LLM predictions exist, so a validation-selected threshold is impossible post hoc; the split-half held-out mean is the honest estimate"
+  },
+  "D_leakage_chance": {
+    "global_index_documents": 115103,
+    "documents_per_note": 1,
+    "split_sizes": {
+      "train": 80707,
+      "validation": 17245,
+      "test": 17151
+    },
+    "top_k_evidence": 5,
+    "chance_prob_own_document_in_topk": 4.344e-05,
+    "expected_cross_admission_rate_under_chance": 0.99995656,
+    "measured_cross_admission_rate": 1.0,
+    "interpretation": "with one document per note in a 115103-document index, chance alone predicts a cross-admission rate of 0.999957, so the measured 1.000 is NOT a surprising rate. The defensible claim is structural: the global-corpus design contains no mechanism that prefers the coded note's own text, so displayed grounding is unrelated to the patient being coded."
+  }
+}

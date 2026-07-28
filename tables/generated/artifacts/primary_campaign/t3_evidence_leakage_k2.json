@@ -1,0 +1,10 @@
+{
+  "notes_evaluated": 1000,
+  "code_queries": 5169,
+  "retrieved_chunks": 10338,
+  "top_k": 2,
+  "cross_admission_rate": 1.0,
+  "cross_patient_rate": 1.0,
+  "same_admission_rate": 0.0,
+  "notes_with_any_own_evidence_rate": 0.0
+}

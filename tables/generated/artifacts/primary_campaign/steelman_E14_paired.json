@@ -1,0 +1,27 @@
+{
+  "shared_notes": 1008,
+  "n_boot": 10000,
+  "n_perm": 10000,
+  "seed": 42,
+  "E14_orig": {
+    "micro_f1": 0.1381,
+    "discriminative_lift": null
+  },
+  "E14_steelman": {
+    "micro_f1": 0.1054,
+    "discriminative_lift": null
+  },
+  "delta_micro_f1": {
+    "point": -0.0327,
+    "ci95": [
+      -0.0469,
+      -0.0181
+    ],
+    "verdict": "SIGNIFICANT (excludes 0)",
+    "approx_randomization_p": 0.0001
+  },
+  "delta_lift": {
+    "point": null,
+    "note": "lift undefined in one or both systems"
+  }
+}

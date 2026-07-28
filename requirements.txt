@@ -1,0 +1,6 @@
+# The audit scripts need only the scientific stack; no model or network access.
+numpy
+scipy
+scikit-learn
+matplotlib
+PyYAML

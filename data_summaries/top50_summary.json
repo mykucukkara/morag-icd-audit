@@ -1,0 +1,15 @@
+{
+  "top_n": 50,
+  "dataset_path": "<local path removed>",
+  "output_root": "<local path removed>",
+  "rows": 115103,
+  "unique_subjects": 61211,
+  "unique_hadm_ids": 115103,
+  "split_counts": {
+    "train": 80707,
+    "validation": 17245,
+    "test": 17151
+  },
+  "unique_code_count": 50,
+  "output_csv": "<local path removed>"
+}

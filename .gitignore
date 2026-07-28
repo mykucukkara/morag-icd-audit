@@ -1,0 +1,19 @@
+# Never commit data or anything derived from clinical text.
+*.jsonl
+data/
+results/
+predictions/
+*.pkl
+*.npy
+*.pt
+*.bin
+
+# Local and build noise
+__pycache__/
+*.pyc
+.venv*/
+*.aux
+*.log
+*.out
+*.blg
+*.bbl

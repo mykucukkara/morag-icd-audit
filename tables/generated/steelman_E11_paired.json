@@ -1,0 +1,32 @@
+{
+  "shared_notes": 1008,
+  "n_boot": 10000,
+  "n_perm": 10000,
+  "seed": 42,
+  "E11_orig": {
+    "micro_f1": 0.1893,
+    "discriminative_lift": 1.222
+  },
+  "E11_steelman": {
+    "micro_f1": 0.1873,
+    "discriminative_lift": 1.702
+  },
+  "delta_micro_f1": {
+    "point": -0.002,
+    "ci95": [
+      -0.0074,
+      0.0033
+    ],
+    "verdict": "NOT significant (spans 0)",
+    "approx_randomization_p": 0.4801
+  },
+  "delta_lift": {
+    "point": 0.479,
+    "ci95": [
+      0.277,
+      0.684
+    ],
+    "verdict": "SIGNIFICANT (excludes 0)",
+    "n_resamples_defined": 10000
+  }
+}

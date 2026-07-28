@@ -1,0 +1,139 @@
+{
+  "floor_K": 10,
+  "contrasts": {
+    "E11_3Bnote_vs_7Bnote": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E11_3B_note": {
+        "micro_f1": 0.1873
+      },
+      "E11_7B_note": {
+        "micro_f1": 0.2351
+      },
+      "delta_micro_f1": {
+        "point": 0.0478,
+        "ci95": [
+          0.041,
+          0.0546
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "E14_3Bnote_vs_7Bnote": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E14_3B_note": {
+        "micro_f1": 0.1054
+      },
+      "E14_7B_note": {
+        "micro_f1": 0.2933
+      },
+      "delta_micro_f1": {
+        "point": 0.1879,
+        "ci95": [
+          0.1728,
+          0.2028
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "E14_7Bnote_vs_E1": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E1_tfidf": {
+        "micro_f1": 0.4494
+      },
+      "E14_7B_note": {
+        "micro_f1": 0.2933
+      },
+      "delta_micro_f1": {
+        "point": -0.1561,
+        "ci95": [
+          -0.1716,
+          -0.1409
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "E14_7Bnote_vs_note_blind_floor": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "note_blind_floor_K10": {
+        "micro_f1": 0.2921
+      },
+      "E14_7B_note": {
+        "micro_f1": 0.2933
+      },
+      "delta_micro_f1": {
+        "point": 0.0012,
+        "ci95": [
+          -0.0138,
+          0.0161
+        ],
+        "verdict": "NOT significant (spans 0)",
+        "approx_randomization_p": 0.8724,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    }
+  },
+  "floor_codes": [
+    "E785",
+    "I10",
+    "Z87891",
+    "K219",
+    "F329",
+    "I2510",
+    "N179",
+    "F419",
+    "Z794",
+    "Z7901"
+  ],
+  "arms": {
+    "E11_3B_note": {
+      "n": 1008,
+      "micro_f1": 0.1873,
+      "precision": 0.1272,
+      "recall": 0.3549,
+      "codes_per_note": 15.0,
+      "discriminative_lift": 1.702
+    },
+    "E11_7B_note": {
+      "n": 1008,
+      "micro_f1": 0.2351,
+      "precision": 0.1597,
+      "recall": 0.4455,
+      "codes_per_note": 15.0,
+      "discriminative_lift": 3.5
+    },
+    "E14_3B_note": {
+      "n": 1008,
+      "micro_f1": 0.1054,
+      "precision": 0.2208,
+      "recall": 0.0692,
+      "codes_per_note": 1.68,
+      "discriminative_lift": null
+    },
+    "E14_7B_note": {
+      "n": 1008,
+      "micro_f1": 0.2933,
+      "precision": 0.35,
+      "recall": 0.2524,
+      "codes_per_note": 3.88,
+      "discriminative_lift": null
+    }
+  }
+}

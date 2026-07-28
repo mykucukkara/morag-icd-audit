@@ -1,0 +1,119 @@
+{
+  "E2": {
+    "E1_minus_E2": 0.0082,
+    "ci95": [
+      0.0073,
+      0.0092
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E3": {
+    "E1_minus_E3": 0.0831,
+    "ci95": [
+      0.0796,
+      0.0867
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E4": {
+    "E1_minus_E4": 0.2537,
+    "ci95": [
+      0.2514,
+      0.2561
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E5": {
+    "E1_minus_E5": 0.2641,
+    "ci95": [
+      0.2618,
+      0.2666
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E6": {
+    "E1_minus_E6": 0.2467,
+    "ci95": [
+      0.2444,
+      0.249
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E7": {
+    "E1_minus_E7": 0.4458,
+    "ci95": [
+      0.4429,
+      0.4488
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E8": {
+    "E1_minus_E8": 0.4349,
+    "ci95": [
+      0.432,
+      0.438
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E9": {
+    "E1_minus_E9": 0.2687,
+    "ci95": [
+      0.2663,
+      0.2711
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E10": {
+    "E1_minus_E10": 0.267,
+    "ci95": [
+      0.2647,
+      0.2695
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E11": {
+    "E1_minus_E11": 0.2629,
+    "ci95": [
+      0.2605,
+      0.2653
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E12": {
+    "E1_minus_E12": 0.3159,
+    "ci95": [
+      0.3124,
+      0.3194
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E13": {
+    "E1_minus_E13": 0.2546,
+    "ci95": [
+      0.2522,
+      0.257
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  },
+  "E14": {
+    "E1_minus_E14": 0.3165,
+    "ci95": [
+      0.3129,
+      0.3202
+    ],
+    "p": 0.0001,
+    "verdict": "SIGNIFICANT (excludes 0)"
+  }
+}

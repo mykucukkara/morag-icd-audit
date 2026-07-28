@@ -1,0 +1,28 @@
+# models.yaml
+embedding_model_path: ${MODELS_ROOT}/embedding_models/bge-small-en-v1.5
+llm_model_path: ${MODELS_ROOT}/llm_models/Qwen2.5-3B-Instruct
+classifier_model_path: ${MODELS_ROOT}/classifier_checkpoints/bert-base-uncased_safetensors
+classifier_use_safetensors: true
+
+use_vllm: false
+load_in_4bit: false
+load_in_8bit: false
+device: cuda
+fallback_device: cpu
+
+# Generation args
+max_new_tokens: 128
+temperature: 0.0
+top_p: 1.0
+repetition_penalty: 1.0
+
+# --- Strengthened E3 neural coder (positive control B) ---
+# The campaign E3 was config-limited (256 tokens, 1 epoch, general BERT) -> micro-F1 0.372.
+# This raises the context to BERT's 512-token max and trains 5 epochs to show the neural
+# side is competently built; absolute ceiling is bounded by bert-base-uncased (not clinical).
+classifier_max_length: 512
+classifier_epochs: 5
+classifier_batch_size: 16
+classifier_learning_rate: 2.0e-5
+classifier_fp16: true
+classifier_threshold: 0.30
