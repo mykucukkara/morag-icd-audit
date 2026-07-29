@@ -17,7 +17,7 @@ keywords:
   - evaluation validity
 preferred-citation:
   type: article
-  title: "Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding: A Component-Wise Cautionary Study"
+  title: "Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding: A Component-Wise Audit"
   authors:
     - family-names: "Küçükkara"
       given-names: "Muhammed Yusuf"

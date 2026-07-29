@@ -1,4 +1,4 @@
-# Code and audit protocol for "Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding"
+# Code and audit protocol for "Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding"
 
 This repository holds both the RAG-LLM ICD-10 coding pipeline the paper studies and the audit
 protocol it is studied with. The paper is a component-wise autopsy of a system that loses to
@@ -11,9 +11,11 @@ ranking or retrieval code. An independent reviewer made exactly that objection, 
 1. **A note-blind floor.** A constant predictor that emits the K most frequent training codes and
    never reads the note. Any system that does not clear it extracts no per-note signal. Costs
    nothing, and every LLM arm in our ladder fails it (`scripts/40`).
-2. **A loss decomposition.** An oracle-over-shortlist bound and a random-pruning null, both at the
-   system's realized budget, separating what retrieval makes available from what the selector does
-   with it (`scripts/40`).
+2. **A loss decomposition at matched cardinality.** An oracle-over-shortlist bound and a random
+   null that emit, per note, exactly as many codes as the system did — micro-F1 moves with
+   cardinality, so an unmatched null flatters or punishes the system for free (`scripts/47`).
+   Paired with stage-wise gold-code retention, which localizes the loss to a component rather than
+   apportioning percentages of an F1 gap that is not additive.
 3. **Note-level paired significance testing.** Paired bootstrap intervals plus an
    approximate-randomization test, resampled at the note level because code decisions within a note
    are not independent (`scripts/37`).
@@ -28,9 +30,16 @@ ranking or retrieval code. An independent reviewer made exactly that objection, 
    the manuscript states, at the precision the manuscript uses, failing on any disagreement
    (`scripts/44`).
 
-Item 7 is the one we would encourage others to copy. On its first run it caught two defects in our
-own reporting: a value rounded up from 0.186 to 0.187 in four places, and a sentence implying a
-difference between two numbers that were identical.
+8. **A complete factorial when two factors are claimed to interact** (`scripts/48`). Our first
+   version assembled a 2 x 2 from two different samples; a reviewer pointed out that differences
+   taken across samples cannot establish an interaction. The missing cell was re-run and the
+   difference-in-differences computed properly.
+
+Item 7 is the one we would encourage others to copy. It caught a value rounded up from 0.186 to
+0.187 in four places, and a sentence implying a difference between two numbers that were identical.
+It did not catch everything: private annotations printed into the reference list, stale
+cross-references and a superseded figure caption all survived it, because it only looked at numbers.
+Those checks were added afterwards, which is the honest version of the lesson.
 
 ## Reproducing the paper's numbers
 
@@ -99,8 +108,7 @@ the JSON parser and schema handling, where a missing confidence field once corru
 
 ## Citation
 
-Küçükkara, M. Y. (2026). Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding: A
-Component-Wise Cautionary Study. *Manuscript under review.*
+Küçükkara, M. Y. (2026). Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding: A Component-Wise Audit. *Manuscript under review.*
 
 ## License
 
