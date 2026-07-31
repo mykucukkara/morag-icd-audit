@@ -1,0 +1,451 @@
+{
+  "corpus_size": 20,
+  "read_at_full_text": 8,
+  "read_at_abstract_only": 12,
+  "single_rater": true,
+  "frame": "convenience frame; not a systematic review (see checklist_scoring_protocol.md)",
+  "items": {
+    "1": {
+      "item": 1,
+      "label": "note-blind floor reported and cleared",
+      "Y": 0,
+      "N": 8,
+      "undeterminable": 12,
+      "not_applicable": 0,
+      "determinable": 8,
+      "prevalence_among_determinable": 0.0,
+      "corpus_size": 20,
+      "rule_of_three_upper_bound": 0.375
+    },
+    "2": {
+      "item": 2,
+      "label": "tuned classical/supervised baseline on the same split",
+      "Y": 2,
+      "N": 8,
+      "undeterminable": 10,
+      "not_applicable": 0,
+      "determinable": 10,
+      "prevalence_among_determinable": 0.2,
+      "corpus_size": 20
+    },
+    "3": {
+      "item": 3,
+      "label": "retrieval-ceiling vs selector decomposition",
+      "Y": 1,
+      "N": 7,
+      "undeterminable": 12,
+      "not_applicable": 0,
+      "determinable": 8,
+      "prevalence_among_determinable": 0.125,
+      "corpus_size": 20
+    },
+    "4": {
+      "item": 4,
+      "label": "scorer input budget stated",
+      "Y": 3,
+      "N": 4,
+      "undeterminable": 13,
+      "not_applicable": 0,
+      "determinable": 7,
+      "prevalence_among_determinable": 0.429,
+      "corpus_size": 20
+    },
+    "5": {
+      "item": 5,
+      "label": "context and capacity varied jointly",
+      "Y": 1,
+      "N": 7,
+      "undeterminable": 12,
+      "not_applicable": 0,
+      "determinable": 8,
+      "prevalence_among_determinable": 0.125,
+      "corpus_size": 20
+    },
+    "6": {
+      "item": 6,
+      "label": "note-local evidence / retrieval provenance reported",
+      "Y": 4,
+      "N": 1,
+      "undeterminable": 12,
+      "not_applicable": 3,
+      "determinable": 5,
+      "prevalence_among_determinable": 0.8,
+      "corpus_size": 20
+    },
+    "7": {
+      "item": 7,
+      "label": "grounding metric the model cannot self-report",
+      "Y": 0,
+      "N": 6,
+      "undeterminable": 12,
+      "not_applicable": 2,
+      "determinable": 6,
+      "prevalence_among_determinable": 0.0,
+      "corpus_size": 20,
+      "rule_of_three_upper_bound": 0.5
+    },
+    "8": {
+      "item": 8,
+      "label": "schema-compliance rate reported",
+      "Y": 0,
+      "N": 6,
+      "undeterminable": 12,
+      "not_applicable": 2,
+      "determinable": 6,
+      "prevalence_among_determinable": 0.0,
+      "corpus_size": 20,
+      "rule_of_three_upper_bound": 0.5
+    },
+    "9": {
+      "item": 9,
+      "label": "paired note-level significance test",
+      "Y": 1,
+      "N": 7,
+      "undeterminable": 12,
+      "not_applicable": 0,
+      "determinable": 8,
+      "prevalence_among_determinable": 0.125,
+      "corpus_size": 20
+    },
+    "10": {
+      "item": 10,
+      "label": "machine-generated tables under provenance checks",
+      "Y": 0,
+      "N": 8,
+      "undeterminable": 12,
+      "not_applicable": 0,
+      "determinable": 8,
+      "prevalence_among_determinable": 0.0,
+      "corpus_size": 20,
+      "rule_of_three_upper_bound": 0.375
+    }
+  },
+  "items_with_zero_observed": [
+    1,
+    7,
+    8,
+    10
+  ],
+  "studies": [
+    {
+      "study": "Palacios et al. 2025, IEEE SDS (fine-tuned SLMs, MIMIC-IV Top-50)",
+      "source": "full text (subscription)",
+      "scores": [
+        "N",
+        "Y",
+        "N",
+        "Y",
+        "N",
+        "\u2013",
+        "\u2013",
+        "\u2013",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Pathak et al. 2024, IEEE URTC (GPT-4o, CoT/RAG, HCUP)",
+      "source": "full text (subscription)",
+      "scores": [
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "Y",
+        "N",
+        "N",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Krumscheid et al. 2025, SHTI/GMDS (Mistral-Small-24B RAG, German CARDIO:DE)",
+      "source": "full text (open)",
+      "scores": [
+        "N",
+        "N",
+        "Y",
+        "Y",
+        "N",
+        "Y",
+        "N",
+        "N",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Ong et al. 2023, J Med Artif Intell (ChatGPT, mockup retina encounters)",
+      "source": "full text (open)",
+      "scores": [
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Hou et al. 2025, npj Health Systems (fine-tuned GPT-4o mini / Llama)",
+      "source": "full text (open)",
+      "scores": [
+        "N",
+        "N",
+        "N",
+        "?",
+        "Y",
+        "\u2013",
+        "\u2013",
+        "N",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Jiang et al. 2026, Digital Health (5 LLMs \u00d7 5 knowledge-injection strategies)",
+      "source": "full text (open)",
+      "scores": [
+        "N",
+        "N",
+        "N",
+        "Y",
+        "N",
+        "Y",
+        "N",
+        "N",
+        "Y",
+        "N"
+      ]
+    },
+    {
+      "study": "Schroeder et al. 2026, JAAOS (5 LLMs, hand-surgery notes)",
+      "source": "full text (subscription)",
+      "scores": [
+        "N",
+        "N",
+        "N",
+        "N",
+        "N",
+        "\u2013",
+        "N",
+        "\u2013",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Boyle et al. 2023, arXiv (off-the-shelf LLMs, CodiEsp-English)",
+      "source": "full text (open)",
+      "scores": [
+        "N",
+        "Y",
+        "N",
+        "N",
+        "N",
+        "Y",
+        "N",
+        "N",
+        "N",
+        "N"
+      ]
+    },
+    {
+      "study": "Klang et al. 2024, medRxiv (RAG-LLM ED ICD-10-CM vs human coders)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Li et al. 2024, arXiv (LLM multi-agents, MIMIC-III)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "You et al. 2025, arXiv (MKE-Coder, Chinese EMRs)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Baksi et al. 2024, arXiv (MedCodER)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Dai et al. 2025, arXiv (section-aware fine-tuning, ICD-10-CM)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "N",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Barreiros et al. 2025, CL4Health (explainable ICD coding via entity linking)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Yuan et al. 2025, EMNLP Industry (verification + lightweight adaptation)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Falis et al. 2024, JAMIA (can GPT-3.5 generate and code discharge summaries?)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Simmons et al. 2024, Appl Clin Inform (extracting ICD codes with LLMs)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Dayeh et al. 2026, SHTI (evidence-grounded LLM validation of MIMIC-IV labels)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Yoo & Kim 2025, Comput Biol Med (how to leverage LLMs for ICD coding)",
+      "source": "abstract",
+      "scores": [
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    },
+    {
+      "study": "Kaur et al. 2026, BMC MIDM (gold-standard-guided DPO, ICD-10-AM/ACHI)",
+      "source": "abstract + article page",
+      "scores": [
+        "?",
+        "N",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?",
+        "?"
+      ]
+    }
+  ]
+}

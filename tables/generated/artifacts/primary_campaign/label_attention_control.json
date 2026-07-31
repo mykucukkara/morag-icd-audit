@@ -1,0 +1,27 @@
+{
+  "arm": "E3b_label_attention",
+  "encoder": "bert-base-uncased_safetensors",
+  "clinically_pretrained": false,
+  "max_length": 512,
+  "epochs": 5,
+  "seed": 42,
+  "n_labels": 50,
+  "fixed_budget": {
+    "micro_f1": 0.4149,
+    "precision": 0.2819,
+    "recall": 0.7858,
+    "n": 17151,
+    "codes_per_note": 15.0,
+    "budget": 15
+  },
+  "tuned_threshold": {
+    "micro_f1": 0.5587,
+    "precision": 0.5614,
+    "recall": 0.556,
+    "n": 17151,
+    "codes_per_note": 5.33,
+    "threshold": 0.32,
+    "selected_on": "validation",
+    "validation_micro_f1": 0.5582
+  }
+}

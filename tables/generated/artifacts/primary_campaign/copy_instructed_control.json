@@ -1,0 +1,32 @@
+{
+  "arm": "E11",
+  "difference": "copy_instructed prompt variant; all other settings identical",
+  "shared_notes": 1008,
+  "control_copy_instructed": {
+    "notes": 1008,
+    "codes": 15120,
+    "quote_checked_codes": 5867,
+    "verbatim_codes": 335,
+    "exact_quote_compliance": 0.0571
+  },
+  "primary_as_published_prompt": {
+    "notes": 1008,
+    "codes": 15120,
+    "quote_checked_codes": 4964,
+    "verbatim_codes": 411,
+    "exact_quote_compliance": 0.0828
+  },
+  "delta_control_minus_primary": -0.0257,
+  "instruction_raised_compliance": false,
+  "paired_test": {
+    "observed_delta": -0.0257,
+    "ci95": [
+      -0.0415,
+      -0.0103
+    ],
+    "p_two_sided": 0.0013,
+    "resamples": 10000,
+    "p_resolution_floor": 0.0001,
+    "unit": "note"
+  }
+}

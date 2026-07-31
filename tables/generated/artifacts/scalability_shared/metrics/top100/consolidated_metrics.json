@@ -1,0 +1,2265 @@
+{
+  "top_n": 100,
+  "label_set_size": 100,
+  "fixed_label_space": true,
+  "individual": {
+    "E11_seed42": {
+      "classification": {
+        "micro_f1": 0.13892819243013796,
+        "macro_f1": 0.13524616127490924,
+        "micro_precision": 0.10197987666342097,
+        "micro_recall": 0.21786160033282484,
+        "macro_precision": 0.15655105567674554,
+        "macro_recall": 0.2580277864306694,
+        "hamming_loss": 0.18962025316455697,
+        "exact_match_ratio": 0.0,
+        "label_coverage": 1.0,
+        "precision_at_5": 0.12399335586230599,
+        "precision_at_10": 0.1116100578498196,
+        "recall_at_5": 0.0955038651892171,
+        "recall_at_10": 0.1666204153098916,
+        "lrap": 0.08855212102392222,
+        "n_samples": 17459,
+        "n_labels": 100
+      },
+      "reliability": {
+        "total_predicted_codes": 261885,
+        "evidence_judged_codes": 261885,
+        "evidence_support_rate": 0.34504839910647805,
+        "unsupported_code_rate": 0.654951600893522,
+        "evidence_quote_verbatim_rate": 0.07645144868190974,
+        "evidence_quote_checked_codes": 90358,
+        "weak_evidence_rate": 0.0,
+        "ambiguous_code_rate": 0.654951600893522,
+        "hallucination_flag_rate": 0.0,
+        "rationale_coverage_rate": 0.3238177062451076,
+        "evidence_quote_rate": 1.0,
+        "contrastive_rationale_rate": 0.0,
+        "rejected_similar_codes_rate": 0.0,
+        "contrastive_fallback_rate": 0.0,
+        "llm_contrastive_rate": 0.0,
+        "schema_invalid_rate": 0.0015808465547854974,
+        "json_parse_error_rate": 5.727704908643107e-05,
+        "confidence_missing_rate": 0.0015808465547854974,
+        "similar_code_confusion_rate": 0.09099915808451471
+      },
+      "hierarchical": {
+        "parent_micro_f1": 0.20511441790671503,
+        "parent_macro_f1": 0.16495897003081084,
+        "parent_micro_precision": 0.16246223938988757,
+        "parent_micro_recall": 0.27813480288257736,
+        "parent_macro_precision": 0.19159825273422224,
+        "parent_macro_recall": 0.26577985941339927,
+        "parent_hamming_loss": 0.20512282700153034,
+        "parent_exact_match_ratio": 0.0,
+        "parent_label_coverage": 1.0,
+        "parent_precision_at_5": 0.15141760696488915,
+        "parent_precision_at_10": 0.16709542629125654,
+        "parent_recall_at_5": 0.107564135034045,
+        "parent_recall_at_10": 0.2481821947897822,
+        "parent_lrap": 0.1309149966439096,
+        "parent_n_samples": 17459,
+        "parent_n_labels": 71,
+        "hierarchical_error_rate": 0.09099915808451471
+      },
+      "cost": {
+        "avg_runtime_sec": 20.177535898681768,
+        "total_runtime_sec": 352279.599255085,
+        "p95_runtime_sec": 40.67400605678558,
+        "avg_input_tokens": 0.0,
+        "total_input_tokens": 0.0,
+        "avg_output_tokens": 0.0,
+        "total_output_tokens": 0.0,
+        "avg_gpu_memory_mb": 0.0,
+        "peak_gpu_memory_mb": 0.0,
+        "runtime_per_correct_code": 13.190534288953645,
+        "tokens_per_correct_code": 0.0,
+        "n_samples": 17459
+      },
+      "errors": {
+        "failed_sample_rate": 0.0,
+        "cuda_oom_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "skipped_rate": 0.0,
+        "success_rate": 1.0
+      },
+      "bootstrap_ci": {},
+      "eval_runtime_sec": 8.885427713394165,
+      "predictions_path": "results_eurohpc/scalability_shared/_eval_stage/top100/E11_seed42/test_predictions.jsonl",
+      "n_samples": 17459,
+      "experiment_id": "E11",
+      "retrieval_mode": "hybrid",
+      "use_evidence_constraint": false,
+      "use_contrastive_verifier": false,
+      "mock_llm": false,
+      "mock_embedding": false,
+      "skipped_dense": false,
+      "evidence_constraint_mode": "filter"
+    },
+    "E14_seed42": {
+      "classification": {
+        "micro_f1": 0.09807061083980466,
+        "macro_f1": 0.08736214024791691,
+        "micro_precision": 0.12682964707709432,
+        "micro_recall": 0.07994322399601915,
+        "macro_precision": 0.15636544587192835,
+        "macro_recall": 0.08897214717436003,
+        "hamming_loss": 0.10324531760123719,
+        "exact_match_ratio": 0.00045821639269144854,
+        "label_coverage": 1.0,
+        "precision_at_5": 0.11440422322775265,
+        "precision_at_10": 0.11008080609718732,
+        "recall_at_5": 0.05715965573011574,
+        "recall_at_10": 0.07411052546492175,
+        "lrap": 0.08939052253858727,
+        "n_samples": 17459,
+        "n_labels": 100
+      },
+      "reliability": {
+        "total_predicted_codes": 77269,
+        "evidence_judged_codes": 77269,
+        "evidence_support_rate": 1.0,
+        "unsupported_code_rate": 0.0,
+        "evidence_quote_verbatim_rate": 0.0762819351331763,
+        "evidence_quote_checked_codes": 77266,
+        "weak_evidence_rate": 0.0,
+        "ambiguous_code_rate": 0.0,
+        "hallucination_flag_rate": 0.0,
+        "rationale_coverage_rate": 0.936598118262175,
+        "evidence_quote_rate": 1.0,
+        "contrastive_rationale_rate": 0.24400471081546285,
+        "rejected_similar_codes_rate": 0.2439400018118521,
+        "contrastive_fallback_rate": 0.0,
+        "llm_contrastive_rate": 0.24400471081546285,
+        "schema_invalid_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "confidence_missing_rate": 0.0,
+        "similar_code_confusion_rate": 0.07848048733492419
+      },
+      "hierarchical": {
+        "parent_micro_f1": 0.15096325494525906,
+        "parent_macro_f1": 0.11081917619467185,
+        "parent_micro_precision": 0.1928247574862927,
+        "parent_micro_recall": 0.12403560830860534,
+        "parent_macro_precision": 0.18577060141246773,
+        "parent_macro_recall": 0.10911265561566465,
+        "parent_hamming_loss": 0.13275529227832775,
+        "parent_exact_match_ratio": 0.0018328655707657941,
+        "parent_label_coverage": 1.0,
+        "parent_precision_at_5": 0.171122821085591,
+        "parent_precision_at_10": 0.17657127765095001,
+        "parent_recall_at_5": 0.07922183963662516,
+        "parent_recall_at_10": 0.11208134324368275,
+        "parent_lrap": 0.12986192338714042,
+        "parent_n_samples": 17459,
+        "parent_n_labels": 71,
+        "hierarchical_error_rate": 0.07848048733492419
+      },
+      "cost": {
+        "avg_runtime_sec": 22.8600498140524,
+        "total_runtime_sec": 399113.6097035408,
+        "p95_runtime_sec": 46.53686780929566,
+        "avg_input_tokens": 0.0,
+        "total_input_tokens": 0.0,
+        "avg_output_tokens": 0.0,
+        "total_output_tokens": 0.0,
+        "avg_gpu_memory_mb": 0.0,
+        "peak_gpu_memory_mb": 0.0,
+        "runtime_per_correct_code": 40.725878541177636,
+        "tokens_per_correct_code": 0.0,
+        "n_samples": 17459
+      },
+      "errors": {
+        "failed_sample_rate": 0.0,
+        "cuda_oom_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "skipped_rate": 0.0,
+        "success_rate": 1.0
+      },
+      "bootstrap_ci": {},
+      "eval_runtime_sec": 5.742061376571655,
+      "predictions_path": "results_eurohpc/scalability_shared/_eval_stage/top100/E14_seed42/test_predictions.jsonl",
+      "n_samples": 17459,
+      "experiment_id": "E14",
+      "retrieval_mode": "hybrid",
+      "use_evidence_constraint": true,
+      "use_contrastive_verifier": true,
+      "mock_llm": false,
+      "mock_embedding": false,
+      "skipped_dense": false,
+      "evidence_constraint_mode": "filter"
+    },
+    "E1_seed42": {
+      "classification": {
+        "micro_f1": 0.4685906906094592,
+        "macro_f1": 0.4497576394926703,
+        "micro_precision": 0.34396777211371404,
+        "micro_recall": 0.7348250630164699,
+        "macro_precision": 0.3666073619553951,
+        "macro_recall": 0.6209112505507427,
+        "hamming_loss": 0.11702388452946905,
+        "exact_match_ratio": 0.0,
+        "label_coverage": 1.0,
+        "precision_at_5": 0.5762987570880348,
+        "precision_at_10": 0.4342459476487771,
+        "recall_at_5": 0.4909444656585349,
+        "recall_at_10": 0.6836183738474495,
+        "lrap": 0.28614765396027064,
+        "n_samples": 17459,
+        "n_labels": 100
+      },
+      "reliability": {
+        "total_predicted_codes": 261885,
+        "evidence_judged_codes": 0,
+        "evidence_support_rate": null,
+        "unsupported_code_rate": null,
+        "evidence_quote_verbatim_rate": null,
+        "evidence_quote_checked_codes": 0,
+        "weak_evidence_rate": 0.0,
+        "ambiguous_code_rate": 0.0,
+        "hallucination_flag_rate": 0.0,
+        "rationale_coverage_rate": 0.0,
+        "evidence_quote_rate": 0.0,
+        "contrastive_rationale_rate": 0.0,
+        "rejected_similar_codes_rate": 0.0,
+        "contrastive_fallback_rate": 0.0,
+        "llm_contrastive_rate": 0.0,
+        "schema_invalid_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "confidence_missing_rate": 0.0,
+        "similar_code_confusion_rate": 0.08362387590582346
+      },
+      "hierarchical": {
+        "parent_micro_f1": 0.5069635404647179,
+        "parent_macro_f1": 0.474127759636569,
+        "parent_micro_precision": 0.37717668766988405,
+        "parent_micro_recall": 0.772929207291225,
+        "parent_macro_precision": 0.38577339102978714,
+        "parent_macro_recall": 0.6563752830621612,
+        "parent_hamming_loss": 0.14305144689086463,
+        "parent_exact_match_ratio": 0.0,
+        "parent_label_coverage": 1.0,
+        "parent_precision_at_5": 0.3968612177100636,
+        "parent_precision_at_10": 0.38511242211912355,
+        "parent_recall_at_5": 0.3082754372820686,
+        "parent_recall_at_10": 0.5951033335469591,
+        "parent_lrap": 0.33002882308889364,
+        "parent_n_samples": 17459,
+        "parent_n_labels": 71,
+        "hierarchical_error_rate": 0.08362387590582346
+      },
+      "cost": {
+        "avg_runtime_sec": 0.00595175171848889,
+        "total_runtime_sec": 103.91163325309753,
+        "p95_runtime_sec": 0.006498599052429199,
+        "avg_input_tokens": 0.0,
+        "total_input_tokens": 0.0,
+        "avg_output_tokens": 0.0,
+        "total_output_tokens": 0.0,
+        "avg_gpu_memory_mb": 0.0,
+        "peak_gpu_memory_mb": 0.0,
+        "runtime_per_correct_code": 0.001153548326521953,
+        "tokens_per_correct_code": 0.0,
+        "n_samples": 17459
+      },
+      "errors": {
+        "failed_sample_rate": 0.0,
+        "cuda_oom_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "skipped_rate": 0.0,
+        "success_rate": 1.0
+      },
+      "bootstrap_ci": {},
+      "eval_runtime_sec": 4.809133768081665,
+      "predictions_path": "results_eurohpc/scalability_shared/_eval_stage/top100/E1_seed42/test_predictions.jsonl",
+      "n_samples": 17459,
+      "experiment_id": "E1"
+    },
+    "E6_seed42": {
+      "classification": {
+        "micro_f1": 0.16502111987348883,
+        "macro_f1": 0.17323997926262347,
+        "micro_precision": 0.12113332187792351,
+        "micro_recall": 0.2587794790638485,
+        "macro_precision": 0.23495546924700542,
+        "macro_recall": 0.31564513137771466,
+        "hamming_loss": 0.1838742196002062,
+        "exact_match_ratio": 0.0,
+        "label_coverage": 1.0,
+        "precision_at_5": 0.1223208660289822,
+        "precision_at_10": 0.12556847471218283,
+        "recall_at_5": 0.09165389144289086,
+        "recall_at_10": 0.18631401115500562,
+        "lrap": 0.09538600466430178,
+        "n_samples": 17459,
+        "n_labels": 100
+      },
+      "reliability": {
+        "total_predicted_codes": 261885,
+        "evidence_judged_codes": 0,
+        "evidence_support_rate": null,
+        "unsupported_code_rate": null,
+        "evidence_quote_verbatim_rate": null,
+        "evidence_quote_checked_codes": 0,
+        "weak_evidence_rate": 0.0,
+        "ambiguous_code_rate": 0.0,
+        "hallucination_flag_rate": 0.0,
+        "rationale_coverage_rate": 1.0,
+        "evidence_quote_rate": 0.0,
+        "contrastive_rationale_rate": 0.0,
+        "rejected_similar_codes_rate": 0.0,
+        "contrastive_fallback_rate": 0.0,
+        "llm_contrastive_rate": 0.0,
+        "schema_invalid_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "confidence_missing_rate": 0.0,
+        "similar_code_confusion_rate": 0.09429010870604183
+      },
+      "hierarchical": {
+        "parent_micro_f1": 0.22432379459035673,
+        "parent_macro_f1": 0.1979337435052226,
+        "parent_micro_precision": 0.1755889882921497,
+        "parent_micro_recall": 0.31050445103857566,
+        "parent_macro_precision": 0.26211004164682566,
+        "parent_macro_recall": 0.3240261367631997,
+        "parent_hamming_loss": 0.20432578862832762,
+        "parent_exact_match_ratio": 0.0,
+        "parent_label_coverage": 1.0,
+        "parent_precision_at_5": 0.1807205452775073,
+        "parent_precision_at_10": 0.18047109463714084,
+        "parent_recall_at_5": 0.12671612482213668,
+        "parent_recall_at_10": 0.26548116514479125,
+        "parent_lrap": 0.13742752176162273,
+        "parent_n_samples": 17459,
+        "parent_n_labels": 71,
+        "hierarchical_error_rate": 0.09429010870604183
+      },
+      "cost": {
+        "avg_runtime_sec": 0.025669371086923354,
+        "total_runtime_sec": 448.16154980659485,
+        "p95_runtime_sec": 0.0332322359085083,
+        "avg_input_tokens": 0.0,
+        "total_input_tokens": 0.0,
+        "avg_output_tokens": 0.0,
+        "total_output_tokens": 0.0,
+        "avg_gpu_memory_mb": 0.0,
+        "peak_gpu_memory_mb": 0.0,
+        "runtime_per_correct_code": 0.01412733820277385,
+        "tokens_per_correct_code": 0.0,
+        "n_samples": 17459
+      },
+      "errors": {
+        "failed_sample_rate": 0.0,
+        "cuda_oom_rate": 0.0,
+        "json_parse_error_rate": 0.0,
+        "skipped_rate": 0.0,
+        "success_rate": 1.0
+      },
+      "bootstrap_ci": {},
+      "eval_runtime_sec": 5.05647873878479,
+      "predictions_path": "results_eurohpc/scalability_shared/_eval_stage/top100/E6_seed42/test_predictions.jsonl",
+      "n_samples": 17459,
+      "experiment_id": "E6"
+    }
+  },
+  "seed_statistics": {
+    "E11": {
+      "classification.exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "classification.hamming_loss": {
+        "mean": 0.18962025316455697,
+        "std": 0.0,
+        "min": 0.18962025316455697,
+        "max": 0.18962025316455697,
+        "n": 1
+      },
+      "classification.label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "classification.lrap": {
+        "mean": 0.08855212102392222,
+        "std": 0.0,
+        "min": 0.08855212102392222,
+        "max": 0.08855212102392222,
+        "n": 1
+      },
+      "classification.macro_f1": {
+        "mean": 0.13524616127490924,
+        "std": 0.0,
+        "min": 0.13524616127490924,
+        "max": 0.13524616127490924,
+        "n": 1
+      },
+      "classification.macro_precision": {
+        "mean": 0.15655105567674554,
+        "std": 0.0,
+        "min": 0.15655105567674554,
+        "max": 0.15655105567674554,
+        "n": 1
+      },
+      "classification.macro_recall": {
+        "mean": 0.2580277864306694,
+        "std": 0.0,
+        "min": 0.2580277864306694,
+        "max": 0.2580277864306694,
+        "n": 1
+      },
+      "classification.micro_f1": {
+        "mean": 0.13892819243013796,
+        "std": 0.0,
+        "min": 0.13892819243013796,
+        "max": 0.13892819243013796,
+        "n": 1
+      },
+      "classification.micro_precision": {
+        "mean": 0.10197987666342097,
+        "std": 0.0,
+        "min": 0.10197987666342097,
+        "max": 0.10197987666342097,
+        "n": 1
+      },
+      "classification.micro_recall": {
+        "mean": 0.21786160033282484,
+        "std": 0.0,
+        "min": 0.21786160033282484,
+        "max": 0.21786160033282484,
+        "n": 1
+      },
+      "classification.n_labels": {
+        "mean": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0,
+        "n": 1
+      },
+      "classification.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "classification.precision_at_10": {
+        "mean": 0.1116100578498196,
+        "std": 0.0,
+        "min": 0.1116100578498196,
+        "max": 0.1116100578498196,
+        "n": 1
+      },
+      "classification.precision_at_5": {
+        "mean": 0.12399335586230599,
+        "std": 0.0,
+        "min": 0.12399335586230599,
+        "max": 0.12399335586230599,
+        "n": 1
+      },
+      "classification.recall_at_10": {
+        "mean": 0.1666204153098916,
+        "std": 0.0,
+        "min": 0.1666204153098916,
+        "max": 0.1666204153098916,
+        "n": 1
+      },
+      "classification.recall_at_5": {
+        "mean": 0.0955038651892171,
+        "std": 0.0,
+        "min": 0.0955038651892171,
+        "max": 0.0955038651892171,
+        "n": 1
+      },
+      "cost.avg_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_runtime_sec": {
+        "mean": 20.177535898681768,
+        "std": 0.0,
+        "min": 20.177535898681768,
+        "max": 20.177535898681768,
+        "n": 1
+      },
+      "cost.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "cost.p95_runtime_sec": {
+        "mean": 40.67400605678558,
+        "std": 0.0,
+        "min": 40.67400605678558,
+        "max": 40.67400605678558,
+        "n": 1
+      },
+      "cost.peak_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.runtime_per_correct_code": {
+        "mean": 13.190534288953645,
+        "std": 0.0,
+        "min": 13.190534288953645,
+        "max": 13.190534288953645,
+        "n": 1
+      },
+      "cost.tokens_per_correct_code": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_runtime_sec": {
+        "mean": 352279.599255085,
+        "std": 0.0,
+        "min": 352279.599255085,
+        "max": 352279.599255085,
+        "n": 1
+      },
+      "errors.cuda_oom_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.failed_sample_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.skipped_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.hierarchical_error_rate": {
+        "mean": 0.09099915808451471,
+        "std": 0.0,
+        "min": 0.09099915808451471,
+        "max": 0.09099915808451471,
+        "n": 1
+      },
+      "hierarchical.parent_exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "hierarchical.parent_hamming_loss": {
+        "mean": 0.20512282700153034,
+        "std": 0.0,
+        "min": 0.20512282700153034,
+        "max": 0.20512282700153034,
+        "n": 1
+      },
+      "hierarchical.parent_label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.parent_lrap": {
+        "mean": 0.1309149966439096,
+        "std": 0.0,
+        "min": 0.1309149966439096,
+        "max": 0.1309149966439096,
+        "n": 1
+      },
+      "hierarchical.parent_macro_f1": {
+        "mean": 0.16495897003081084,
+        "std": 0.0,
+        "min": 0.16495897003081084,
+        "max": 0.16495897003081084,
+        "n": 1
+      },
+      "hierarchical.parent_macro_precision": {
+        "mean": 0.19159825273422224,
+        "std": 0.0,
+        "min": 0.19159825273422224,
+        "max": 0.19159825273422224,
+        "n": 1
+      },
+      "hierarchical.parent_macro_recall": {
+        "mean": 0.26577985941339927,
+        "std": 0.0,
+        "min": 0.26577985941339927,
+        "max": 0.26577985941339927,
+        "n": 1
+      },
+      "hierarchical.parent_micro_f1": {
+        "mean": 0.20511441790671503,
+        "std": 0.0,
+        "min": 0.20511441790671503,
+        "max": 0.20511441790671503,
+        "n": 1
+      },
+      "hierarchical.parent_micro_precision": {
+        "mean": 0.16246223938988757,
+        "std": 0.0,
+        "min": 0.16246223938988757,
+        "max": 0.16246223938988757,
+        "n": 1
+      },
+      "hierarchical.parent_micro_recall": {
+        "mean": 0.27813480288257736,
+        "std": 0.0,
+        "min": 0.27813480288257736,
+        "max": 0.27813480288257736,
+        "n": 1
+      },
+      "hierarchical.parent_n_labels": {
+        "mean": 71.0,
+        "std": 0.0,
+        "min": 71.0,
+        "max": 71.0,
+        "n": 1
+      },
+      "hierarchical.parent_n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_10": {
+        "mean": 0.16709542629125654,
+        "std": 0.0,
+        "min": 0.16709542629125654,
+        "max": 0.16709542629125654,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_5": {
+        "mean": 0.15141760696488915,
+        "std": 0.0,
+        "min": 0.15141760696488915,
+        "max": 0.15141760696488915,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_10": {
+        "mean": 0.2481821947897822,
+        "std": 0.0,
+        "min": 0.2481821947897822,
+        "max": 0.2481821947897822,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_5": {
+        "mean": 0.107564135034045,
+        "std": 0.0,
+        "min": 0.107564135034045,
+        "max": 0.107564135034045,
+        "n": 1
+      },
+      "reliability.ambiguous_code_rate": {
+        "mean": 0.654951600893522,
+        "std": 0.0,
+        "min": 0.654951600893522,
+        "max": 0.654951600893522,
+        "n": 1
+      },
+      "reliability.confidence_missing_rate": {
+        "mean": 0.0015808465547854974,
+        "std": 0.0,
+        "min": 0.0015808465547854974,
+        "max": 0.0015808465547854974,
+        "n": 1
+      },
+      "reliability.contrastive_fallback_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_rationale_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_judged_codes": {
+        "mean": 261885.0,
+        "std": 0.0,
+        "min": 261885.0,
+        "max": 261885.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_checked_codes": {
+        "mean": 90358.0,
+        "std": 0.0,
+        "min": 90358.0,
+        "max": 90358.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_verbatim_rate": {
+        "mean": 0.07645144868190974,
+        "std": 0.0,
+        "min": 0.07645144868190974,
+        "max": 0.07645144868190974,
+        "n": 1
+      },
+      "reliability.evidence_support_rate": {
+        "mean": 0.34504839910647805,
+        "std": 0.0,
+        "min": 0.34504839910647805,
+        "max": 0.34504839910647805,
+        "n": 1
+      },
+      "reliability.hallucination_flag_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.json_parse_error_rate": {
+        "mean": 5.727704908643107e-05,
+        "std": 0.0,
+        "min": 5.727704908643107e-05,
+        "max": 5.727704908643107e-05,
+        "n": 1
+      },
+      "reliability.llm_contrastive_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.rationale_coverage_rate": {
+        "mean": 0.3238177062451076,
+        "std": 0.0,
+        "min": 0.3238177062451076,
+        "max": 0.3238177062451076,
+        "n": 1
+      },
+      "reliability.rejected_similar_codes_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.schema_invalid_rate": {
+        "mean": 0.0015808465547854974,
+        "std": 0.0,
+        "min": 0.0015808465547854974,
+        "max": 0.0015808465547854974,
+        "n": 1
+      },
+      "reliability.similar_code_confusion_rate": {
+        "mean": 0.09099915808451471,
+        "std": 0.0,
+        "min": 0.09099915808451471,
+        "max": 0.09099915808451471,
+        "n": 1
+      },
+      "reliability.total_predicted_codes": {
+        "mean": 261885.0,
+        "std": 0.0,
+        "min": 261885.0,
+        "max": 261885.0,
+        "n": 1
+      },
+      "reliability.unsupported_code_rate": {
+        "mean": 0.654951600893522,
+        "std": 0.0,
+        "min": 0.654951600893522,
+        "max": 0.654951600893522,
+        "n": 1
+      },
+      "reliability.weak_evidence_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      }
+    },
+    "E14": {
+      "classification.exact_match_ratio": {
+        "mean": 0.00045821639269144854,
+        "std": 0.0,
+        "min": 0.00045821639269144854,
+        "max": 0.00045821639269144854,
+        "n": 1
+      },
+      "classification.hamming_loss": {
+        "mean": 0.10324531760123719,
+        "std": 0.0,
+        "min": 0.10324531760123719,
+        "max": 0.10324531760123719,
+        "n": 1
+      },
+      "classification.label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "classification.lrap": {
+        "mean": 0.08939052253858727,
+        "std": 0.0,
+        "min": 0.08939052253858727,
+        "max": 0.08939052253858727,
+        "n": 1
+      },
+      "classification.macro_f1": {
+        "mean": 0.08736214024791691,
+        "std": 0.0,
+        "min": 0.08736214024791691,
+        "max": 0.08736214024791691,
+        "n": 1
+      },
+      "classification.macro_precision": {
+        "mean": 0.15636544587192835,
+        "std": 0.0,
+        "min": 0.15636544587192835,
+        "max": 0.15636544587192835,
+        "n": 1
+      },
+      "classification.macro_recall": {
+        "mean": 0.08897214717436003,
+        "std": 0.0,
+        "min": 0.08897214717436003,
+        "max": 0.08897214717436003,
+        "n": 1
+      },
+      "classification.micro_f1": {
+        "mean": 0.09807061083980466,
+        "std": 0.0,
+        "min": 0.09807061083980466,
+        "max": 0.09807061083980466,
+        "n": 1
+      },
+      "classification.micro_precision": {
+        "mean": 0.12682964707709432,
+        "std": 0.0,
+        "min": 0.12682964707709432,
+        "max": 0.12682964707709432,
+        "n": 1
+      },
+      "classification.micro_recall": {
+        "mean": 0.07994322399601915,
+        "std": 0.0,
+        "min": 0.07994322399601915,
+        "max": 0.07994322399601915,
+        "n": 1
+      },
+      "classification.n_labels": {
+        "mean": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0,
+        "n": 1
+      },
+      "classification.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "classification.precision_at_10": {
+        "mean": 0.11008080609718732,
+        "std": 0.0,
+        "min": 0.11008080609718732,
+        "max": 0.11008080609718732,
+        "n": 1
+      },
+      "classification.precision_at_5": {
+        "mean": 0.11440422322775265,
+        "std": 0.0,
+        "min": 0.11440422322775265,
+        "max": 0.11440422322775265,
+        "n": 1
+      },
+      "classification.recall_at_10": {
+        "mean": 0.07411052546492175,
+        "std": 0.0,
+        "min": 0.07411052546492175,
+        "max": 0.07411052546492175,
+        "n": 1
+      },
+      "classification.recall_at_5": {
+        "mean": 0.05715965573011574,
+        "std": 0.0,
+        "min": 0.05715965573011574,
+        "max": 0.05715965573011574,
+        "n": 1
+      },
+      "cost.avg_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_runtime_sec": {
+        "mean": 22.8600498140524,
+        "std": 0.0,
+        "min": 22.8600498140524,
+        "max": 22.8600498140524,
+        "n": 1
+      },
+      "cost.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "cost.p95_runtime_sec": {
+        "mean": 46.53686780929566,
+        "std": 0.0,
+        "min": 46.53686780929566,
+        "max": 46.53686780929566,
+        "n": 1
+      },
+      "cost.peak_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.runtime_per_correct_code": {
+        "mean": 40.725878541177636,
+        "std": 0.0,
+        "min": 40.725878541177636,
+        "max": 40.725878541177636,
+        "n": 1
+      },
+      "cost.tokens_per_correct_code": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_runtime_sec": {
+        "mean": 399113.6097035408,
+        "std": 0.0,
+        "min": 399113.6097035408,
+        "max": 399113.6097035408,
+        "n": 1
+      },
+      "errors.cuda_oom_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.failed_sample_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.skipped_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.hierarchical_error_rate": {
+        "mean": 0.07848048733492419,
+        "std": 0.0,
+        "min": 0.07848048733492419,
+        "max": 0.07848048733492419,
+        "n": 1
+      },
+      "hierarchical.parent_exact_match_ratio": {
+        "mean": 0.0018328655707657941,
+        "std": 0.0,
+        "min": 0.0018328655707657941,
+        "max": 0.0018328655707657941,
+        "n": 1
+      },
+      "hierarchical.parent_hamming_loss": {
+        "mean": 0.13275529227832775,
+        "std": 0.0,
+        "min": 0.13275529227832775,
+        "max": 0.13275529227832775,
+        "n": 1
+      },
+      "hierarchical.parent_label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.parent_lrap": {
+        "mean": 0.12986192338714042,
+        "std": 0.0,
+        "min": 0.12986192338714042,
+        "max": 0.12986192338714042,
+        "n": 1
+      },
+      "hierarchical.parent_macro_f1": {
+        "mean": 0.11081917619467185,
+        "std": 0.0,
+        "min": 0.11081917619467185,
+        "max": 0.11081917619467185,
+        "n": 1
+      },
+      "hierarchical.parent_macro_precision": {
+        "mean": 0.18577060141246773,
+        "std": 0.0,
+        "min": 0.18577060141246773,
+        "max": 0.18577060141246773,
+        "n": 1
+      },
+      "hierarchical.parent_macro_recall": {
+        "mean": 0.10911265561566465,
+        "std": 0.0,
+        "min": 0.10911265561566465,
+        "max": 0.10911265561566465,
+        "n": 1
+      },
+      "hierarchical.parent_micro_f1": {
+        "mean": 0.15096325494525906,
+        "std": 0.0,
+        "min": 0.15096325494525906,
+        "max": 0.15096325494525906,
+        "n": 1
+      },
+      "hierarchical.parent_micro_precision": {
+        "mean": 0.1928247574862927,
+        "std": 0.0,
+        "min": 0.1928247574862927,
+        "max": 0.1928247574862927,
+        "n": 1
+      },
+      "hierarchical.parent_micro_recall": {
+        "mean": 0.12403560830860534,
+        "std": 0.0,
+        "min": 0.12403560830860534,
+        "max": 0.12403560830860534,
+        "n": 1
+      },
+      "hierarchical.parent_n_labels": {
+        "mean": 71.0,
+        "std": 0.0,
+        "min": 71.0,
+        "max": 71.0,
+        "n": 1
+      },
+      "hierarchical.parent_n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_10": {
+        "mean": 0.17657127765095001,
+        "std": 0.0,
+        "min": 0.17657127765095001,
+        "max": 0.17657127765095001,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_5": {
+        "mean": 0.171122821085591,
+        "std": 0.0,
+        "min": 0.171122821085591,
+        "max": 0.171122821085591,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_10": {
+        "mean": 0.11208134324368275,
+        "std": 0.0,
+        "min": 0.11208134324368275,
+        "max": 0.11208134324368275,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_5": {
+        "mean": 0.07922183963662516,
+        "std": 0.0,
+        "min": 0.07922183963662516,
+        "max": 0.07922183963662516,
+        "n": 1
+      },
+      "reliability.ambiguous_code_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.confidence_missing_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_fallback_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_rationale_rate": {
+        "mean": 0.24400471081546285,
+        "std": 0.0,
+        "min": 0.24400471081546285,
+        "max": 0.24400471081546285,
+        "n": 1
+      },
+      "reliability.evidence_judged_codes": {
+        "mean": 77269.0,
+        "std": 0.0,
+        "min": 77269.0,
+        "max": 77269.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_checked_codes": {
+        "mean": 77266.0,
+        "std": 0.0,
+        "min": 77266.0,
+        "max": 77266.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_verbatim_rate": {
+        "mean": 0.0762819351331763,
+        "std": 0.0,
+        "min": 0.0762819351331763,
+        "max": 0.0762819351331763,
+        "n": 1
+      },
+      "reliability.evidence_support_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "reliability.hallucination_flag_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.llm_contrastive_rate": {
+        "mean": 0.24400471081546285,
+        "std": 0.0,
+        "min": 0.24400471081546285,
+        "max": 0.24400471081546285,
+        "n": 1
+      },
+      "reliability.rationale_coverage_rate": {
+        "mean": 0.936598118262175,
+        "std": 0.0,
+        "min": 0.936598118262175,
+        "max": 0.936598118262175,
+        "n": 1
+      },
+      "reliability.rejected_similar_codes_rate": {
+        "mean": 0.2439400018118521,
+        "std": 0.0,
+        "min": 0.2439400018118521,
+        "max": 0.2439400018118521,
+        "n": 1
+      },
+      "reliability.schema_invalid_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.similar_code_confusion_rate": {
+        "mean": 0.07848048733492419,
+        "std": 0.0,
+        "min": 0.07848048733492419,
+        "max": 0.07848048733492419,
+        "n": 1
+      },
+      "reliability.total_predicted_codes": {
+        "mean": 77269.0,
+        "std": 0.0,
+        "min": 77269.0,
+        "max": 77269.0,
+        "n": 1
+      },
+      "reliability.unsupported_code_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.weak_evidence_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      }
+    },
+    "E1": {
+      "classification.exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "classification.hamming_loss": {
+        "mean": 0.11702388452946905,
+        "std": 0.0,
+        "min": 0.11702388452946905,
+        "max": 0.11702388452946905,
+        "n": 1
+      },
+      "classification.label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "classification.lrap": {
+        "mean": 0.28614765396027064,
+        "std": 0.0,
+        "min": 0.28614765396027064,
+        "max": 0.28614765396027064,
+        "n": 1
+      },
+      "classification.macro_f1": {
+        "mean": 0.4497576394926703,
+        "std": 0.0,
+        "min": 0.4497576394926703,
+        "max": 0.4497576394926703,
+        "n": 1
+      },
+      "classification.macro_precision": {
+        "mean": 0.3666073619553951,
+        "std": 0.0,
+        "min": 0.3666073619553951,
+        "max": 0.3666073619553951,
+        "n": 1
+      },
+      "classification.macro_recall": {
+        "mean": 0.6209112505507427,
+        "std": 0.0,
+        "min": 0.6209112505507427,
+        "max": 0.6209112505507427,
+        "n": 1
+      },
+      "classification.micro_f1": {
+        "mean": 0.4685906906094592,
+        "std": 0.0,
+        "min": 0.4685906906094592,
+        "max": 0.4685906906094592,
+        "n": 1
+      },
+      "classification.micro_precision": {
+        "mean": 0.34396777211371404,
+        "std": 0.0,
+        "min": 0.34396777211371404,
+        "max": 0.34396777211371404,
+        "n": 1
+      },
+      "classification.micro_recall": {
+        "mean": 0.7348250630164699,
+        "std": 0.0,
+        "min": 0.7348250630164699,
+        "max": 0.7348250630164699,
+        "n": 1
+      },
+      "classification.n_labels": {
+        "mean": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0,
+        "n": 1
+      },
+      "classification.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "classification.precision_at_10": {
+        "mean": 0.4342459476487771,
+        "std": 0.0,
+        "min": 0.4342459476487771,
+        "max": 0.4342459476487771,
+        "n": 1
+      },
+      "classification.precision_at_5": {
+        "mean": 0.5762987570880348,
+        "std": 0.0,
+        "min": 0.5762987570880348,
+        "max": 0.5762987570880348,
+        "n": 1
+      },
+      "classification.recall_at_10": {
+        "mean": 0.6836183738474495,
+        "std": 0.0,
+        "min": 0.6836183738474495,
+        "max": 0.6836183738474495,
+        "n": 1
+      },
+      "classification.recall_at_5": {
+        "mean": 0.4909444656585349,
+        "std": 0.0,
+        "min": 0.4909444656585349,
+        "max": 0.4909444656585349,
+        "n": 1
+      },
+      "cost.avg_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_runtime_sec": {
+        "mean": 0.00595175171848889,
+        "std": 0.0,
+        "min": 0.00595175171848889,
+        "max": 0.00595175171848889,
+        "n": 1
+      },
+      "cost.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "cost.p95_runtime_sec": {
+        "mean": 0.006498599052429199,
+        "std": 0.0,
+        "min": 0.006498599052429199,
+        "max": 0.006498599052429199,
+        "n": 1
+      },
+      "cost.peak_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.runtime_per_correct_code": {
+        "mean": 0.001153548326521953,
+        "std": 0.0,
+        "min": 0.001153548326521953,
+        "max": 0.001153548326521953,
+        "n": 1
+      },
+      "cost.tokens_per_correct_code": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_runtime_sec": {
+        "mean": 103.91163325309753,
+        "std": 0.0,
+        "min": 103.91163325309753,
+        "max": 103.91163325309753,
+        "n": 1
+      },
+      "errors.cuda_oom_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.failed_sample_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.skipped_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.hierarchical_error_rate": {
+        "mean": 0.08362387590582346,
+        "std": 0.0,
+        "min": 0.08362387590582346,
+        "max": 0.08362387590582346,
+        "n": 1
+      },
+      "hierarchical.parent_exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "hierarchical.parent_hamming_loss": {
+        "mean": 0.14305144689086463,
+        "std": 0.0,
+        "min": 0.14305144689086463,
+        "max": 0.14305144689086463,
+        "n": 1
+      },
+      "hierarchical.parent_label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.parent_lrap": {
+        "mean": 0.33002882308889364,
+        "std": 0.0,
+        "min": 0.33002882308889364,
+        "max": 0.33002882308889364,
+        "n": 1
+      },
+      "hierarchical.parent_macro_f1": {
+        "mean": 0.474127759636569,
+        "std": 0.0,
+        "min": 0.474127759636569,
+        "max": 0.474127759636569,
+        "n": 1
+      },
+      "hierarchical.parent_macro_precision": {
+        "mean": 0.38577339102978714,
+        "std": 0.0,
+        "min": 0.38577339102978714,
+        "max": 0.38577339102978714,
+        "n": 1
+      },
+      "hierarchical.parent_macro_recall": {
+        "mean": 0.6563752830621612,
+        "std": 0.0,
+        "min": 0.6563752830621612,
+        "max": 0.6563752830621612,
+        "n": 1
+      },
+      "hierarchical.parent_micro_f1": {
+        "mean": 0.5069635404647179,
+        "std": 0.0,
+        "min": 0.5069635404647179,
+        "max": 0.5069635404647179,
+        "n": 1
+      },
+      "hierarchical.parent_micro_precision": {
+        "mean": 0.37717668766988405,
+        "std": 0.0,
+        "min": 0.37717668766988405,
+        "max": 0.37717668766988405,
+        "n": 1
+      },
+      "hierarchical.parent_micro_recall": {
+        "mean": 0.772929207291225,
+        "std": 0.0,
+        "min": 0.772929207291225,
+        "max": 0.772929207291225,
+        "n": 1
+      },
+      "hierarchical.parent_n_labels": {
+        "mean": 71.0,
+        "std": 0.0,
+        "min": 71.0,
+        "max": 71.0,
+        "n": 1
+      },
+      "hierarchical.parent_n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_10": {
+        "mean": 0.38511242211912355,
+        "std": 0.0,
+        "min": 0.38511242211912355,
+        "max": 0.38511242211912355,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_5": {
+        "mean": 0.3968612177100636,
+        "std": 0.0,
+        "min": 0.3968612177100636,
+        "max": 0.3968612177100636,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_10": {
+        "mean": 0.5951033335469591,
+        "std": 0.0,
+        "min": 0.5951033335469591,
+        "max": 0.5951033335469591,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_5": {
+        "mean": 0.3082754372820686,
+        "std": 0.0,
+        "min": 0.3082754372820686,
+        "max": 0.3082754372820686,
+        "n": 1
+      },
+      "reliability.ambiguous_code_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.confidence_missing_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_fallback_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_rationale_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_judged_codes": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_checked_codes": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.hallucination_flag_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.llm_contrastive_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.rationale_coverage_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.rejected_similar_codes_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.schema_invalid_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.similar_code_confusion_rate": {
+        "mean": 0.08362387590582346,
+        "std": 0.0,
+        "min": 0.08362387590582346,
+        "max": 0.08362387590582346,
+        "n": 1
+      },
+      "reliability.total_predicted_codes": {
+        "mean": 261885.0,
+        "std": 0.0,
+        "min": 261885.0,
+        "max": 261885.0,
+        "n": 1
+      },
+      "reliability.weak_evidence_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      }
+    },
+    "E6": {
+      "classification.exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "classification.hamming_loss": {
+        "mean": 0.1838742196002062,
+        "std": 0.0,
+        "min": 0.1838742196002062,
+        "max": 0.1838742196002062,
+        "n": 1
+      },
+      "classification.label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "classification.lrap": {
+        "mean": 0.09538600466430178,
+        "std": 0.0,
+        "min": 0.09538600466430178,
+        "max": 0.09538600466430178,
+        "n": 1
+      },
+      "classification.macro_f1": {
+        "mean": 0.17323997926262347,
+        "std": 0.0,
+        "min": 0.17323997926262347,
+        "max": 0.17323997926262347,
+        "n": 1
+      },
+      "classification.macro_precision": {
+        "mean": 0.23495546924700542,
+        "std": 0.0,
+        "min": 0.23495546924700542,
+        "max": 0.23495546924700542,
+        "n": 1
+      },
+      "classification.macro_recall": {
+        "mean": 0.31564513137771466,
+        "std": 0.0,
+        "min": 0.31564513137771466,
+        "max": 0.31564513137771466,
+        "n": 1
+      },
+      "classification.micro_f1": {
+        "mean": 0.16502111987348883,
+        "std": 0.0,
+        "min": 0.16502111987348883,
+        "max": 0.16502111987348883,
+        "n": 1
+      },
+      "classification.micro_precision": {
+        "mean": 0.12113332187792351,
+        "std": 0.0,
+        "min": 0.12113332187792351,
+        "max": 0.12113332187792351,
+        "n": 1
+      },
+      "classification.micro_recall": {
+        "mean": 0.2587794790638485,
+        "std": 0.0,
+        "min": 0.2587794790638485,
+        "max": 0.2587794790638485,
+        "n": 1
+      },
+      "classification.n_labels": {
+        "mean": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0,
+        "n": 1
+      },
+      "classification.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "classification.precision_at_10": {
+        "mean": 0.12556847471218283,
+        "std": 0.0,
+        "min": 0.12556847471218283,
+        "max": 0.12556847471218283,
+        "n": 1
+      },
+      "classification.precision_at_5": {
+        "mean": 0.1223208660289822,
+        "std": 0.0,
+        "min": 0.1223208660289822,
+        "max": 0.1223208660289822,
+        "n": 1
+      },
+      "classification.recall_at_10": {
+        "mean": 0.18631401115500562,
+        "std": 0.0,
+        "min": 0.18631401115500562,
+        "max": 0.18631401115500562,
+        "n": 1
+      },
+      "classification.recall_at_5": {
+        "mean": 0.09165389144289086,
+        "std": 0.0,
+        "min": 0.09165389144289086,
+        "max": 0.09165389144289086,
+        "n": 1
+      },
+      "cost.avg_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.avg_runtime_sec": {
+        "mean": 0.025669371086923354,
+        "std": 0.0,
+        "min": 0.025669371086923354,
+        "max": 0.025669371086923354,
+        "n": 1
+      },
+      "cost.n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "cost.p95_runtime_sec": {
+        "mean": 0.0332322359085083,
+        "std": 0.0,
+        "min": 0.0332322359085083,
+        "max": 0.0332322359085083,
+        "n": 1
+      },
+      "cost.peak_gpu_memory_mb": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.runtime_per_correct_code": {
+        "mean": 0.01412733820277385,
+        "std": 0.0,
+        "min": 0.01412733820277385,
+        "max": 0.01412733820277385,
+        "n": 1
+      },
+      "cost.tokens_per_correct_code": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_input_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_output_tokens": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "cost.total_runtime_sec": {
+        "mean": 448.16154980659485,
+        "std": 0.0,
+        "min": 448.16154980659485,
+        "max": 448.16154980659485,
+        "n": 1
+      },
+      "errors.cuda_oom_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.failed_sample_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.skipped_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "errors.success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.hierarchical_error_rate": {
+        "mean": 0.09429010870604183,
+        "std": 0.0,
+        "min": 0.09429010870604183,
+        "max": 0.09429010870604183,
+        "n": 1
+      },
+      "hierarchical.parent_exact_match_ratio": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "hierarchical.parent_hamming_loss": {
+        "mean": 0.20432578862832762,
+        "std": 0.0,
+        "min": 0.20432578862832762,
+        "max": 0.20432578862832762,
+        "n": 1
+      },
+      "hierarchical.parent_label_coverage": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "hierarchical.parent_lrap": {
+        "mean": 0.13742752176162273,
+        "std": 0.0,
+        "min": 0.13742752176162273,
+        "max": 0.13742752176162273,
+        "n": 1
+      },
+      "hierarchical.parent_macro_f1": {
+        "mean": 0.1979337435052226,
+        "std": 0.0,
+        "min": 0.1979337435052226,
+        "max": 0.1979337435052226,
+        "n": 1
+      },
+      "hierarchical.parent_macro_precision": {
+        "mean": 0.26211004164682566,
+        "std": 0.0,
+        "min": 0.26211004164682566,
+        "max": 0.26211004164682566,
+        "n": 1
+      },
+      "hierarchical.parent_macro_recall": {
+        "mean": 0.3240261367631997,
+        "std": 0.0,
+        "min": 0.3240261367631997,
+        "max": 0.3240261367631997,
+        "n": 1
+      },
+      "hierarchical.parent_micro_f1": {
+        "mean": 0.22432379459035673,
+        "std": 0.0,
+        "min": 0.22432379459035673,
+        "max": 0.22432379459035673,
+        "n": 1
+      },
+      "hierarchical.parent_micro_precision": {
+        "mean": 0.1755889882921497,
+        "std": 0.0,
+        "min": 0.1755889882921497,
+        "max": 0.1755889882921497,
+        "n": 1
+      },
+      "hierarchical.parent_micro_recall": {
+        "mean": 0.31050445103857566,
+        "std": 0.0,
+        "min": 0.31050445103857566,
+        "max": 0.31050445103857566,
+        "n": 1
+      },
+      "hierarchical.parent_n_labels": {
+        "mean": 71.0,
+        "std": 0.0,
+        "min": 71.0,
+        "max": 71.0,
+        "n": 1
+      },
+      "hierarchical.parent_n_samples": {
+        "mean": 17459.0,
+        "std": 0.0,
+        "min": 17459.0,
+        "max": 17459.0,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_10": {
+        "mean": 0.18047109463714084,
+        "std": 0.0,
+        "min": 0.18047109463714084,
+        "max": 0.18047109463714084,
+        "n": 1
+      },
+      "hierarchical.parent_precision_at_5": {
+        "mean": 0.1807205452775073,
+        "std": 0.0,
+        "min": 0.1807205452775073,
+        "max": 0.1807205452775073,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_10": {
+        "mean": 0.26548116514479125,
+        "std": 0.0,
+        "min": 0.26548116514479125,
+        "max": 0.26548116514479125,
+        "n": 1
+      },
+      "hierarchical.parent_recall_at_5": {
+        "mean": 0.12671612482213668,
+        "std": 0.0,
+        "min": 0.12671612482213668,
+        "max": 0.12671612482213668,
+        "n": 1
+      },
+      "reliability.ambiguous_code_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.confidence_missing_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_fallback_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.contrastive_rationale_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_judged_codes": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_checked_codes": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.evidence_quote_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.hallucination_flag_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.json_parse_error_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.llm_contrastive_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.rationale_coverage_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "reliability.rejected_similar_codes_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.schema_invalid_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "reliability.similar_code_confusion_rate": {
+        "mean": 0.09429010870604183,
+        "std": 0.0,
+        "min": 0.09429010870604183,
+        "max": 0.09429010870604183,
+        "n": 1
+      },
+      "reliability.total_predicted_codes": {
+        "mean": 261885.0,
+        "std": 0.0,
+        "min": 261885.0,
+        "max": 261885.0,
+        "n": 1
+      },
+      "reliability.weak_evidence_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      }
+    }
+  }
+}

@@ -38,6 +38,13 @@ SECTIONS = [
     ("08_conclusion.md", "Conclusion"),
 ]
 
+# The manuscript numbers its own sections (and uses 4.1a-4.1e, which article's counters cannot
+# express), so the builder prints those numbers rather than letting LaTeX assign new ones.
+SECTION_NUMBERS = {
+    "02_introduction.md": 1, "03_related_work.md": 2, "04_methods.md": 3, "05_results.md": 4,
+    "06_discussion.md": 5, "07_limitations_future_work.md": 6, "08_conclusion.md": 7,
+}
+
 UNICODE = {
     "—": "---", "–": "--", "−": "$-$", "→": "$\\rightarrow$", "×": "$\\times$",
     "≈": "$\\approx$", "≤": "$\\leq$", "≥": "$\\geq$", "±": "$\\pm$",
@@ -46,6 +53,20 @@ UNICODE = {
     "ğ": "\\u{g}", "Ğ": "\\u{G}", "ş": "\\c{s}", "Ş": "\\c{S}", "ı": "\\i{}",
     "İ": "\\.{I}", "’": "'", "‘": "`", "“": "``", "”": "''",
 }
+
+
+def selected_title(sections_dir: Path) -> str:
+    """Read the chosen title from the title page instead of hard-coding it here.
+
+    It was hard-coded, and when the title changed after the third capacity point the built PDF kept
+    the old one — exactly the prose-versus-source drift `scripts/44` exists to catch, in the one
+    place that script does not look. Failing loudly beats silently typesetting a stale title.
+    """
+    text = (sections_dir / "00_title_page.md").read_text(encoding="utf-8")
+    m = re.search(r"Selected:\s*\*\*\"?(.+?)\"?\*\*", text, re.S)
+    if not m:
+        raise SystemExit("00_title_page.md has no `Selected: **...**` line — cannot build")
+    return " ".join(m.group(1).split())
 
 
 def strip_working_notes(md: str) -> str:
@@ -245,12 +266,16 @@ class Builder:
             if m:
                 close_list()
                 level = len(m.group(1))
-                title = re.sub(r"^\d+(\.\d+)*[a-z]?\.?\s*", "", m.group(2)).strip()
+                heading = m.group(2).strip()
                 if level == 1:
                     i += 1
                     continue  # the file title; the section command is emitted by the caller
                 cmd = {2: "subsection", 3: "subsubsection", 4: "paragraph"}.get(level, "paragraph")
-                out.append(f"\\{cmd}{{{self.inline(title)}}}")
+                # Starred form plus the manuscript's own number, so that a cross-reference written
+                # as "Section 4.1d" lands on the heading actually labelled 4.1d. LaTeX's counters
+                # cannot express the 4.1a-4.1e level the manuscript uses and would renumber them.
+                out.append(f"\\{cmd}*{{{self.inline(heading)}}}")
+                out.append(f"\\addcontentsline{{toc}}{{{cmd}}}{{{self.inline(heading)}}}")
                 i += 1
                 continue
 
@@ -482,6 +507,13 @@ def main() -> int:
     abstract_tex = builder.convert("\n".join(body_lines[:kw_idx]))
     keywords = re.sub(r"^\*\*Keywords:\*\*\s*", "", " ".join(body_lines[kw_idx:])).strip()
 
+    # The title is read from the title page so the PDF cannot keep a superseded one.
+
+    tex_escape_title = (selected_title(M / "sections")
+
+                        .replace('&', r'\&').replace('%', r'\%').replace('_', r'\_'))
+
+
     tex = [
         # pdftex.def auto-loads epstopdf-base whenever shell-escape is on; this TeX Live install
         # does not ship it, and every figure here is already a PDF. The documented opt-out is to
@@ -508,8 +540,7 @@ def main() -> int:
         "\\captionsetup[figure]{labelformat=empty}",
         "\\usepackage{setspace}\\onehalfspacing",
         "\\usepackage[hidelinks]{hyperref}",
-        "\\title{Why a Retrieval-Augmented LLM Loses to TF-IDF at ICD-10 Coding:\\\\"
-        "A Component-Wise Cautionary Study}",
+        "\\title{" + tex_escape_title + "}",
         r'\author{Muhammed Yusuf K\"u\c{c}\"ukkara \\[3pt]' "\n"
         r'\small Department of Computer Engineering, Faculty of Technology, \\' "\n"
         r'\small Sakarya University of Applied Sciences, Sakarya, T\"urkiye \\[3pt]' "\n"
@@ -523,7 +554,8 @@ def main() -> int:
 
     for fname, title in SECTIONS:
         md = (M / "sections" / fname).read_text(encoding="utf-8")
-        tex.append(f"\\section{{{title}}}")
+        tex.append(f"\\section*{{{SECTION_NUMBERS[fname]}. {title}}}")
+        tex.append(f"\\addcontentsline{{toc}}{{section}}{{{SECTION_NUMBERS[fname]}. {title}}}")
         tex.append(builder.convert(md))
         tex.append("")
 

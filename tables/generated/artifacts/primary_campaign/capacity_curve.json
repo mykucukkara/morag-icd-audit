@@ -1,0 +1,192 @@
+{
+  "n_boot": 10000,
+  "n_perm": 10000,
+  "seed": 42,
+  "floor_K": 8,
+  "arms": {
+    "E11": {
+      "shared_notes": 1008,
+      "curve_micro_f1": {
+        "note": {
+          "3B": 0.1873,
+          "7B": 0.2351,
+          "14B": 0.3039
+        },
+        "nonote": {
+          "3B": 0.1893,
+          "7B": 0.2012,
+          "14B": 0.2156
+        }
+      },
+      "steps": [
+        {
+          "step": "3B->7B",
+          "capacity_effect_with_note": 0.0478,
+          "capacity_effect_without_note": 0.0119,
+          "interaction": {
+            "point": 0.0359,
+            "ci95": [
+              0.0282,
+              0.0438
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        },
+        {
+          "step": "7B->14B",
+          "capacity_effect_with_note": 0.0688,
+          "capacity_effect_without_note": 0.0144,
+          "interaction": {
+            "point": 0.0544,
+            "ci95": [
+              0.046,
+              0.0628
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        },
+        {
+          "step": "3B->14B",
+          "capacity_effect_with_note": 0.1167,
+          "capacity_effect_without_note": 0.0263,
+          "interaction": {
+            "point": 0.0904,
+            "ci95": [
+              0.0807,
+              0.1
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        }
+      ]
+    },
+    "E14": {
+      "shared_notes": 1008,
+      "curve_micro_f1": {
+        "note": {
+          "3B": 0.1054,
+          "7B": 0.2933,
+          "14B": 0.4255
+        },
+        "nonote": {
+          "3B": 0.1381,
+          "7B": 0.1301,
+          "14B": 0.174
+        }
+      },
+      "steps": [
+        {
+          "step": "3B->7B",
+          "capacity_effect_with_note": 0.1879,
+          "capacity_effect_without_note": -0.0079,
+          "interaction": {
+            "point": 0.1958,
+            "ci95": [
+              0.1754,
+              0.2158
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        },
+        {
+          "step": "7B->14B",
+          "capacity_effect_with_note": 0.1321,
+          "capacity_effect_without_note": 0.0438,
+          "interaction": {
+            "point": 0.0883,
+            "ci95": [
+              0.0688,
+              0.1077
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        },
+        {
+          "step": "3B->14B",
+          "capacity_effect_with_note": 0.3201,
+          "capacity_effect_without_note": 0.0359,
+          "interaction": {
+            "point": 0.2842,
+            "ci95": [
+              0.2626,
+              0.3047
+            ],
+            "verdict": "SIGNIFICANT (excludes 0)",
+            "approx_randomization_p": 0.0001,
+            "p_resolution_floor": 0.0001
+          }
+        }
+      ]
+    }
+  },
+  "floor_codes": [
+    "E785",
+    "I10",
+    "Z87891",
+    "K219",
+    "F329",
+    "I2510",
+    "N179",
+    "F419"
+  ],
+  "best_cell": {
+    "arm": "E14",
+    "cell": "14B_note"
+  },
+  "reference_contrasts": {
+    "vs_E1_tfidf": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E1_tfidf": {
+        "micro_f1": 0.4494
+      },
+      "E14_14B_note": {
+        "micro_f1": 0.4255
+      },
+      "delta_micro_f1": {
+        "point": -0.0239,
+        "ci95": [
+          -0.0394,
+          -0.0085
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0035,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "vs_note_blind_floor": {
+      "shared_notes": 1008,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "floor_K8": {
+        "micro_f1": 0.2955
+      },
+      "E14_14B_note": {
+        "micro_f1": 0.4255
+      },
+      "delta_micro_f1": {
+        "point": 0.13,
+        "ci95": [
+          0.1148,
+          0.1452
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    }
+  }
+}

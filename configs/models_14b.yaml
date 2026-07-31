@@ -1,0 +1,22 @@
+# Third capacity point (14B), used for the three-point capacity curve in §4.5.
+#
+# The 14B weights sit under a second root because a 28 GB checkpoint did not fit in the home
+# filesystem quota alongside the 3B and 7B models. Set MODELS_ROOT_LARGE to wherever you keep
+# large checkpoints; if you have room for everything in one place, point it at MODELS_ROOT.
+# models.yaml
+embedding_model_path: ${MODELS_ROOT}/embedding_models/bge-small-en-v1.5
+llm_model_path: ${MODELS_ROOT_LARGE}/llm_models/Qwen2.5-14B-Instruct
+classifier_model_path: ${MODELS_ROOT}/classifier_checkpoints/bert-base-uncased_safetensors
+classifier_use_safetensors: true
+
+use_vllm: false
+load_in_4bit: false
+load_in_8bit: false
+device: cuda
+fallback_device: cpu
+
+# Generation args
+max_new_tokens: 128
+temperature: 0.0
+top_p: 1.0
+repetition_penalty: 1.0

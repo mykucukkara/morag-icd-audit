@@ -72,101 +72,101 @@
     },
     "E6": {
       "band1": {
-        "micro_f1": 0.1994,
-        "precision": 0.1345,
-        "recall": 0.3848,
+        "micro_f1": 0.1313,
+        "precision": 0.1447,
+        "recall": 0.1202,
         "gold_instances": 92209
       },
       "band2": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.1339,
+        "precision": 0.1068,
+        "recall": 0.1793,
         "gold_instances": 29589
       },
       "band3": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.095,
+        "precision": 0.0592,
+        "recall": 0.2401,
         "gold_instances": 18533
       },
       "band4": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.1032,
+        "precision": 0.0626,
+        "recall": 0.293,
         "gold_instances": 13332
       }
     },
     "E11": {
       "band1": {
-        "micro_f1": 0.1829,
-        "precision": 0.1234,
-        "recall": 0.353,
+        "micro_f1": 0.1256,
+        "precision": 0.1457,
+        "recall": 0.1104,
         "gold_instances": 92209
       },
       "band2": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.1117,
+        "precision": 0.0847,
+        "recall": 0.164,
         "gold_instances": 29589
       },
       "band3": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.0854,
+        "precision": 0.0545,
+        "recall": 0.1973,
         "gold_instances": 18533
       },
       "band4": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.0889,
+        "precision": 0.053,
+        "recall": 0.2757,
         "gold_instances": 13332
       }
     },
     "E14": {
       "band1": {
-        "micro_f1": 0.1315,
-        "precision": 0.148,
-        "recall": 0.1182,
+        "micro_f1": 0.0598,
+        "precision": 0.1799,
+        "recall": 0.0359,
         "gold_instances": 92209
       },
       "band2": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.0736,
+        "precision": 0.1062,
+        "recall": 0.0563,
         "gold_instances": 29589
       },
       "band3": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.076,
+        "precision": 0.0738,
+        "recall": 0.0783,
         "gold_instances": 18533
       },
       "band4": {
-        "micro_f1": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "micro_f1": 0.0902,
+        "precision": 0.0733,
+        "recall": 0.1175,
         "gold_instances": 13332
       }
     }
   },
   "gap_vs_E1_per_band": {
     "E6": {
-      "band1": 0.3035,
-      "band2": 0.4218,
-      "band3": 0.3651,
-      "band4": 0.3714
+      "band1": 0.3716,
+      "band2": 0.2879,
+      "band3": 0.2701,
+      "band4": 0.2682
     },
     "E11": {
-      "band1": 0.32,
-      "band2": 0.4218,
-      "band3": 0.3651,
-      "band4": 0.3714
+      "band1": 0.3773,
+      "band2": 0.3101,
+      "band3": 0.2797,
+      "band4": 0.2825
     },
     "E14": {
-      "band1": 0.3714,
-      "band2": 0.4218,
-      "band3": 0.3651,
-      "band4": 0.3714
+      "band1": 0.4431,
+      "band2": 0.3482,
+      "band3": 0.2891,
+      "band4": 0.2812
     }
   },
   "interpretation": "if the gap to E1 shrinks toward the rarest band, the 'evaluated only in the supervised-friendly regime' objection is substantiated; if it holds or widens, the finding spans the available frequency range"

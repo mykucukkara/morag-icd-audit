@@ -72,7 +72,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--splits-root", default="data/splits_real")
     ap.add_argument("--top-n", type=int, default=200)
-    ap.add_argument("--scalability-root", default="results_eurohpc/scalability")
+    # The v1 tree predates the top_n_suffix fix, under which the retrieval/RAG/full arms could only
+    # emit the fifty most frequent codes — which shows up here as an exact 0.0 in every band beyond
+    # the first. Default to the corrected re-run; E1 was unaffected and was not re-run, so it falls
+    # back to v1.
+    ap.add_argument("--scalability-root", default="results_eurohpc/scalability_v2")
+    ap.add_argument("--scalability-root-v1", default="results_eurohpc/scalability",
+                    help="Fallback for arms not affected by the defect and therefore not re-run")
     ap.add_argument("--arms", default="E1,E6,E11,E14")
     ap.add_argument("--n-bands", type=int, default=4)
     ap.add_argument("--out", default=None)
@@ -99,6 +105,8 @@ def main():
 
     for arm in args.arms.split(","):
         base = Path(args.scalability_root) / f"top{args.top_n}" / f"{arm}_seed42"
+        if not (base / "test_predictions.jsonl").exists() and not (base / "merged").exists():
+            base = Path(args.scalability_root_v1) / f"top{args.top_n}" / f"{arm}_seed42"
         p = base / "merged" / "test_predictions.jsonl"
         if not p.exists():
             p = base / "test_predictions.jsonl"

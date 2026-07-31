@@ -1,5 +1,7 @@
 from .local_llm import LocalLLM
-from .prompts import CODE_SCORER_PROMPT, BATCH_CODE_SCORER_PROMPT, BATCH_CODE_SCORER_PROMPT_WITH_NOTE
+from .prompts import (CODE_SCORER_PROMPT, BATCH_CODE_SCORER_PROMPT,
+                      BATCH_CODE_SCORER_PROMPT_COPY_INSTRUCTED,
+                      BATCH_CODE_SCORER_PROMPT_WITH_NOTE)
 from .json_parser import parse_llm_json
 import hashlib
 
@@ -149,7 +151,11 @@ class CodeScorer:
             prompt = BATCH_CODE_SCORER_PROMPT_WITH_NOTE.format(
                 note=str(note_text)[:note_cap], candidates_block=block)
         else:
-            prompt = BATCH_CODE_SCORER_PROMPT.format(candidates_block=block)
+            # copy_instructed swaps only the quote instruction, so the arm differs from the
+            # primary one in exactly one respect (reviewer item T3-5).
+            tmpl = (BATCH_CODE_SCORER_PROMPT_COPY_INSTRUCTED
+                    if self.config.get("copy_instructed") else BATCH_CODE_SCORER_PROMPT)
+            prompt = tmpl.format(candidates_block=block)
         batch_prompt_max = int(self.config.get("batch_prompt_max_chars", 0) or 0) or prompt_max
         if batch_prompt_max:
             prompt = prompt[:batch_prompt_max]
