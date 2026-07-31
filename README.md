@@ -1,10 +1,16 @@
-# Code and audit protocol for "Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding"
+# Code and audit protocol for "Context and Capacity Interact: Why Single-Factor Evaluations Misjudge RAG-LLM ICD-10 Coding"
 
 This repository holds both the RAG-LLM ICD-10 coding pipeline the paper studies and the audit
-protocol it is studied with. The paper is a component-wise autopsy of a system that loses to
-TF-IDF, so withholding the system would leave the central question unanswerable: a reader could not
-check whether the weak result comes from the design or from a defect in the prompting, parsing,
-ranking or retrieval code. An independent reviewer made exactly that objection, and it was right.
+protocol it is studied with. The paper is a component-wise autopsy, so withholding the system
+would leave the central question unanswerable: a reader could not check whether the result comes
+from the design or from a defect in the prompting, parsing, ranking or retrieval code. An
+independent reviewer made exactly that objection, and it was right.
+
+The headline finding is that scorer context and model capacity interact. Neither factor helps on
+its own, and the same pipeline sits on opposite sides of the note-blind floor depending on where
+it is run: starved of note context at 3B it falls significantly below a predictor that never reads
+the note, while at 14B with truncated context it clears that floor by 0.130 and comes within 0.024
+of tuned TF-IDF. An evaluation varying either factor alone would conclude that neither mattered.
 
 ## What the protocol does
 
@@ -108,7 +114,12 @@ the JSON parser and schema handling, where a missing confidence field once corru
 
 ## Citation
 
-Küçükkara, M. Y. (2026). Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding: A Component-Wise Audit. *Manuscript under review.*
+Küçükkara, M. Y. (2026). Context and Capacity Interact: Why Single-Factor Evaluations Misjudge
+RAG-LLM ICD-10 Coding. *Manuscript under review.*
+
+Software: archived on Zenodo at [10.5281/zenodo.21652988](https://doi.org/10.5281/zenodo.21652988)
+(concept DOI, resolving to the latest version). The results in the paper correspond to release
+v1.1.0: [10.5281/zenodo.21728018](https://doi.org/10.5281/zenodo.21728018).
 
 ## License
 

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this audit protocol, please cite both the software and the paper it comes from."
-title: "Audit and verification code for a component-wise study of RAG-LLM ICD-10 coding"
+message: "If you use this pipeline or audit protocol, please cite both the software and the paper it comes from."
+title: "RAG-LLM ICD-10 coding pipeline and audit protocol"
 type: software
 license: MIT
 authors:
@@ -17,7 +17,7 @@ keywords:
   - evaluation validity
 preferred-citation:
   type: article
-  title: "Why a Context-Limited RAG-LLM Pipeline Loses to TF-IDF at ICD-10 Coding: A Component-Wise Audit"
+  title: "Context and Capacity Interact: Why Single-Factor Evaluations Misjudge RAG-LLM ICD-10 Coding"
   authors:
     - family-names: "Küçükkara"
       given-names: "Muhammed Yusuf"
