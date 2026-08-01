@@ -1,4 +1,4 @@
-# Code and audit protocol for "Context and Capacity Interact: Why Single-Factor Evaluations Misjudge RAG-LLM ICD-10 Coding"
+# Code and audit protocol for "Context and capacity interact in a retrieval-augmented LLM pipeline for ICD-10 coding: a component-wise audit"
 
 This repository holds both the RAG-LLM ICD-10 coding pipeline the paper studies and the audit
 protocol it is studied with. The paper is a component-wise autopsy, so withholding the system
@@ -114,8 +114,8 @@ the JSON parser and schema handling, where a missing confidence field once corru
 
 ## Citation
 
-Küçükkara, M. Y. (2026). Context and Capacity Interact: Why Single-Factor Evaluations Misjudge
-RAG-LLM ICD-10 Coding. *Manuscript under review.*
+Küçükkara, M. Y. (2026). Context and capacity interact in a retrieval-augmented LLM pipeline
+for ICD-10 coding: a component-wise audit. *Manuscript under review.*
 
 Software: archived on Zenodo at [10.5281/zenodo.21652988](https://doi.org/10.5281/zenodo.21652988)
 (concept DOI, resolving to the latest version). The results in the paper correspond to release

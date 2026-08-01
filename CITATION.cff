@@ -17,7 +17,7 @@ keywords:
   - evaluation validity
 preferred-citation:
   type: article
-  title: "Context and Capacity Interact: Why Single-Factor Evaluations Misjudge RAG-LLM ICD-10 Coding"
+  title: "Context and capacity interact in a retrieval-augmented LLM pipeline for ICD-10 coding: a component-wise audit"
   authors:
     - family-names: "Küçükkara"
       given-names: "Muhammed Yusuf"
