@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import json
 import re
 import shutil
 import subprocess
@@ -351,10 +352,27 @@ def main() -> int:
     print("  wrote manuscript.tex (double-spaced, author block moved to the title page)")
 
     date = args.date or "[date]"
+    #  The repository URL and the DOIs were hard-coded here, which is how the cover letter came to
+    #  advertise v1.2.0 after the manuscript had moved on — the same failure the title had, for the
+    #  same reason. They now come from manuscript/release.json, which scripts/44 checks the two
+    #  manuscript sections against, so all three sites are one source.
+    #  Fails with a sentence rather than a traceback, the way the title read does. A build script
+    #  that dies on a raw FileNotFoundError reads as broken; this one is merely being told that the
+    #  identifiers it must not invent are missing.
+    rel_path = M / "release.json"
+    if not rel_path.exists():
+        raise SystemExit(f"{rel_path} is missing — the cover letter's repository URL and DOIs come "
+                         "from it and are deliberately not hard-coded here; cannot build")
+    rel = json.loads(rel_path.read_text(encoding="utf-8"))
+    cited = rel.get("cited_release") or {}
+    if not cited.get("version") or not cited.get("version_doi"):
+        raise SystemExit(f"{rel_path} has no cited_release.version/version_doi — publish the release "
+                         "and record the DOI before building a cover letter that claims one")
     (OUT / "cover_letter.md").write_text(
         COVER_LETTER.format(date=date, title=title,
-                            repo="https://github.com/mykucukkara/morag-icd-audit",
-                            doi="https://doi.org/10.5281/zenodo.21652988 (v1.2.0: https://doi.org/10.5281/zenodo.21796502)"),
+                            repo=rel["repository_url"],
+                            doi=f"https://doi.org/{rel['concept_doi']} "
+                                f"({cited['version']}: https://doi.org/{cited['version_doi']})"),
         encoding="utf-8")
     print("  wrote cover_letter.md")
 
