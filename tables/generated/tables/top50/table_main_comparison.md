@@ -1,6 +1,6 @@
 ### Main comparison (Top-50, mean ± std over seeds)
 
-| Experiment | Micro-F1 | Macro-F1 | P@5 | R@10 | Hamming | Evid.Support | Unsupported |
+| Experiment | Micro-F1 | Macro-F1 | P@5 | R@10 | Hamming loss | Evid.Support | Unsupported |
 |---|---|---|---|---|---|---|---|
 | E1 | 0.4494 ± 0.0000 | 0.4476 ± 0.0000 | 0.5521 ± 0.0000 | 0.7918 ± 0.0000 | 0.2244 ± 0.0000 | — | — |
 | E2 | 0.4412 ± 0.0000 | 0.4154 ± 0.0000 | 0.5578 ± 0.0000 | 0.7780 ± 0.0000 | 0.2278 ± 0.0000 | — | — |

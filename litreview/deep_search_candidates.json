@@ -1,0 +1,35 @@
+{
+  "_note": "Records surfaced by re-running the logged queries in deep mode (OpenAlex + Crossref paginated to ~100 rather than the original limit of 30), after Semantic Scholar proved unreachable (blanket HTTP 429). Screened against the eligibility rule in manuscript/notes/checklist_scoring_protocol.md. Run date 2026-08-02.",
+  "queries_rerun_deep": [
+    "large language model ICD coding",
+    "retrieval augmented generation ICD coding",
+    "GPT ICD code assignment clinical notes",
+    "LLM ICD coding evaluation benchmark discharge summaries"
+  ],
+  "candidates": [
+    {"title": "To RAG, or Not to RAG? A Comparative Evaluation of Retrieval-Augmented Generation for ICD Coding of German Tumor Diagnoses", "year": 2026, "venue": "medRxiv", "doi": "10.64898/2026.05.27.26353695"},
+    {"title": "Fine-tuning for accuracy: evaluation of GPT for automatic assignment of ICD codes to clinical documentation", "year": 2024, "venue": "J Med Artif Intell", "doi": "10.21037/jmai-24-60"},
+    {"title": "Developing an ICD-10 Coding Assistant: Pilot Study Using RoBERTa and GPT-4 for Term Extraction and Description-Based Code Selection", "year": 2025, "venue": "JMIR Formative Research", "doi": "10.2196/60095"},
+    {"title": "Challenges and Solutions in Applying Large Language Models to Guideline-Based Management Planning and Automated Medical Coding in Health Care", "year": 2025, "venue": "JMIR Biomedical Engineering", "doi": "10.2196/66691"},
+    {"title": "Refine Medical Diagnosis Using Generation Augmented Retrieval and Clinical Practice Guidelines", "year": 2025, "venue": "IEEE JBHI", "doi": "10.1109/jbhi.2025.3641931"},
+    {"title": "Leveraging Large Language Models to Extract and Translate Medical Information in Doctors' Notes for Health Records and Diagnostic Billing Codes", "year": 2026, "venue": "arXiv", "doi": "10.48550/arxiv.2603.22625"},
+    {"title": "Accurate Clinical Entity Recognition and Code Mapping of Anatomopathological Reports Using BioClinicalBERT Enhanced by Retrieval-Augmented Generation", "year": 2025, "venue": "Bioengineering", "doi": "10.3390/bioengineering13010030"},
+    {"title": "Augmenting Structured Diagnoses through Effective Use of Pre-trained Large Language Models on Clinical Notes", "year": 2026, "venue": "medRxiv", "doi": "10.64898/2026.05.30.26354533"},
+    {"title": "Enhancing Clinical Note Generation with ICD-10, Clinical Ontology Knowledge Graphs, and Chain-of-Thought Prompting Using GPT-4", "year": 2026, "venue": "J Computational Biology", "doi": "10.1177/15578666251411390"},
+    {"title": "Zero-Shot ATC Coding with Large Language Models for Clinical Assessments", "year": 2024, "venue": "arXiv", "doi": "10.48550/arxiv.2412.07743"},
+    {"title": "MAX-EVAL-11: A Large Scale Benchmark for Evaluating Large Language Models on Full-Spectrum ICD-11 Medical Coding", "year": 2026, "venue": "BioNLP 2026", "doi": "10.18653/v1/2026.bionlp-1.23"},
+    {"title": "MedicalBench: Evaluating Large Language Models Toward Improved Medical Concept Extraction", "year": 2026, "venue": "arXiv", "doi": "10.48550/arxiv.2605.20197"},
+    {"title": "Large language models are good medical coders, if provided with tools", "year": 2024, "venue": "unknown", "doi": null},
+    {"title": "Autonomous International Classification of Diseases Coding Using Pretrained Language Models", "year": 2024, "venue": "unknown", "doi": null},
+    {"title": "Leveraging Language Models for Inpatient Diagnosis Coding", "year": 2023, "venue": "unknown", "doi": null},
+    {"title": "Evaluating the Reasoning Capabilities of Large Language Models for Medical Coding and Hospital workflows", "year": 2025, "venue": "unknown", "doi": null},
+    {"title": "Automated ICD-O-3 Coding of Real-World Pathology Reports Using Self-Hosted Large Language Models", "year": 2025, "venue": "unknown", "doi": null},
+    {"title": "Large Language Models for Automated ICD-10 Coding of Obstetric Clinical Notes in Portuguese", "year": 2026, "venue": "unknown", "doi": null},
+    {"title": "An automated information extraction model for unstructured discharge letters using large language models", "year": 2025, "venue": "unknown", "doi": null},
+    {"title": "Large language models vs human for classifying clinical documents", "year": 2025, "venue": "unknown", "doi": null},
+    {"title": "Large Language Model in Medical Informatics: Direct Classification and Enhanced Text Representations", "year": 2024, "venue": "unknown", "doi": null},
+    {"title": "Decoding substance use disorder severity from clinical notes using a large language model", "year": 2025, "venue": "unknown", "doi": null},
+    {"title": "Coding Historical Causes of Death Data with Large Language Models", "year": 2024, "venue": "unknown", "doi": null},
+    {"title": "Evaluating Enhanced LLMs for Precise Mental Health Diagnosis from Clinical Notes", "year": 2024, "venue": "medRxiv", "doi": "10.1101/2024.12.16.24317648"}
+  ]
+}

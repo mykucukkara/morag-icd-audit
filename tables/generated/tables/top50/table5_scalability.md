@@ -2,11 +2,11 @@
 
 | System | Top-50 | Top-100 | Top-200 | Δ Top-50→Top-200 |
 |---|---|---|---|---|
-| E1 TF-IDF + LR | 0.4494 | 0.4659 | 0.4685 | +0.019 |
-| E6 hybrid retrieval | 0.2027 | 0.1627 | 0.1185 | -0.084 |
-| E11 hybrid RAG | 0.1865 | 0.1375 | 0.1072 | -0.079 |
-| E14 full model | 0.1329 | 0.0970 | 0.0699 | -0.063 |
-| **E1 lead over E14** | **+0.3165** | **+0.3689** | **+0.3987** | **widens** |
-| Test notes (n) | 17,151 | 17,159 | 17,581 |  |
-| Gold codes/note (mean) | 5.38 | 6.91 | 8.74 |  |
-| Recall ceiling at a 15-code budget | 0.998 | 0.987 | 0.951 |  |
+| E1 TF-IDF + LR | 0.4494 | 0.4686 | 0.4669 | +0.018 |
+| E6 hybrid retrieval | 0.2027 | 0.1650 | 0.1234 | -0.079 |
+| E11 hybrid RAG | 0.1865 | 0.1389 | 0.1096 | -0.077 |
+| E14 full model | 0.1329 | 0.0981 | 0.0703 | -0.063 |
+| **E1 lead over E14** | **+0.3165** | **+0.3705** | **+0.3966** | **widens** |
+| Test notes (n) | 17,151 | 17,459 | 17,718 |  |
+| Gold codes/note (mean) | 5.38 | 7.02 | 8.75 |  |
+| Recall ceiling at a 15-code budget | 0.998 | 0.984 | 0.950 |  |

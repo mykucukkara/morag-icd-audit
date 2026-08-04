@@ -1,0 +1,12 @@
+{
+  "top_n": 50,
+  "shipped_label_set_size": 50,
+  "training_only_label_set_size": 50,
+  "identical_members": true,
+  "identical_order": false,
+  "in_shipped_not_in_training_only": [],
+  "in_training_only_not_in_shipped": [],
+  "n_differing_members": 0,
+  "verdict": "same members, different rank order",
+  "whole_corpus_matches_shipped": true
+}

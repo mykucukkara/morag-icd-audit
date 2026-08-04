@@ -68,6 +68,45 @@ def f1_from(counts: dict, sample) -> float:
     return 2 * p * r / (p + r) if (p + r) else 0.0
 
 
+def cell_stats(counts: dict, idx) -> dict:
+    """micro-F1 plus the quantities a reader needs to interpret it.
+
+    A cell's F1 can rise because judgement improved or because the arm simply emitted more codes,
+    and those have opposite implications for the paper's argument. Reporting precision, recall and
+    codes-per-note beside F1 lets a reader tell them apart instead of taking our word for it.
+    """
+    tp = fp = fn = 0
+    for i in idx:
+        a, b, c = counts[i][:3]
+        tp += a; fp += b; fn += c
+    p = tp / (tp + fp) if (tp + fp) else 0.0
+    r = tp / (tp + fn) if (tp + fn) else 0.0
+    return {"micro_f1": round(2 * p * r / (p + r), 4) if (p + r) else 0.0,
+            "precision": round(p, 4), "recall": round(r, 4),
+            "codes_per_note": round((tp + fp) / len(idx), 2) if idx else 0.0}
+
+
+def simple_effect(counts, idx, hi_cell: str, lo_cell: str, n_boot: int, seed: int) -> dict:
+    """One paired contrast between two cells, with an interval.
+
+    The paper claimed "neither factor helps alone". A reviewer objected that the supporting numbers
+    were point estimates without intervals — a capacity gain of +0.036 with the note withheld may
+    well be real, and calling it nothing is a stronger claim than the data carried. Every simple
+    effect now ships its interval so the reader decides what "alone" bought.
+    """
+    import random
+    d = f1_from(counts[hi_cell], idx) - f1_from(counts[lo_cell], idx)
+    rng = random.Random(seed)
+    boot = []
+    for _ in range(n_boot):
+        s = [rng.choice(idx) for _ in idx]
+        boot.append(f1_from(counts[hi_cell], s) - f1_from(counts[lo_cell], s))
+    lo, hi = PB.ci(boot)
+    return {"contrast": f"{hi_cell} - {lo_cell}", "point": round(d, 4),
+            "ci95": [round(lo, 4), round(hi, 4)],
+            "excludes_zero": bool(lo * hi > 0)}
+
+
 def interaction_between(counts, idx, lo_cap, hi_cap, n_boot, n_perm, seed):
     """Difference-in-differences for one capacity step, same machinery as scripts/48."""
     def d(sample, ctx):
@@ -143,6 +182,17 @@ def main() -> int:
             "shared_notes": len(idx),
             "curve_micro_f1": {ctx: {cap: round(f1_from(counts[f"{cap}_{ctx}"], idx), 4)
                                      for cap in CAPACITIES} for ctx in ("note", "nonote")},
+            "cells": {f"{cap}_{ctx}": cell_stats(counts[f"{cap}_{ctx}"], idx)
+                      for ctx in ("note", "nonote") for cap in CAPACITIES},
+            "simple_effects": {
+                **{f"context_at_{cap}": simple_effect(counts, idx, f"{cap}_note", f"{cap}_nonote",
+                                                      args.n_boot, args.seed)
+                   for cap in CAPACITIES},
+                **{f"capacity_{a}_to_{b}_{ctx}": simple_effect(counts, idx, f"{b}_{ctx}", f"{a}_{ctx}",
+                                                               args.n_boot, args.seed)
+                   for ctx in ("note", "nonote")
+                   for a, b in list(zip(CAPACITIES, CAPACITIES[1:])) + [("3B", "14B")]},
+            },
             "steps": [interaction_between(counts, idx, a, b, args.n_boot, args.n_perm, args.seed)
                       for a, b in zip(CAPACITIES, CAPACITIES[1:])],
         }

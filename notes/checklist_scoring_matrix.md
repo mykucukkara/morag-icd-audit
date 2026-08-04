@@ -39,7 +39,7 @@ protocol was written to stop exactly this kind of quiet adjustment:
 
 ## Scores
 
-### Studies read at full text (n = 8)
+### Studies read at full text in the first round (n = 10)
 
 | Study | Evidence source | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -51,30 +51,42 @@ protocol was written to stop exactly this kind of quiet adjustment:
 | Jiang et al. 2026, Digital Health (5 LLMs × 5 knowledge-injection strategies) | full text (open) | N | N | N | Y | N | Y | N | N | Y | N |
 | Schroeder et al. 2026, JAAOS (5 LLMs, hand-surgery notes) | full text (subscription) | N | N | N | N | N | – | N | – | N | N |
 | Boyle et al. 2023, arXiv (off-the-shelf LLMs, CodiEsp-English) | full text (open) | N | Y | N | N | N | Y | N | N | N | N |
+| Yoo & Kim 2025, Comput Biol Med (fine-tuned T5/LLaMA, MIMIC-III-50) | full text (author-supplied) | N | Y | N | Y | Y | – | N | N | N | N |
+| Mustafa et al. 2025, IJMI (ChatGPT-4 vs five human coders) | full text (author-supplied) | N | Y | N | N | N | – | N | N | N | N |
 
-### Studies for which only the abstract (or abstract plus publisher article page) could be read (n = 12)
+### Studies added or upgraded by the deep-search round (n = 21)
 
-Every Methods-detail item is `?` here by construction — see the protocol's reasoning for why an
-abstract cannot support an `N`. Item 2 is scored where the accessible text names the comparators.
+All but one were read at full text. Each `N` below was recorded with the sections searched and the
+terms grepped, because this audit is run by authors whose argument strengthens every time an item is
+absent — the burden was placed on the scorer to look before concluding.
 
 | Study | Evidence source | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Klang et al. 2024, medRxiv (RAG-LLM ED ICD-10-CM vs human coders) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Li et al. 2024, arXiv (LLM multi-agents, MIMIC-III) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| You et al. 2025, arXiv (MKE-Coder, Chinese EMRs) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Baksi et al. 2024, arXiv (MedCodER) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Dai et al. 2025, arXiv (section-aware fine-tuning, ICD-10-CM) | abstract | ? | N | ? | ? | ? | ? | ? | ? | ? | ? |
-| Barreiros et al. 2025, CL4Health (explainable ICD coding via entity linking) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Yuan et al. 2025, EMNLP Industry (verification + lightweight adaptation) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Falis et al. 2024, JAMIA (can GPT-3.5 generate and code discharge summaries?) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Simmons et al. 2024, Appl Clin Inform (extracting ICD codes with LLMs) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Dayeh et al. 2026, SHTI (evidence-grounded LLM validation of MIMIC-IV labels) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Yoo & Kim 2025, Comput Biol Med (how to leverage LLMs for ICD coding) | abstract | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
-| Kaur et al. 2026, BMC MIDM (gold-standard-guided DPO, ICD-10-AM/ACHI) | abstract + article page | ? | N | ? | ? | ? | ? | ? | ? | ? | ? |
+| German discharge-letter study 2024, Healthcare Analytics | full text (open) | N | N | Y | Y | N | – | Y | Y | N | N |
+| Klang et al. 2024, medRxiv (RAG-LLM ED coding vs human coders) | full text (open) | N | N | N | Y | Y | Y | N | Y | N | N |
+| Razzaghi et al. 2026, medRxiv (GPT-OSS, paediatric notes) | full text (open) | N | N | N | Y | N | Y | Y | N | N | N |
+| ICD-O-3 pathology study 2025, medRxiv (self-hosted LLMs) | full text (open) | N | N | N | Y | Y | – | – | Y | N | N |
+| Falis et al. 2024, JAMIA (GPT-3.5 generate and code) | full text (open) | N | Y | N | Y | N | – | – | N | N | N |
+| Puts et al. 2025, JMIR Form Res (RoBERTa + GPT-4, CodiEsp) | full text (open) | N | Y | Y | Y | N | Y | Y | N | N | N |
+| Boggavarapu et al. 2024, medRxiv (LLM+RAG, psychiatric notes) | full text (open) | N | N | N | N | N | Y | – | N | N | N |
+| Reasoning-capability study 2025, JMIR (5 LLMs, MIMIC-IV) | full text (open) | N | N | N | Y | N | – | N | N | N | N |
+| Dayeh et al. 2026, SHTI (evidence-grounded label validation) | abstract | ? | Y | ? | ? | ? | Y | ? | ? | Y | ? |
+| Barreiros et al. 2025, CL4Health (entity linking) | full text (open) | N | Y | Y | Y | N | Y | Y | Y | N | N |
+| Li et al. 2024, arXiv (LLM multi-agents, MIMIC-III) | full text (open) | N | Y | N | Y | N | Y | Y | N | N | N |
+| Simmons et al. 2024, Appl Clin Inform (LLM extraction) | full text (open) | N | N | N | N | N | – | Y | – | ? | N |
+| Nawab et al. 2024, J Med Artif Intell (GPT-3.5 fine-tuned, MIMIC-IV) | full text (open) | N | N | N | N | N | – | – | N | N | N |
+| Kaur et al. 2026, BMC MIDM (gold-guided DPO) | full text (open) | N | N | N | Y | N | – | – | N | N | N |
+| Obstetric ICD-10 study 2026, Research Square (Portuguese) | full text (open) | N | N | N | Y | N | – | Y | N | N | N |
+| Hartnett et al. 2026, arXiv (local LLMs, synthetic notes) | full text (open) | N | N | N | N | Y | Y | Y | Y | N | N |
+| You et al. 2025, arXiv (MKE-Coder, Chinese EMRs) | full text (open) | N | Y | Y | Y | Y | Y | Y | – | N | N |
+| Baksi et al. 2024, arXiv (MedCodER) | full text (open) | N | Y | Y | N | N | Y | Y | N | N | N |
+| Dai et al. 2025, arXiv (section-aware fine-tuning) | full text (open) | N | Y | N | Y | N | – | – | N | N | N |
+| Alickovic et al. 2026, medRxiv (RAG vs no-RAG, German tumour diagnoses) | full text (open) | N | Y | Y | Y | Y | Y | N | Y | N | N |
+| Yuan et al. 2025, EMNLP Industry (verification + adaptation) | full text (open) | N | Y | Y | Y | Y | Y | Y | N | N | N |
 
 ## Notes on individual scores
 
-- **Ackermann et al. 2025 (IEEE SDS)** — item 2 scored `Y` generously: the paper places its own
+- **Palacios et al. 2025 (IEEE SDS)** — item 2 scored `Y` generously: the paper places its own
   micro-F1 (0.70) beside a published supervised number on the same benchmark (MSMN, 0.74 on
   MIMIC-IV-ICD10-50) rather than re-running it. Item 5 scored `N` and is the sharpest external
   illustration of §4.5 in this corpus: context length and model capacity are confounded across the
@@ -140,11 +152,53 @@ abstract cannot support an `N`. Item 2 is scored where the accessible text names
   paper had in hand — CodiEsp carries span-level expert annotations that would have supported a
   grounding metric directly.
 
+- **Yoo & Kim 2025 (Comput Biol Med)** — the *second* study in the corpus to score `Y` on item 5, and
+  finding it changes what §5.5 can say. Table 5 crosses the input token limit (512 / 1024 / 2048)
+  against two models (T5-base and LLaMA-7B), which is a genuine crossed design over context and
+  capacity. The direction differs from ours — T5-base gains far more from context than LLaMA-7B
+  (about +46% macro-F1 from 512 to 1024 tokens, against +11% for LLaMA-7B) — which is worth noting
+  precisely because it is not our result. Item 4 is `Y` as well, and unusually concrete: the paper
+  reports that truncating MIMIC-III discharge summaries to 2,048 tokens discards 44.66% of the
+  tokens. Item 2 is `Y`: CAML and JointLAAT are reported on the same MIMIC-III-50 benchmark.
+- **Mustafa et al. 2025 (IJMI)** — item 2 is `Y` (logistic regression, KNN, random forest and
+  decision-tree baselines built on the same data). Item 1 is `N` despite the paper's "majority vote
+  of human coders" comparator, which is a human reference rather than a prevalence predictor: a
+  system can lose to human coders and still beat a note-blind floor, or the reverse, so the two
+  references answer different questions. Item 7 is `N` because the rationales the model is asked to
+  supply are self-reported by construction.
+
 ## Prevalence
 
 Computed by `scripts/53_checklist_prevalence.py`, which parses this file so the reported figures and
 the matrix cannot drift apart. Denominators are the studies where the item is determinable and
 applicable; `?` and `–` counts are reported beside them rather than folded in.
+
+
+## Corrections made when the author re-checked the machine scoring (2026-08-02)
+
+The scoring pass was set up to guard against a false `N`, because an audit run by the authors of a
+paper that benefits from absent items has an obvious incentive to under-look. The large jump in
+item 7 between the eight-study and thirty-study rounds (0/6 to 13/23) created the opposite risk, so
+every item-7 `Y` was re-read. Two did not survive, and both corrections move the count *down*, which
+is the self-serving direction — they are therefore recorded with the reasoning in full so a reader
+can disagree.
+
+- **Falis et al. 2024** — scored `Y` on the strength of four clinicians rating the output on a 1–5
+  scale with Fleiss' κ. The scorer's own note flags the problem: that panel adjudicates the
+  *generated discharge summaries* against their prompted code list, not evidence supporting a code
+  assignment on a real note, and "for the coding arm the model's per-code 'diagnosis' string is never
+  checked for span overlap or quote match against the note". Item 7 asks for a grounding metric on
+  displayed evidence. Since this system retrieves and displays no evidence at all — item 6 was
+  already scored `–` for the same reason — item 7 is now `–` rather than `N`, so the correction
+  removes the study from the denominator instead of counting it against the field.
+- **Alickovic et al. 2026** — scored `Y` because "the quality of the displayed evidence is scored
+  externally against the gold code". Read closely, the quoted evidence measures whether the
+  *retrieved candidate code* matches the gold code, which is retrieval accuracy: the same quantity
+  item 3 already credits this paper for. It is not a check that the evidence shown to a reader is
+  drawn from the note being coded. Corrected to `N`.
+
+Items 3 and 5 were re-read on the same grounds; their `Y` verdicts describe genuine stage-wise
+decompositions and genuine crossed designs respectively, and none was changed.
 
 ## Excluded at full text after an abstract-stage include
 

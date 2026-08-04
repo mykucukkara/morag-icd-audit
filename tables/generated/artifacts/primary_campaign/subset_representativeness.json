@@ -1,0 +1,24 @@
+{
+  "test_file": "data/splits_real/top50/test.jsonl",
+  "selection": "first 1008 notes (shards 0-3 of 68), not a random sample",
+  "subset": {
+    "n_notes": 1008,
+    "note_chars_median": 11115,
+    "note_chars_mean": 11590.0,
+    "gold_codes_per_note_mean": 5.377,
+    "distinct_codes_present": 50
+  },
+  "remainder": {
+    "n_notes": 16143,
+    "note_chars_median": 10937,
+    "note_chars_mean": 11666.5,
+    "gold_codes_per_note_mean": 5.381,
+    "distinct_codes_present": 50
+  },
+  "differences": {
+    "note_chars_median": 178,
+    "gold_codes_per_note_mean": -0.004,
+    "label_distribution_total_variation": 0.0479
+  },
+  "internal_validity_note": "All \u00a74.5 contrasts are paired on these notes, so the interaction and simple effects do not depend on the subset being typical; only the absolute level does."
+}

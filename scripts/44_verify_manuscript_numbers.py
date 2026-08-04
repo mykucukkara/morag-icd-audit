@@ -145,15 +145,23 @@ def main() -> int:
         "copy": load_json(A / "copy_instructed_control.json")
                 or load_json(Path("results_eurohpc/copy_instructed/copy_instructed_control.json")),
         "band": load_json(A / "frequency_band_analysis.json"),
+        "subset": load_json(A / "subset_representativeness.json"),
+        "lset": load_json(A / "label_set_protocol_check.json"),
         "prev": load_json(A / "checklist_prevalence.json")
                 or load_json(Path("results_eurohpc/primary_campaign/checklist_prevalence.json")),
-        "shared100": load_json(A / "scalability_shared/metrics/top100/consolidated_metrics.json"),
-        "shared200": load_json(A / "scalability_shared/metrics/top200/consolidated_metrics.json"),
+        "shared100": load_json(A.parent / "scalability_shared/metrics/top100/consolidated_metrics.json")
+                     or load_json(Path("results_eurohpc/scalability_shared/metrics/top100/consolidated_metrics.json")),
+        "shared200": load_json(A.parent / "scalability_shared/metrics/top200/consolidated_metrics.json")
+                     or load_json(Path("results_eurohpc/scalability_shared/metrics/top200/consolidated_metrics.json")),
         "sc100": load_json(Path(args.scalability) / "top100" / "top100" / "consolidated_metrics.json")
                  or load_json(Path(args.scalability) / "top100" / "consolidated_metrics.json"),
         "sc200": load_json(Path(args.scalability) / "top200" / "top200" / "consolidated_metrics.json")
                  or load_json(Path(args.scalability) / "top200" / "consolidated_metrics.json"),
     }
+
+    missing = [k for k, v in src.items() if v is None]
+    if missing:
+        print(f"NOTE: artifacts not found, their checks will not run: {', '.join(sorted(missing))}\n")
 
     def arm_f1(key: str, arm: str) -> float:
         return get(src[key], f"seed_statistics.{arm}.classification.micro_f1.mean")
@@ -400,17 +408,51 @@ def main() -> int:
             ("4.4", "band 1 gap to E14", 0.443, 3, gap("E14", 1)),
             ("4.4", "band 4 gap to E14", 0.281, 3, gap("E14", 4)),
         ]
+    if src["subset"]:
+        CHECKS += [
+            ("3.6", "subset median note chars", 11115, 0,
+             lambda: get(src["subset"], "subset.note_chars_median")),
+            ("3.6", "remainder median note chars", 10937, 0,
+             lambda: get(src["subset"], "remainder.note_chars_median")),
+            ("3.6", "subset gold codes/note", 5.377, 3,
+             lambda: get(src["subset"], "subset.gold_codes_per_note_mean")),
+            ("3.6", "remainder gold codes/note", 5.381, 3,
+             lambda: get(src["subset"], "remainder.gold_codes_per_note_mean")),
+            ("3.6", "label distribution total variation", 0.048, 3,
+             lambda: get(src["subset"], "differences.label_distribution_total_variation")),
+            ("3.6", "notes excluded from the subset", 16143, 0,
+             lambda: get(src["subset"], "remainder.n_notes")),
+            #  The outcome-side representativeness check a reviewer asked for: the same 3B cell
+            #  scored on both samples. If the subset ever stops reading high, this catches it.
+            ("3.6", "E11 3B no-note on the subset", 0.1893, 4,
+             lambda: get(src["curve"], "arms.E11.cells.3B_nonote.micro_f1")),
+            ("3.6", "E11 on the full test set", 0.1865, 4, lambda: arm_f1("ladder", "E11")),
+            ("3.6", "E14 3B no-note on the subset", 0.1381, 4,
+             lambda: get(src["curve"], "arms.E14.cells.3B_nonote.micro_f1")),
+            ("3.6", "E14 on the full test set", 0.1329, 4, lambda: arm_f1("ladder", "E14")),
+        ]
+    if src["lset"]:
+        CHECKS.append(("3.1", "Top-50 label members differing under training-only selection", 0, 0,
+                       lambda: get(src["lset"], "n_differing_members")))
     if src["prev"]:
         CHECKS += [
-            ("5.5", "checklist corpus size", 20, 0, lambda: get(src["prev"], "corpus_size")),
-            ("5.5", "studies read at full text", 8, 0,
+            ("5.5", "checklist corpus size", 31, 0, lambda: get(src["prev"], "corpus_size")),
+            ("5.5", "studies read at full text", 30, 0,
              lambda: get(src["prev"], "read_at_full_text")),
-            ("5.5", "item 1 observed", 0, 0, lambda: get(src["prev"], "items.1.Y")),
-            ("5.5", "item 1 determinable", 8, 0, lambda: get(src["prev"], "items.1.determinable")),
-            ("5.5", "item 1 rule-of-three bound", 0.38, 2,
-             lambda: get(src["prev"], "items.1.rule_of_three_upper_bound")),
-            ("5.5", "item 7 determinable", 6, 0, lambda: get(src["prev"], "items.7.determinable")),
-            ("5.5", "item 8 determinable", 6, 0, lambda: get(src["prev"], "items.8.determinable")),
+            ("5.5", "item 1 observed (note-blind floor)", 0, 0, lambda: get(src["prev"], "items.1.Y")),
+            ("5.5", "item 1 determinable", 30, 0, lambda: get(src["prev"], "items.1.determinable")),
+            ("5.5", "item 2 observed (classical baseline)", 14, 0, lambda: get(src["prev"], "items.2.Y")),
+            ("5.5", "item 2 determinable", 31, 0, lambda: get(src["prev"], "items.2.determinable")),
+            ("5.5", "item 4 observed (input budget)", 19, 0, lambda: get(src["prev"], "items.4.Y")),
+            ("5.5", "item 4 determinable", 29, 0, lambda: get(src["prev"], "items.4.determinable")),
+            ("5.5", "item 5 observed (joint variation)", 8, 0, lambda: get(src["prev"], "items.5.Y")),
+            ("5.5", "item 5 determinable", 30, 0, lambda: get(src["prev"], "items.5.determinable")),
+            ("5.5", "item 7 observed (grounding metric)", 11, 0, lambda: get(src["prev"], "items.7.Y")),
+            ("5.5", "item 7 determinable", 22, 0, lambda: get(src["prev"], "items.7.determinable")),
+            ("5.5", "item 9 observed (paired test)", 2, 0, lambda: get(src["prev"], "items.9.Y")),
+            ("5.5", "item 9 determinable", 30, 0, lambda: get(src["prev"], "items.9.determinable")),
+            ("5.5", "item 10 observed (generated tables)", 0, 0, lambda: get(src["prev"], "items.10.Y")),
+            ("5.5", "item 10 determinable", 30, 0, lambda: get(src["prev"], "items.10.determinable")),
         ]
 
     # Per-label-space disclosure comes from the splits themselves.
@@ -471,8 +513,18 @@ def main() -> int:
         ("F2_decomposition_ladder.py", "E11", 0.186, arm_f1("ladder", "E11")),
         ("F2_decomposition_ladder.py", "E14", 0.133, arm_f1("ladder", "E14")),
         ("F2_decomposition_ladder.py", "E1", 0.449, arm_f1("ladder", "E1")),
-        ("S1_scalability.py", "E11 Top-200", 0.107, arm_f1("sc200", "E11")),
-        ("S1_scalability.py", "E14 Top-200", 0.070, arm_f1("sc200", "E14")),
+        #  S1 draws Table 5, which is the shared-partition re-run, so it must be checked against
+        #  the same metrics the table is built from — not the superseded independent-partition run.
+        ("S1_scalability.py", "E1 Top-100", 0.469,
+         get(src["shared100"], "individual.E1_seed42.classification.micro_f1")),
+        ("S1_scalability.py", "E11 Top-100", 0.139,
+         get(src["shared100"], "individual.E11_seed42.classification.micro_f1")),
+        ("S1_scalability.py", "E1 Top-200", 0.467,
+         get(src["shared200"], "individual.E1_seed42.classification.micro_f1")),
+        ("S1_scalability.py", "E11 Top-200", 0.110,
+         get(src["shared200"], "individual.E11_seed42.classification.micro_f1")),
+        ("S1_scalability.py", "E14 Top-200", 0.070,
+         get(src["shared200"], "individual.E14_seed42.classification.micro_f1")),
     ]
     fig_bad = []
     for fname, label, stated, actual in fig_checks:
@@ -533,6 +585,59 @@ def main() -> int:
             banned[word] += len(re.findall(rf"\b{word}\b", text))
     print("\nmanuscript markers:", banned,
           "(TODO in the title page and declarations are the administrative fields)")
+
+    #  ---- superseded-claim scan -------------------------------------------------------------
+    #  The checks above ask "does this number match its artifact". They cannot ask "is this still
+    #  the right artifact", and that gap let several sections keep quoting results a later
+    #  experiment had overtaken while the script reported 0 mismatches.
+    #
+    #  Scanning for the superseded *values* was the obvious fix and it was the wrong one: 0.293 is
+    #  still the correct entry for the 7B cell in Table 6, §4.1b deliberately quotes the old floor to
+    #  explain why the protocol changed, and 0.304 also happens to be E11's 14B score. A value is not
+    #  wrong for appearing; it is wrong for being asserted as current. So this scans for the
+    #  *claims*, which do not have innocent occurrences, and exempts a line that visibly marks the
+    #  value as historical.
+    SUPERSEDED_CLAIMS = [
+        ("indistinguishable from the note-blind floor",
+         "true of the 7B cell only; the 14B cell clears the floor by 0.130"),
+        ("only matching the note-blind floor",
+         "superseded: the best cell clears the floor by 0.130"),
+        ("Neither factor helps alone",
+         "capacity alone is +0.036 with an interval excluding zero"),
+        ("neither factor helps alone",
+         "capacity alone is +0.036 with an interval excluding zero"),
+        ("upper bound on faithfulness",
+         "exact-quote compliance bounds faithfulness in neither direction"),
+        ("lower bound on what full context would",
+         "not established; more context may add noise as well as signal"),
+        ("attributable to the clinically pretrained weights",
+         "causal overreach; the control varies more than pretraining"),
+        ("wrong four times in five",
+         "not shown; non-copied quotes may still be faithful"),
+        ("extracts no usable per-note signal",
+         "stronger than the test supports; say 'no net benefit over a prevalence predictor'"),
+        ("jointly necessary and individually insufficient",
+         "capacity alone has a nonzero effect; state the interaction instead"),
+    ]
+    #  A line that names the value as superseded is doing the right thing, not the wrong one.
+    HISTORICAL = ("previous version", "earlier version", "superseded", "at 7B", "would have given",
+                  "we first", "had said", "an earlier")
+    stale = []
+    for fname in sorted(Path(args.sections).glob("*.md")):
+        if fname.name.startswith("00_"):      # the title page documents rejected wording on purpose
+            continue
+        for n, line in enumerate(fname.read_text(encoding="utf-8").splitlines(), 1):
+            if any(h in line for h in HISTORICAL):
+                continue
+            for needle, why in SUPERSEDED_CLAIMS:
+                if needle in line:
+                    stale.append((fname.name, n, needle, why))
+    if stale:
+        print("\nSUPERSEDED CLAIMS STILL ASSERTED:")
+        for f, n, needle, why in stale:
+            print(f"  {f}:{n}  {needle!r} — {why}")
+    else:
+        print("superseded-claim scan: clean")
 
     print(f"\n{len(CHECKS) - len(failures) - len(skipped)} ok, {len(failures)} mismatched, "
           f"{len(skipped)} skipped")

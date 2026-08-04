@@ -45,22 +45,35 @@ def main():
     ap.add_argument("--scalability-metrics", default="results_eurohpc/scalability_v2/metrics",
                     help="Root holding top100/ and top200/ consolidated_metrics.json (scripts/10)")
     ap.add_argument("--splits-root", default="data/splits_real",
-                    help="Split root used for Table 5's per-label-space n and gold-code density")
+                    help="Split root for Top-50 (the reference partition)")
+    #  Top-100/200 were rebuilt on the Top-50 subject partition (scripts/51), so their n and
+    #  gold-code density come from a different tree than Top-50's. One flag would silently pair
+    #  shared-partition scores with the superseded splits' counts.
+    ap.add_argument("--splits-root-scalability", default=None,
+                    help="Split root for Top-100/200; defaults to --splits-root")
     args = ap.parse_args()
     A = Path(args.artifacts)
     out = Path(args.outdir)
+    splits_scal = Path(args.splits_root_scalability or args.splits_root)
 
     # ---------- Table 2: reference points ----------
-    rev = json.loads((A / "revision_round1_analyses.json").read_text())
-    floor = rev["A_note_blind_floor"]["by_K"]
-    best = rev["A_note_blind_floor"]["best_K"]
     rows = [["System / reference point", "Protocol", "Micro-F1", "Precision", "Recall"]]
-    rows.append([f"Note-blind floor (E0, {best})", "constant, most frequent codes",
-                 f"{floor[best]['micro_f1']:.4f}", f"{floor[best]['precision']:.4f}",
-                 f"{floor[best]['recall']:.4f}"])
-    rows.append(["Note-blind floor (E0, K=15)", "constant, matched 15-code budget",
-                 f"{floor['K=15']['micro_f1']:.4f}", f"{floor['K=15']['precision']:.4f}",
-                 f"{floor['K=15']['recall']:.4f}"])
+
+    #  The floor must be the validation-selected one (§4.1b). The first version picked the best K on
+    #  test itself, which tunes the reference point on the data it is a reference for and, as it
+    #  happens, produced a *lower* floor (K=10, 0.3040) that the systems had an easier time clearing.
+    #  This table kept quoting that superseded value after the prose had moved on.
+    r2 = A / "reviewer_round2_analyses.json"
+    if r2.exists():
+        fl = json.loads(r2.read_text())["A_floor_selected_on_validation"]
+        k, t, m = fl["selected_K"], fl["test_once"], fl["test_at_matched_budget_K15"]
+        rows.append([f"Note-blind floor (E0, K={k})", "constant; K selected on validation, scored once on test",
+                     f"{t['micro_f1']:.4f}", f"{t['precision']:.4f}", f"{t['recall']:.4f}"])
+        rows.append(["Note-blind floor (E0, K=15)", "constant, matched 15-code budget",
+                     f"{m['micro_f1']:.4f}", f"{m['precision']:.4f}", f"{m['recall']:.4f}"])
+    else:
+        raise SystemExit("reviewer_round2_analyses.json missing — Table 2 would report the "
+                         "superseded test-selected floor; refusing to build")
     pc = A / "positive_control_tfidf.json"
     if pc.exists():
         d = json.loads(pc.read_text())
@@ -147,11 +160,12 @@ def main():
             rows.append(["**E1 lead over E14**"] + [f"**{lead[tn]:+.4f}**" for tn in (50, 100, 200)]
                         + ["**widens**"])
         # Per-label-space disclosure: what the task itself becomes as the label set grows.
-        splits = Path(args.splits_root)
         n_row, gold_row, ceil_row = ["Test notes (n)"], ["Gold codes/note (mean)"], \
                                     ["Recall ceiling at a 15-code budget"]
         for tn in (50, 100, 200):
-            f = splits / f"top{tn}" / "test.jsonl"
+            # Top-50 is the reference partition; Top-100/200 were rebuilt on it (scripts/51),
+            # so their counts must come from the rebuilt tree, not the superseded splits.
+            f = (Path(args.splits_root) if tn == 50 else splits_scal) / f"top{tn}" / "test.jsonl"
             if not f.exists():
                 n_row.append("—"); gold_row.append("—"); ceil_row.append("—")
                 continue
@@ -174,39 +188,35 @@ def main():
     # ---------- Table 6: steelman ----------
     st = A / "steelman_3b_comparison.txt"
     if st.exists():
-        txt = st.read_text()
-        rows = [["Arm", "Configuration", "Micro-F1", "Precision", "Recall", "Codes/note", "Evidence lift"]]
-        cur = None
-        for line in txt.splitlines():
-            m = re.match(r"=== (E\d+)\s+\(shared notes: (\d+)\)", line.strip())
-            if m:
-                cur = m.group(1)
-                continue
-            m = re.search(r"(ORIGINAL|STEELMAN)[^:]*:\s*F1=([\d.]+)\s+P=([\d.]+)\s+R=([\d.]+)\s+codes/note=([\d.]+)\s+lift=(\S+)", line)
-            if m and cur:
-                which = "note not shown (200-char evidence)" if m.group(1) == "ORIGINAL" \
-                        else "note supplied (6,000 chars)"
-                lift = m.group(6)
-                rows.append([cur, which, m.group(2), m.group(3), m.group(4), m.group(5),
-                             "—" if lift == "None" else lift])
-        # The 7B corner of the 2x2 lives in scripts/43's artifact; append it so the whole design
-        # is one generated table instead of three 3B rows plus a transcribed fourth.
-        s7b = A / "steelman7b_contrasts.json"
-        if s7b.exists():
-            arms = json.loads(s7b.read_text()).get("arms", {})
+        # Table 6 is built from `capacity_curve.json` (scripts/54), which holds all six cells of
+        # the 3 x 2 design scored on one note set. The previous version scraped a text log for the
+        # 3B rows and appended two 7B rows from a second artifact, so it silently stayed a 2 x 2
+        # after the third capacity point was added — the table a reviewer read did not match the
+        # design the text described.
+        cc = A / "capacity_curve.json"
+        if not cc.exists():
+            print("  table6: capacity_curve.json missing — refusing to emit a partial design")
+            rows = []
+        else:
+            curve = json.loads(cc.read_text())["arms"]
+            rows = [["Arm", "Scorer context", "Model", "Micro-F1", "Precision", "Recall",
+                     "Codes/note"]]
+            ctx_label = {"nonote": "note withheld (200-char evidence)",
+                         "note": "note truncated to 6,000 chars"}
             for arm in ("E11", "E14"):
-                a7 = arms.get(f"{arm}_7B_note")
-                if not a7:
-                    continue
-                lift = a7.get("discriminative_lift")
-                rows.append([arm, "note supplied (6,000 chars), Qwen2.5-7B",
-                             f"{a7['micro_f1']:.4f}", f"{a7['precision']:.4f}", f"{a7['recall']:.4f}",
-                             f"{a7['codes_per_note']:.2f}", "—" if lift is None else f"{lift:.3f}"])
-
+                cells = curve.get(arm, {}).get("cells", {})
+                for ctx in ("nonote", "note"):
+                    for cap in ("3B", "7B", "14B"):
+                        c = cells.get(f"{cap}_{ctx}")
+                        if not c:
+                            continue
+                        rows.append([arm, ctx_label[ctx], f"Qwen2.5-{cap}",
+                                     f"{c['micro_f1']:.4f}", f"{c['precision']:.4f}",
+                                     f"{c['recall']:.4f}", f"{c['codes_per_note']:.2f}"])
         if len(rows) > 1:
             write(rows, out, "table6_steelman",
-                  "Table 6. Steelman 2 x 2: scorer context crossed with model size "
-                  "(first ~1,008 test notes)")
+                  "Table 6. Scorer context crossed with model capacity (3 x 2), all cells on the same "
+                  "1,008 notes (shards 0-3 of the 68-way split)")
 
     print(f"\nartifacts read from {A}\noutput -> {out}")
 
