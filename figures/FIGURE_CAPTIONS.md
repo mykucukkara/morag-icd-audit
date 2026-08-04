@@ -40,5 +40,5 @@ the reported runs, every one of which records `evidence_note_local: true` (§4.3
 **Figure S1. Scalability across label-space size.**
 Micro-F1 for four representative arms on Top-50, Top-100, and Top-200. The TF-IDF baseline holds
 or improves with label-space size while every retrieval, RAG, and full-model arm degrades, so the
-baseline's advantage over the full model widens monotonically from +0.317 to +0.373. Grey arrows
+baseline's advantage over the full model widens monotonically from +0.317 to +0.397. Grey arrows
 mark that gap at the endpoints.

@@ -1,0 +1,213 @@
+{
+  "top_n": 50,
+  "seed": 42,
+  "note": "Deficits of the note-blind floor over each arm, against the floor whose K is selected on validation and evaluated once on test. Supersedes the `vs_floor_bestK` deltas in revision_round1_analyses.json, which used the K that maximizes the floor on test.",
+  "floor": {
+    "selection_split": "validation",
+    "candidate_K": [
+      3,
+      5,
+      8,
+      10,
+      12,
+      15,
+      20,
+      25
+    ],
+    "by_K_validation": {
+      "K=3": {
+        "micro_f1": 0.2563,
+        "precision": 0.3585,
+        "recall": 0.1995,
+        "n": 17245,
+        "codes_per_note": 3.0
+      },
+      "K=5": {
+        "micro_f1": 0.2987,
+        "precision": 0.3104,
+        "recall": 0.2879,
+        "n": 17245,
+        "codes_per_note": 5.0
+      },
+      "K=8": {
+        "micro_f1": 0.3116,
+        "precision": 0.2608,
+        "recall": 0.3869,
+        "n": 17245,
+        "codes_per_note": 8.0
+      },
+      "K=10": {
+        "micro_f1": 0.3058,
+        "precision": 0.2353,
+        "recall": 0.4365,
+        "n": 17245,
+        "codes_per_note": 10.0
+      },
+      "K=12": {
+        "micro_f1": 0.3007,
+        "precision": 0.2179,
+        "recall": 0.485,
+        "n": 17245,
+        "codes_per_note": 12.0
+      },
+      "K=15": {
+        "micro_f1": 0.288,
+        "precision": 0.1958,
+        "recall": 0.5447,
+        "n": 17245,
+        "codes_per_note": 15.0
+      },
+      "K=20": {
+        "micro_f1": 0.2707,
+        "precision": 0.1719,
+        "recall": 0.6375,
+        "n": 17245,
+        "codes_per_note": 20.0
+      },
+      "K=25": {
+        "micro_f1": 0.2551,
+        "precision": 0.1551,
+        "recall": 0.7191,
+        "n": 17245,
+        "codes_per_note": 25.0
+      }
+    },
+    "selected_K": 8
+  },
+  "sign_convention": "delta = floor - arm; positive means the note-blind floor is ahead",
+  "contrasts": {
+    "E6": {
+      "shared_notes": 17151,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E6": {
+        "micro_f1": 0.2027
+      },
+      "note_blind_floor": {
+        "micro_f1": 0.3104
+      },
+      "delta_micro_f1": {
+        "point": 0.1077,
+        "ci95": [
+          0.1047,
+          0.1107
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "E11": {
+      "shared_notes": 17151,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E11": {
+        "micro_f1": 0.1865
+      },
+      "note_blind_floor": {
+        "micro_f1": 0.3104
+      },
+      "delta_micro_f1": {
+        "point": 0.1239,
+        "ci95": [
+          0.121,
+          0.1268
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    },
+    "E14": {
+      "shared_notes": 17151,
+      "n_boot": 10000,
+      "n_perm": 10000,
+      "seed": 42,
+      "E14": {
+        "micro_f1": 0.1329
+      },
+      "note_blind_floor": {
+        "micro_f1": 0.3104
+      },
+      "delta_micro_f1": {
+        "point": 0.1775,
+        "ci95": [
+          0.1739,
+          0.1811
+        ],
+        "verdict": "SIGNIFICANT (excludes 0)",
+        "approx_randomization_p": 0.0001,
+        "p_note": "approximate randomization cannot go below 1/(B+1) = 0.00010"
+      }
+    }
+  },
+  "discriminative_lift_by_capacity": {
+    "E11_3B_note_withheld": {
+      "capacity": "3B",
+      "scorer_context": "note_withheld",
+      "n": 17151,
+      "micro_f1": 0.1865,
+      "discriminative_lift": 1.147,
+      "undefined_reason": null
+    },
+    "E14_3B_note_withheld": {
+      "capacity": "3B",
+      "scorer_context": "note_withheld",
+      "n": 17151,
+      "micro_f1": 0.1329,
+      "discriminative_lift": null,
+      "undefined_reason": "the arm emits only codes it marked supported, so there is no unsupported group to contrast; this holds at every capacity"
+    },
+    "E11_3B_note_supplied": {
+      "capacity": "3B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.1873,
+      "discriminative_lift": 1.702,
+      "undefined_reason": null
+    },
+    "E14_3B_note_supplied": {
+      "capacity": "3B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.1054,
+      "discriminative_lift": null,
+      "undefined_reason": "the arm emits only codes it marked supported, so there is no unsupported group to contrast; this holds at every capacity"
+    },
+    "E11_7B_note_supplied": {
+      "capacity": "7B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.2351,
+      "discriminative_lift": 3.5,
+      "undefined_reason": null
+    },
+    "E14_7B_note_supplied": {
+      "capacity": "7B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.2933,
+      "discriminative_lift": null,
+      "undefined_reason": "the arm emits only codes it marked supported, so there is no unsupported group to contrast; this holds at every capacity"
+    },
+    "E11_14B_note_supplied": {
+      "capacity": "14B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.3039,
+      "discriminative_lift": 5.64,
+      "undefined_reason": null
+    },
+    "E14_14B_note_supplied": {
+      "capacity": "14B",
+      "scorer_context": "note_supplied",
+      "n": 1008,
+      "micro_f1": 0.4255,
+      "discriminative_lift": null,
+      "undefined_reason": "the arm emits only codes it marked supported, so there is no unsupported group to contrast; this holds at every capacity"
+    }
+  },
+  "discriminative_lift_note": "The three note_supplied cells are the same 1,008 notes and form the capacity curve quoted in \u00a75.2. The note_withheld entry is the ladder arm on the full test split and is not a point on that curve."
+}

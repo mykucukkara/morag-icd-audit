@@ -57,7 +57,10 @@ def selected_title(sections_dir: Path) -> str:
 
 
 HIGHLIGHTS = [
-    "Scorer context and model capacity interact: neither factor helps on its own",
+    #  Was "neither factor helps on its own" — the claim §4.5 retracted: capacity alone is +0.036
+    #  with a CI excluding zero. A highlight carries no surrounding text to qualify it, so it says
+    #  the two simple effects instead of asserting a joint null. `scripts/44` now scans this list.
+    "Model capacity is worth +0.036 without the note and +0.320 with it: they interact",
     "The same pipeline fails a note-blind floor at 3B and clears it by 0.130 at 14B",
     "Single-factor evaluations mistake a configuration limit for an architectural one",
     "An oracle over the same shortlist scores twice the model: the loss is in selection",
@@ -78,8 +81,9 @@ The paper reports a negative result and, more importantly, the protocol that mak
 decomposed a complete evidence-constrained, contrastive RAG-LLM pipeline for ICD-10 coding of
 MIMIC-IV discharge summaries into a fourteen-system ladder and evaluated every arm on the same
 subject-disjoint split with note-level paired significance testing. The full pipeline reaches
-micro-F1 0.133 against 0.449 for a tuned TF-IDF baseline, and every retrieval, RAG and full-model
-arm falls significantly below a constant predictor that never reads the note. Measured against the
+micro-F1 0.133 against 0.449 for a tuned TF-IDF baseline, and in the ladder's as-run configuration
+(3B, note withheld) every retrieval, RAG and full-model arm falls significantly below a constant
+predictor that never reads the note. Measured against the
 arm each component is added to, the damage is localized: the evidence filter costs 0.053 micro-F1
 and discards two thirds of the gold codes retrieval had retained, while the contrastive verifier is
 mildly beneficial on its own. At matched output cardinality an oracle over the same shortlist
@@ -93,8 +97,10 @@ is +0.284 (95% CI +0.263 to +0.305) and is significant at every step. This matte
 cells sit on opposite sides of the note-blind floor: starved of context at 3B the pipeline falls
 significantly below a predictor that never reads the note, while at 14B with truncated context it
 clears that floor by 0.130 (95% CI +0.115 to +0.145) and comes within 0.024 of tuned TF-IDF, still
-significantly behind. An evaluation varying either factor alone would have concluded that neither
-mattered, which is what the two published designs closest to ours do. Second, the pipeline's
+significantly behind. An evaluation varying either factor alone would have measured a real but small
+effect — +0.036 for capacity, −0.033 for context at 3B — and so would have substantially understated
+the joint effect; varying one factor at a time is what the two published designs closest to ours do.
+Second, the pipeline's
 self-reported evidence signals do not carry the information they appear to: an unsupported rate that
 is the arithmetic complement of the support rate, a support rate of 1.000 in the filtered arms that
 is a property of the filter rather than a measurement, a confidence field whose omission silently
@@ -112,7 +118,9 @@ reporting, which is the argument for the practice.
 
 I should state the study's main limitation plainly. I could not reproduce a PLM-ICD-class supervised
 system (micro-F1 approximately 0.70) because it requires a clinically pretrained encoder unavailable
-in the offline environment; my strengthened neural control reaches 0.530. The comparison should
+in the offline environment. My strongest supervised control is a label-wise attention coder from
+that architecture family, trained on the same split with a general-domain encoder, which reaches
+0.559; that bounds the missing control rather than closing it. The comparison should
 therefore be read as a decomposition of one pipeline against competent baselines, not as a claim
 about the ceiling of supervised coding. This is stated in Section 4.1a and in Limitation 1.
 
@@ -346,7 +354,7 @@ def main() -> int:
     (OUT / "cover_letter.md").write_text(
         COVER_LETTER.format(date=date, title=title,
                             repo="https://github.com/mykucukkara/morag-icd-audit",
-                            doi="https://doi.org/10.5281/zenodo.21652988 (v1.1.0: https://doi.org/10.5281/zenodo.21728018)"),
+                            doi="https://doi.org/10.5281/zenodo.21652988 (v1.2.0: https://doi.org/10.5281/zenodo.21796502)"),
         encoding="utf-8")
     print("  wrote cover_letter.md")
 

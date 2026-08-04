@@ -88,11 +88,18 @@ def load_json(p: Path):
 #  Falling back to the mirror means someone who clones the repository can run this guard without
 #  first knowing that the default path only exists on MareNostrum5 — the alternative is a verifier
 #  that crashes on a KeyError and looks broken rather than unavailable.
-MIRROR = Path("manuscript/tables/generated/artifacts")
+#  Two mirrors, because the working tree and the published repository do not have the same shape.
+#  The round-6 fix added the first one and was tested in the working tree, where it works. It was
+#  never run in a clone: the published repository roots the same artifacts at `tables/generated/…`
+#  with no `manuscript/` directory at all, so the fallback missed, and the guard the paper cites as
+#  proof its numbers can be checked crashed with the very KeyError that fix was written to remove.
+#  Verified against a fresh clone of v1.2.0 before this list replaced the single path.
+MIRRORS = [Path("manuscript/tables/generated/artifacts"),   # working tree
+           Path("tables/generated/artifacts")]              # published repository
 
 
 def resolve(primary: str, mirror: str, sentinel: str) -> Path:
-    """Prefer the cluster tree, fall back to the mirror.
+    """Prefer the cluster tree, fall back to whichever mirror actually holds the artifacts.
 
     The test is a file the checks actually read, not the directory: `results_eurohpc/` exists
     locally but holds only the newest campaigns, so a directory test would select a tree missing
@@ -101,8 +108,11 @@ def resolve(primary: str, mirror: str, sentinel: str) -> Path:
     p = Path(primary)
     if (p / sentinel).exists():
         return p
-    m = MIRROR / mirror
-    return m if (m / sentinel).exists() else p
+    for base in MIRRORS:
+        m = base / mirror
+        if (m / sentinel).exists():
+            return m
+    return p
 
 
 def main() -> int:
@@ -111,6 +121,10 @@ def main() -> int:
     ap.add_argument("--scalability", default=None)
     ap.add_argument("--sections", default="manuscript/sections")
     ap.add_argument("--splits-root", default="data/splits_real")
+    #  Top-100/200 were rebuilt on the Top-50 subject partition (scripts/51). §4.4 and Table 5 report
+    #  that campaign, so its cohort counts must be read from its own tree — one flag for both would
+    #  pair shared-partition scores with the superseded splits' note counts.
+    ap.add_argument("--splits-root-scalability", default="data/splits_shared")
     args = ap.parse_args()
     if args.artifacts is None:
         args.artifacts = str(resolve("results_eurohpc/primary_campaign", "primary_campaign",
@@ -145,6 +159,8 @@ def main() -> int:
         "copy": load_json(A / "copy_instructed_control.json")
                 or load_json(Path("results_eurohpc/copy_instructed/copy_instructed_control.json")),
         "band": load_json(A / "frequency_band_analysis.json"),
+        "floorK": load_json(A / "floor_contrasts_validation_K.json"),
+        "disc": load_json(A / "scalability_disclosure.json"),
         "subset": load_json(A / "subset_representativeness.json"),
         "lset": load_json(A / "label_set_protocol_check.json"),
         "prev": load_json(A / "checklist_prevalence.json")
@@ -218,6 +234,44 @@ def main() -> int:
          lambda: get(src["rev2"], "A_floor_selected_on_validation.test_once.micro_f1")),
         ("4.1b", "note-blind floor at K=15", 0.285, 3,
          lambda: get(src["rev"], "A_note_blind_floor.by_K.K=15.micro_f1")),
+        #  §4.1b's three deficits were the round-7 defect: quoted against the test-selected K=10
+        #  floor while the sentence above them stated the validation-selected K=8 one. Both floors
+        #  were artifact-true, and neither deficit was checked at all, so nothing failed. They are
+        #  bound here — point and both interval ends — to the artifact that recomputed them, and the
+        #  floor the contrast used is checked to be the same floor the prose claims.
+        ("4.1b", "deficit vs validation floor, hybrid retrieval", 0.108, 3,
+         lambda: get(src["floorK"], "contrasts.E6.delta_micro_f1.point")),
+        ("4.1b", "deficit CI low, hybrid retrieval", 0.105, 3,
+         lambda: get(src["floorK"], "contrasts.E6.delta_micro_f1.ci95.0")),
+        ("4.1b", "deficit CI high, hybrid retrieval", 0.111, 3,
+         lambda: get(src["floorK"], "contrasts.E6.delta_micro_f1.ci95.1")),
+        ("4.1b", "deficit vs validation floor, hybrid-RAG", 0.124, 3,
+         lambda: get(src["floorK"], "contrasts.E11.delta_micro_f1.point")),
+        ("4.1b", "deficit CI low, hybrid-RAG", 0.121, 3,
+         lambda: get(src["floorK"], "contrasts.E11.delta_micro_f1.ci95.0")),
+        ("4.1b", "deficit CI high, hybrid-RAG", 0.127, 3,
+         lambda: get(src["floorK"], "contrasts.E11.delta_micro_f1.ci95.1")),
+        ("4.1b", "deficit vs validation floor, full model", 0.178, 3,
+         lambda: get(src["floorK"], "contrasts.E14.delta_micro_f1.point")),
+        ("4.1b", "deficit CI low, full model", 0.174, 3,
+         lambda: get(src["floorK"], "contrasts.E14.delta_micro_f1.ci95.0")),
+        ("4.1b", "deficit CI high, full model", 0.181, 3,
+         lambda: get(src["floorK"], "contrasts.E14.delta_micro_f1.ci95.1")),
+        ("4.1b", "the deficits' floor is the validation-selected one", 0.310, 3,
+         lambda: get(src["floorK"], "contrasts.E14.note_blind_floor.micro_f1")),
+        ("4.1b", "K re-derived from validation by the contrast script", 8, 0,
+         lambda: get(src["floorK"], "floor.selected_K")),
+        #  §5.2's mechanism sentence explained the 14B result with the 7B cell's lift. The three
+        #  points are checked together, and the context condition is part of the key, so a value
+        #  cannot migrate between capacities or between the note-supplied and note-withheld series.
+        ("5.2", "judge lift, 3B with the note", 1.702, 3,
+         lambda: get(src["floorK"], "discriminative_lift_by_capacity.E11_3B_note_supplied.discriminative_lift")),
+        ("5.2", "judge lift, 7B with the note", 3.50, 2,
+         lambda: get(src["floorK"], "discriminative_lift_by_capacity.E11_7B_note_supplied.discriminative_lift")),
+        ("5.2", "judge lift, 14B with the note", 5.64, 2,
+         lambda: get(src["floorK"], "discriminative_lift_by_capacity.E11_14B_note_supplied.discriminative_lift")),
+        ("5.2", "the three lift cells are the same 1,008 notes", 1008, 0,
+         lambda: get(src["floorK"], "discriminative_lift_by_capacity.E11_14B_note_supplied.n")),
         ("4.1c", "oracle over shortlist, matched per note", 0.264, 3,
          lambda: get(src["rev2"], "C_null_matched_per_note.oracle_over_shortlist.micro_f1")),
         ("4.1c", "random pruning null, matched per note", 0.119, 3,
@@ -239,14 +293,18 @@ def main() -> int:
         ("4.3", "verbatim quote rate E10", 0.21, 2, lambda: arm_rel("E10", "evidence_quote_verbatim_rate")),
         ("4.3", "verbatim quote rate E11", 0.09, 2, lambda: arm_rel("E11", "evidence_quote_verbatim_rate")),
         ("4.3", "verbatim quote rate E14", 0.09, 2, lambda: arm_rel("E14", "evidence_quote_verbatim_rate")),
-        ("4.4", "Top-100 E1", 0.4659, 4, lambda: arm_f1("sc100", "E1")),
-        ("4.4", "Top-100 E6", 0.1627, 4, lambda: arm_f1("sc100", "E6")),
-        ("4.4", "Top-100 E11", 0.1375, 4, lambda: arm_f1("sc100", "E11")),
-        ("4.4", "Top-100 E14", 0.0970, 4, lambda: arm_f1("sc100", "E14")),
-        ("4.4", "Top-200 E1", 0.4685, 4, lambda: arm_f1("sc200", "E1")),
-        ("4.4", "Top-200 E6", 0.1185, 4, lambda: arm_f1("sc200", "E6")),
-        ("4.4", "Top-200 E11", 0.1072, 4, lambda: arm_f1("sc200", "E11")),
-        ("4.4", "Top-200 E14", 0.0699, 4, lambda: arm_f1("sc200", "E14")),
+        #  These are the superseded independent-partition campaign, which §4.4 now reports as a
+        #  sensitivity analysis rather than as the result. The labels say so: when both campaigns are
+        #  checked and neither says which one the prose is entitled to use, the prose can quote the
+        #  wrong one for three review rounds without a single check failing.
+        ("4.4", "sensitivity (own-cohort) Top-100 E1", 0.4659, 4, lambda: arm_f1("sc100", "E1")),
+        ("4.4", "sensitivity (own-cohort) Top-100 E6", 0.1627, 4, lambda: arm_f1("sc100", "E6")),
+        ("4.4", "sensitivity (own-cohort) Top-100 E11", 0.1375, 4, lambda: arm_f1("sc100", "E11")),
+        ("4.4", "sensitivity (own-cohort) Top-100 E14", 0.0970, 4, lambda: arm_f1("sc100", "E14")),
+        ("4.4", "sensitivity (own-cohort) Top-200 E1", 0.4685, 4, lambda: arm_f1("sc200", "E1")),
+        ("4.4", "sensitivity (own-cohort) Top-200 E6", 0.1185, 4, lambda: arm_f1("sc200", "E6")),
+        ("4.4", "sensitivity (own-cohort) Top-200 E11", 0.1072, 4, lambda: arm_f1("sc200", "E11")),
+        ("4.4", "sensitivity (own-cohort) Top-200 E14", 0.0699, 4, lambda: arm_f1("sc200", "E14")),
         ("4.5", "steelman 3B E11 delta", -0.002, 3, lambda: get(src["st11"], "delta_micro_f1.point")),
         ("4.5", "steelman 3B E11 CI high (MDE bound)", 0.003, 3, lambda: get(src["st11"], "delta_micro_f1.ci95.1")),
         ("4.5", "steelman 3B E14 delta", -0.033, 3, lambda: get(src["st14"], "delta_micro_f1.point")),
@@ -455,11 +513,38 @@ def main() -> int:
             ("5.5", "item 10 determinable", 30, 0, lambda: get(src["prev"], "items.10.determinable")),
         ]
 
-    # Per-label-space disclosure comes from the splits themselves.
-    for tn, exp_n, exp_gold, exp_ceil in ((50, 17151, 5.38, 0.998), (100, 17159, 6.91, 0.987),
-                                          (200, 17581, 8.74, 0.951)):
-        f = Path(args.splits_root) / f"top{tn}" / "test.jsonl"
+    # Per-label-space disclosure comes from the splits themselves. Top-100/200 must come from the
+    # *shared* partition, because that is the campaign §4.4 and Table 5 now report; reading them from
+    # the original tree is what let the prose quote one campaign's cohort while the table beside it
+    # reported the other's. The sensitivity paragraph's own-cohort counts are checked separately
+    # below, against the tree they actually belong to.
+    absent_splits: list[str] = []
+    disclosure = [(50, Path(args.splits_root), 17151, 5.38, 0.998, "4.4"),
+                  (100, Path(args.splits_root_scalability), 17459, 7.02, 0.984, "4.4"),
+                  (200, Path(args.splits_root_scalability), 17718, 8.75, 0.950, "4.4"),
+                  (100, Path(args.splits_root), 17159, 6.91, 0.987, "4.4 sensitivity"),
+                  (200, Path(args.splits_root), 17581, 8.74, 0.951, "4.4 sensitivity")]
+    for tn, root, exp_n, exp_gold, exp_ceil, sect in disclosure:
+        f = root / f"top{tn}" / "test.jsonl"
         if not f.exists():
+            #  Fall back to the aggregates scripts/42 emitted while building Table 5 from these very
+            #  splits. Weaker than recounting the split — it trusts the generator — but the split
+            #  files are clinical text and cannot exist in the public repository at all, and the
+            #  alternative is six checks that silently never run. Only the shared-partition tree is
+            #  mirrored this way; the superseded campaign's counts stay split-only.
+            disc = src["disc"]
+            key = f"top{tn}"
+            if disc and sect == "4.4" and key in disc.get("by_label_space", {}):
+                d = disc["by_label_space"][key]
+                CHECKS += [
+                    (f"{sect} (artifact)", f"Top-{tn} test notes", exp_n, 0, lambda d=d: d["test_notes"]),
+                    (f"{sect} (artifact)", f"Top-{tn} gold codes/note", exp_gold, 2,
+                     lambda d=d: d["gold_codes_per_note"]),
+                    (f"{sect} (artifact)", f"Top-{tn} recall ceiling at 15", exp_ceil, 3,
+                     lambda d=d: d["recall_ceiling_at_15"]),
+                ]
+            else:
+                absent_splits.append(f"{f} → 3 {sect} Top-{tn} disclosure checks")
             continue
 
         def measure(f=f):
@@ -473,9 +558,9 @@ def main() -> int:
             return n, tot / max(n, 1), capped / max(tot, 1)
 
         CHECKS += [
-            ("4.4", f"Top-{tn} test notes", exp_n, 0, lambda m=measure: m()[0]),
-            ("4.4", f"Top-{tn} gold codes/note", exp_gold, 2, lambda m=measure: m()[1]),
-            ("4.4", f"Top-{tn} recall ceiling at 15", exp_ceil, 3, lambda m=measure: m()[2]),
+            (sect, f"Top-{tn} test notes", exp_n, 0, lambda m=measure: m()[0]),
+            (sect, f"Top-{tn} gold codes/note", exp_gold, 2, lambda m=measure: m()[1]),
+            (sect, f"Top-{tn} recall ceiling at 15", exp_ceil, 3, lambda m=measure: m()[2]),
         ]
 
     failures, skipped = [], []
@@ -542,6 +627,9 @@ def main() -> int:
     # Three defects reached a built PDF while this script reported "0 mismatched", because it only
     # looked at numbers. An independent reviewer found all three. They are cheap to test for.
     hygiene = []
+    #  Findings raised *after* the hygiene block has already printed. They must still fail the run,
+    #  but appending them to `hygiene` would make the run print "hygiene: clean" and then exit 1.
+    blocking: list[str] = []
     msdir = Path(args.sections).parent
 
     #  (i) BibTeX prints the `note` field, so private annotations are typeset into the reference
@@ -568,10 +656,55 @@ def main() -> int:
     if caps.exists():
         ctext = caps.read_text(encoding="utf-8")
         if re.search(r"\+0\.373", ctext):
-            hygiene.append("figure caption still gives the superseded scalability lead +0.373 (now +0.399)")
+            hygiene.append("figure caption still gives the superseded scalability lead +0.373 (now +0.397)")
         # k=5 may be mentioned, but only alongside the k=2 figure the text reports as primary.
         if "25,845" in ctext and "10,338" not in ctext:
             hygiene.append("figure caption reports leakage at k=5 without the primary k=2 figure")
+
+    #  (iii-b) The scalability lead exists in four places — the artifact, Table 5, the §4.4 prose and
+    #  the S1 caption and annotation — and it drifted across all of them at once. Both partitions
+    #  were separately artifact-true, so every number-level check passed while the prose described
+    #  the superseded campaign and the table beside it described the current one. Bind the three
+    #  written copies to the shared-partition artifact so they cannot disagree again.
+    #
+    #  Each site is tested for existence separately: the published repository carries the figure
+    #  script but not the manuscript, and an earlier version of this block reached a caption
+    #  variable that only exists when the manuscript does — it ran clean here and crashed in a clone.
+    if src["shared200"]:
+        lead = (get(src["shared200"], "individual.E1_seed42.classification.micro_f1")
+                - get(src["shared200"], "individual.E14_seed42.classification.micro_f1"))
+        want = f"+{lead:.3f}"
+        for label, path in (("§4.4 prose", Path(args.sections) / "05_results.md"),
+                            ("Figure S1 caption", caps),
+                            ("Figure S1 script", msdir / "figures" / "S1_scalability.py")):
+            if path.exists() and want not in path.read_text(encoding="utf-8"):
+                hygiene.append(f"{label} does not carry the shared-partition Top-200 lead {want}")
+
+    #  §3.7's full-text count must agree with the matrix it summarizes. A stale "Eight studies could
+    #  be read at full text" survived the corpus expansion sitting in the same sentence as a 31-era
+    #  clause and contradicting §5.5's "thirty full texts", because no check bound that prose to the
+    #  matrix. Numbers written as words are invisible to a scan that only looks for digits.
+    matrix = Path(args.sections).parent / "notes" / "checklist_scoring_matrix.md"
+    methods = Path(args.sections) / "04_methods.md"
+    if matrix.exists() and methods.exists():
+        cells = [[c.strip() for c in l.strip().strip("|").split("|")]
+                 for l in matrix.read_text(encoding="utf-8").splitlines() if l.startswith("|")]
+        n_full = sum(1 for c in cells if len(c) > 2 and "full text" in c[1].lower())
+        WORD = {8: "Eight", 20: "Twenty", 21: "Twenty-one", 30: "Thirty", 31: "Thirty-one"}
+        want = f"{WORD.get(n_full, str(n_full))} studies could be read at full text"
+        prose = " ".join(methods.read_text(encoding="utf-8").split())
+        if want.lower() not in prose.lower():
+            hygiene.append(f"S3.7 disagrees with the matrix on studies readable at full text "
+                           f"({n_full} rows); expected the prose to read {want!r}")
+
+    #  The AI-use declaration has to name the literature screening and scoring. Those counts are an
+    #  empirical result of the paper and they are model-produced; a declaration that lists only
+    #  drafting and code understates what the reader is being asked to trust.
+    decl = Path(args.sections) / "09_declarations.md"
+    if decl.exists():
+        d = " ".join(decl.read_text(encoding="utf-8").split()).lower()
+        if "screen and score the literature corpus" not in d:
+            hygiene.append("S9 AI declaration does not cover the S3.7 literature screening/scoring")
 
     print("\nmanuscript hygiene:", "clean" if not hygiene else "")
     for h in hygiene:
@@ -618,16 +751,43 @@ def main() -> int:
          "stronger than the test supports; say 'no net benefit over a prevalence predictor'"),
         ("jointly necessary and individually insufficient",
          "capacity alone has a nonzero effect; state the interaction instead"),
+        ("helps on its own",
+         "reworded form of the same joint null; capacity alone is +0.036, CI excluding zero"),
+        #  Misattribution, not a stale value. "A second reader" and "single rater" both name a human
+        #  in a Methods section; the screening and scoring were AI-assisted and author-adjudicated,
+        #  and implying human double-screening claims a validity marker the study does not have.
+        ("second reader",
+         "the re-check was a second model pass; say AI-assisted adversarial re-screening (S3.7, S9)"),
+        ("single rater",
+         "no human rater scored the corpus; state AI-assisted and author-adjudicated instead"),
+        ("Single rater",
+         "no human rater scored the corpus; state AI-assisted and author-adjudicated instead"),
+        ("by one reader",
+         "screening was done by a language model, not a person"),
     ]
     #  A line that names the value as superseded is doing the right thing, not the wrong one.
     HISTORICAL = ("previous version", "earlier version", "superseded", "at 7B", "would have given",
                   "we first", "had said", "an earlier")
+    #  Scanning only `sections/` was too narrow. The highlights and the cover letter are prose that
+    #  reaches the editor, and they live as string literals in `scripts/46`, where this scan could
+    #  not see them — which is how a highlight came to assert the joint null in the one place with no
+    #  surrounding text to qualify it. Scan the generator (so the failure comes before the build) and
+    #  the built package (so it also comes from what actually ships). Python comments are exempt:
+    #  they document rejected wording and are never typeset.
+    #  The published repository does not carry the manuscript, so this glob legitimately finds
+    #  nothing there — and an empty scan printed "clean", which is the strongest possible statement
+    #  from the weakest possible evidence. Say what was scanned.
+    sections_present = Path(args.sections).is_dir()
+    scan_targets = [f for f in sorted(Path(args.sections).glob("*.md"))
+                    if not f.name.startswith("00_")]   # the title page lists rejected titles on purpose
+    scan_targets += [p for p in [Path(__file__).resolve().parent / "46_build_jbi_submission.py",
+                                 Path(args.sections).parent / "submission" / "jbi" / "cover_letter.md",
+                                 Path(args.sections).parent / "submission" / "jbi" / "highlights.tex"]
+                     if p.exists()]
     stale = []
-    for fname in sorted(Path(args.sections).glob("*.md")):
-        if fname.name.startswith("00_"):      # the title page documents rejected wording on purpose
-            continue
+    for fname in scan_targets:
         for n, line in enumerate(fname.read_text(encoding="utf-8").splitlines(), 1):
-            if any(h in line for h in HISTORICAL):
+            if any(h in line for h in HISTORICAL) or line.lstrip().startswith("#"):
                 continue
             for needle, why in SUPERSEDED_CLAIMS:
                 if needle in line:
@@ -636,8 +796,70 @@ def main() -> int:
         print("\nSUPERSEDED CLAIMS STILL ASSERTED:")
         for f, n, needle, why in stale:
             print(f"  {f}:{n}  {needle!r} — {why}")
+        #  This used to print and return 0. A retracted claim back in the text is the most serious
+        #  thing this script can find — more serious than a mismatched decimal, because no artifact
+        #  disagrees with it — and it was the one finding that did not fail the run. It did exactly
+        #  that once: the stale highlight was reported under a "0 mismatched" summary and an exit
+        #  code of zero, which is what a passing gate looks like to anything automated.
+        blocking.extend(f"superseded claim asserted in {f}:{n} — {needle!r} ({why})"
+                        for f, n, needle, why in stale)
+    elif not sections_present:
+        print(f"superseded-claim scan: NOT RUN — no manuscript at {args.sections} "
+              "(expected when running inside the published code repository, which does not carry "
+              "the manuscript; the prose checks and the release check need --sections)")
     else:
-        print("superseded-claim scan: clean")
+        print(f"superseded-claim scan: clean ({len(scan_targets)} files scanned)")
+
+    #  A split tree that is absent must read as absent. The public repository cannot carry the
+    #  splits at all — they are clinical text — so silence here would look like a pass.
+    if absent_splits:
+        print("\nSPLIT TREES NOT PRESENT (checks skipped, not passed):")
+        for s in absent_splits:
+            print(f"  {s}")
+
+    #  ---- release identifiers -----------------------------------------------------------------
+    #  The code-availability claim is the only one in the paper that points outside it, it is
+    #  repeated in two sections, and until now nothing checked it at all. This cannot verify that
+    #  the release exists — there is no network here, and no git working copy on this machine or on
+    #  MareNostrum5 — so it checks the two things that are checkable offline: that both sections
+    #  cite exactly the recorded identifiers, and that the version they cite has not been left
+    #  behind by a superseding release. The existence check is a human step, recorded in the file.
+    rel_path = Path(args.sections).parent / "release.json"
+    rel = load_json(rel_path)
+    if rel:
+        cited = rel.get("cited_release", {})
+        pending = rel.get("pending_release", {})
+        sites = [("3.9", Path(args.sections) / "04_methods.md"),
+                 ("9 Code availability", Path(args.sections) / "09_declarations.md")]
+        problems = []
+        for label, p in sites:
+            if not p.exists():
+                continue
+            text = p.read_text(encoding="utf-8")
+            for field in ("repository_url", "concept_doi"):
+                if rel[field] not in text:
+                    problems.append(f"§{label} does not cite {field} {rel[field]}")
+            for field in ("version", "version_doi"):
+                if cited.get(field) and cited[field] not in text:
+                    problems.append(f"§{label} does not cite the recorded {field} {cited[field]}")
+        if pending.get("version") and not pending.get("version_doi"):
+            problems.append(
+                f"release {pending['version']} is pending with no DOI recorded, and the manuscript "
+                f"still cites {cited.get('version')} — {cited.get('status', 'superseded')}")
+        if rel.get("verified_by_human_on") is None:
+            problems.append("no human has confirmed the release is live "
+                            f"({rel.get('verified_what')}); this script cannot check it")
+        if problems:
+            print("\nRELEASE CLAIM NOT SETTLED:")
+            for p in problems:
+                print(f"  {p}")
+            #  Fails the run deliberately. The manuscript currently directs readers to a release
+            #  whose code disagrees with it, and this script is the gate the submission passes
+            #  through. Clear it by publishing the release and filling in release.json — not by
+            #  deleting the check.
+            blocking.extend(f"release: {p}" for p in problems)
+        else:
+            print("release identifiers: consistent across both sections")
 
     print(f"\n{len(CHECKS) - len(failures) - len(skipped)} ok, {len(failures)} mismatched, "
           f"{len(skipped)} skipped")
@@ -649,6 +871,14 @@ def main() -> int:
         print("\nMISMATCHES (manuscript vs artifact):")
         for s, c, stated, actual in failures:
             print(f"  §{s} {c}: paper says {stated}, artifact says {actual}")
+    #  Blocking findings are not mismatches — no artifact disagrees with them, which is exactly why
+    #  they went unnoticed. They get their own heading and their own sentence in the exit line.
+    if blocking:
+        print("\nBLOCKING (no artifact disagrees; these still must not ship):")
+        for b in blocking:
+            print(f"  {b}")
+    if failures or blocking:
+        print(f"\nFAILED: {len(failures)} mismatch(es), {len(blocking)} blocking finding(s)")
         return 1
     return 0
 

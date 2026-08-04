@@ -1,0 +1,25 @@
+{
+  "note": "Aggregates of the test splits behind Table 5's disclosure rows. Top-50 from the reference partition; Top-100/200 from the shared-partition rebuild (scripts/51).",
+  "splits_root_top50": "data/splits_real",
+  "splits_root_scalability": "data/splits_shared",
+  "by_label_space": {
+    "top50": {
+      "test_notes": 17151,
+      "gold_codes_per_note": 5.381144,
+      "recall_ceiling_at_15": 0.99844,
+      "source": "data/splits_real/top50/test.jsonl"
+    },
+    "top100": {
+      "test_notes": 17459,
+      "gold_codes_per_note": 7.021651,
+      "recall_ceiling_at_15": 0.984477,
+      "source": "data/splits_shared/top100/test.jsonl"
+    },
+    "top200": {
+      "test_notes": 17718,
+      "gold_codes_per_note": 8.753471,
+      "recall_ceiling_at_15": 0.950088,
+      "source": "data/splits_shared/top200/test.jsonl"
+    }
+  }
+}

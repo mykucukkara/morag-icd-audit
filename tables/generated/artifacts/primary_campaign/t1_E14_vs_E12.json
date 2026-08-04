@@ -1,0 +1,27 @@
+{
+  "shared_notes": 17151,
+  "n_boot": 10000,
+  "n_perm": 10000,
+  "seed": 42,
+  "E12_evidence_constraint": {
+    "micro_f1": 0.1335,
+    "discriminative_lift": null
+  },
+  "E14_full_model": {
+    "micro_f1": 0.1329,
+    "discriminative_lift": null
+  },
+  "delta_micro_f1": {
+    "point": -0.0006,
+    "ci95": [
+      -0.0016,
+      0.0004
+    ],
+    "verdict": "NOT significant (spans 0)",
+    "approx_randomization_p": 0.2381
+  },
+  "delta_lift": {
+    "point": null,
+    "note": "lift undefined in one or both systems"
+  }
+}

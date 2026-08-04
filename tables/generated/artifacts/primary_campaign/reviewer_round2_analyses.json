@@ -1,0 +1,423 @@
+{
+  "top_n": 50,
+  "seed": 42,
+  "A_floor_selected_on_validation": {
+    "selection_split": "validation",
+    "by_K_validation": {
+      "K=3": {
+        "micro_f1": 0.2563,
+        "precision": 0.3585,
+        "recall": 0.1995,
+        "n": 17245,
+        "codes_per_note": 3.0
+      },
+      "K=5": {
+        "micro_f1": 0.2987,
+        "precision": 0.3104,
+        "recall": 0.2879,
+        "n": 17245,
+        "codes_per_note": 5.0
+      },
+      "K=8": {
+        "micro_f1": 0.3116,
+        "precision": 0.2608,
+        "recall": 0.3869,
+        "n": 17245,
+        "codes_per_note": 8.0
+      },
+      "K=10": {
+        "micro_f1": 0.3058,
+        "precision": 0.2353,
+        "recall": 0.4365,
+        "n": 17245,
+        "codes_per_note": 10.0
+      },
+      "K=12": {
+        "micro_f1": 0.3007,
+        "precision": 0.2179,
+        "recall": 0.485,
+        "n": 17245,
+        "codes_per_note": 12.0
+      },
+      "K=15": {
+        "micro_f1": 0.288,
+        "precision": 0.1958,
+        "recall": 0.5447,
+        "n": 17245,
+        "codes_per_note": 15.0
+      },
+      "K=20": {
+        "micro_f1": 0.2707,
+        "precision": 0.1719,
+        "recall": 0.6375,
+        "n": 17245,
+        "codes_per_note": 20.0
+      },
+      "K=25": {
+        "micro_f1": 0.2551,
+        "precision": 0.1551,
+        "recall": 0.7191,
+        "n": 17245,
+        "codes_per_note": 25.0
+      }
+    },
+    "selected_K": 8,
+    "test_once": {
+      "micro_f1": 0.3104,
+      "precision": 0.2596,
+      "recall": 0.386,
+      "n": 17151,
+      "codes_per_note": 8.0
+    },
+    "test_at_matched_budget_K15": {
+      "micro_f1": 0.285,
+      "precision": 0.1936,
+      "recall": 0.5398,
+      "n": 17151,
+      "codes_per_note": 15.0
+    },
+    "note": "K is chosen on validation and the selected K is evaluated once on test; the earlier figure picked the best K on test itself."
+  },
+  "B_matched_cardinality": {
+    "by_arm": {
+      "E1": {
+        "top1": {
+          "micro_f1": 0.2408,
+          "precision": 0.7682,
+          "recall": 0.1428,
+          "n": 17151,
+          "codes_per_note": 1.0
+        },
+        "top2": {
+          "micro_f1": 0.3816,
+          "precision": 0.7041,
+          "recall": 0.2617,
+          "n": 17151,
+          "codes_per_note": 2.0
+        },
+        "top3": {
+          "micro_f1": 0.4623,
+          "precision": 0.6458,
+          "recall": 0.3601,
+          "n": 17151,
+          "codes_per_note": 3.0
+        },
+        "top4": {
+          "micro_f1": 0.5082,
+          "precision": 0.5959,
+          "recall": 0.443,
+          "n": 17151,
+          "codes_per_note": 4.0
+        },
+        "top5": {
+          "micro_f1": 0.5318,
+          "precision": 0.5521,
+          "recall": 0.513,
+          "n": 17151,
+          "codes_per_note": 5.0
+        },
+        "top8": {
+          "micro_f1": 0.5387,
+          "precision": 0.4506,
+          "recall": 0.6699,
+          "n": 17151,
+          "codes_per_note": 8.0
+        },
+        "top10": {
+          "micro_f1": 0.5181,
+          "precision": 0.3984,
+          "recall": 0.7404,
+          "n": 17151,
+          "codes_per_note": 10.0
+        },
+        "top15": {
+          "micro_f1": 0.4494,
+          "precision": 0.3053,
+          "recall": 0.8511,
+          "n": 17151,
+          "codes_per_note": 15.0
+        },
+        "as_run": {
+          "micro_f1": 0.4494,
+          "precision": 0.3053,
+          "recall": 0.8511,
+          "n": 17151,
+          "codes_per_note": 15.0
+        }
+      },
+      "E11": {
+        "top1": {
+          "micro_f1": 0.0425,
+          "precision": 0.1356,
+          "recall": 0.0252,
+          "n": 17151,
+          "codes_per_note": 1.0
+        },
+        "top2": {
+          "micro_f1": 0.0718,
+          "precision": 0.1324,
+          "recall": 0.0492,
+          "n": 17151,
+          "codes_per_note": 2.0
+        },
+        "top3": {
+          "micro_f1": 0.1017,
+          "precision": 0.142,
+          "recall": 0.0792,
+          "n": 17151,
+          "codes_per_note": 3.0
+        },
+        "top4": {
+          "micro_f1": 0.1212,
+          "precision": 0.1421,
+          "recall": 0.1057,
+          "n": 17151,
+          "codes_per_note": 4.0
+        },
+        "top5": {
+          "micro_f1": 0.1369,
+          "precision": 0.1421,
+          "recall": 0.1321,
+          "n": 17151,
+          "codes_per_note": 5.0
+        },
+        "top8": {
+          "micro_f1": 0.1638,
+          "precision": 0.137,
+          "recall": 0.2037,
+          "n": 17151,
+          "codes_per_note": 8.0
+        },
+        "top10": {
+          "micro_f1": 0.1738,
+          "precision": 0.1337,
+          "recall": 0.2484,
+          "n": 17151,
+          "codes_per_note": 10.0
+        },
+        "top15": {
+          "micro_f1": 0.1865,
+          "precision": 0.1267,
+          "recall": 0.3532,
+          "n": 17151,
+          "codes_per_note": 15.0
+        },
+        "as_run": {
+          "micro_f1": 0.1865,
+          "precision": 0.1267,
+          "recall": 0.3532,
+          "n": 17151,
+          "codes_per_note": 15.0
+        }
+      },
+      "E14": {
+        "top1": {
+          "micro_f1": 0.0367,
+          "precision": 0.1314,
+          "recall": 0.0213,
+          "n": 17151,
+          "codes_per_note": 0.87
+        },
+        "top2": {
+          "micro_f1": 0.0671,
+          "precision": 0.1575,
+          "recall": 0.0426,
+          "n": 17151,
+          "codes_per_note": 1.46
+        },
+        "top3": {
+          "micro_f1": 0.0843,
+          "precision": 0.1613,
+          "recall": 0.057,
+          "n": 17151,
+          "codes_per_note": 1.9
+        },
+        "top4": {
+          "micro_f1": 0.0948,
+          "precision": 0.16,
+          "recall": 0.0673,
+          "n": 17151,
+          "codes_per_note": 2.26
+        },
+        "top5": {
+          "micro_f1": 0.103,
+          "precision": 0.1593,
+          "recall": 0.0761,
+          "n": 17151,
+          "codes_per_note": 2.57
+        },
+        "top8": {
+          "micro_f1": 0.1179,
+          "precision": 0.156,
+          "recall": 0.0947,
+          "n": 17151,
+          "codes_per_note": 3.27
+        },
+        "top10": {
+          "micro_f1": 0.1242,
+          "precision": 0.1544,
+          "recall": 0.1039,
+          "n": 17151,
+          "codes_per_note": 3.62
+        },
+        "top15": {
+          "micro_f1": 0.1329,
+          "precision": 0.1503,
+          "recall": 0.1191,
+          "n": 17151,
+          "codes_per_note": 4.26
+        },
+        "as_run": {
+          "micro_f1": 0.1329,
+          "precision": 0.1503,
+          "recall": 0.1191,
+          "n": 17151,
+          "codes_per_note": 4.26
+        }
+      }
+    },
+    "note": "A fifteen-code cap is a maximum, not an emitted count: E1 emits about fifteen codes per note and E14 about four. Comparing the arms at the same budget separates the architecture from the number of codes each chooses to emit."
+  },
+  "C_null_matched_per_note": {
+    "shared_notes": 17151,
+    "full_model_E14": {
+      "micro_f1": 0.1329,
+      "precision": 0.1503,
+      "recall": 0.1191,
+      "n": 17151,
+      "codes_per_note": 4.26
+    },
+    "random_pruning_null": {
+      "micro_f1": 0.1194,
+      "precision": 0.135,
+      "recall": 0.107,
+      "n": 17151,
+      "codes_per_note": 4.26
+    },
+    "oracle_over_shortlist": {
+      "micro_f1": 0.2639,
+      "precision": 0.2985,
+      "recall": 0.2365,
+      "n": 17151,
+      "codes_per_note": 4.26
+    },
+    "note": "The null and the oracle now emit exactly as many codes as the full model did on that note, so the comparison isolates which codes are kept, not how many. The shortlist is E11's emitted ranking, which already reflects LLM scoring: the oracle bounds selection over that list, not retrieval coverage."
+  },
+  "D_stagewise_gold_recall": {
+    "by_stage": {
+      "retrieval_only_top15": {
+        "arm": "E6",
+        "n": 17151,
+        "gold_total": 92288,
+        "gold_retained": 35432,
+        "gold_recall": 0.3839
+      },
+      "rag_top15": {
+        "arm": "E11",
+        "n": 17151,
+        "gold_total": 92288,
+        "gold_retained": 32593,
+        "gold_recall": 0.3532
+      },
+      "plus_evidence_constraint": {
+        "arm": "E12",
+        "n": 17151,
+        "gold_total": 92288,
+        "gold_retained": 11895,
+        "gold_recall": 0.1289
+      },
+      "plus_contrastive": {
+        "arm": "E13",
+        "n": 17151,
+        "gold_total": 92288,
+        "gold_retained": 34053,
+        "gold_recall": 0.369
+      },
+      "full_model": {
+        "arm": "E14",
+        "n": 17151,
+        "gold_total": 92288,
+        "gold_retained": 10994,
+        "gold_recall": 0.1191
+      }
+    },
+    "note": "Recall of gold codes in each arm's emitted set. These are descriptive retention rates along the ladder, not an additive decomposition of the F1 gap."
+  },
+  "E_label_space_on_shared_notes": {
+    "by_pair": {
+      "top50_vs_top100": {
+        "shared_notes": 2668,
+        "cells": {
+          "top50_E1": {
+            "micro_f1": 0.4443,
+            "precision": 0.3004,
+            "recall": 0.8531,
+            "n": 2668,
+            "codes_per_note": 15.0
+          },
+          "top50_E14": {
+            "micro_f1": 0.1277,
+            "precision": 0.1465,
+            "recall": 0.1131,
+            "n": 2668,
+            "codes_per_note": 4.08
+          },
+          "top100_E1": {
+            "micro_f1": 0.4716,
+            "precision": 0.3457,
+            "recall": 0.7418,
+            "n": 2668,
+            "codes_per_note": 15.0
+          },
+          "top100_E14": {
+            "micro_f1": 0.0969,
+            "precision": 0.1276,
+            "recall": 0.0782,
+            "n": 2668,
+            "codes_per_note": 4.28
+          }
+        },
+        "E1_lead_top50": 0.3166,
+        "E1_lead_top100": 0.3747,
+        "widens": true
+      },
+      "top50_vs_top200": {
+        "shared_notes": 2734,
+        "cells": {
+          "top50_E1": {
+            "micro_f1": 0.4515,
+            "precision": 0.3075,
+            "recall": 0.8497,
+            "n": 2734,
+            "codes_per_note": 15.0
+          },
+          "top50_E14": {
+            "micro_f1": 0.1335,
+            "precision": 0.1513,
+            "recall": 0.1195,
+            "n": 2734,
+            "codes_per_note": 4.29
+          },
+          "top200_E1": {
+            "micro_f1": 0.4757,
+            "precision": 0.3811,
+            "recall": 0.6326,
+            "n": 2734,
+            "codes_per_note": 15.0
+          },
+          "top200_E14": {
+            "micro_f1": 0.0692,
+            "precision": 0.1062,
+            "recall": 0.0513,
+            "n": 2734,
+            "codes_per_note": 4.36
+          }
+        },
+        "E1_lead_top50": 0.318,
+        "E1_lead_top200": 0.4065,
+        "widens": true
+      }
+    },
+    "note": "Each label space has its own subject-disjoint partition, so the headline across-label-space trend compares different cohorts. These paired subsets hold the notes fixed and vary only the label space."
+  }
+}

@@ -88,6 +88,21 @@ def main():
                      f"{tl.get('micro_f1',0):.4f}", f"{tl.get('precision',0):.4f}", f"{tl.get('recall',0):.4f}"])
     rows.append(["Positive control: strengthened neural (E3)", "512 tokens, 5 epochs",
                  "0.5296", "0.5386", "0.5209"])
+    #  The label-attention control is the architecture family the ICD-coding literature reports its
+    #  best numbers with, and it was the strongest supervised reference the study has — yet it lived
+    #  only in a Results paragraph while the weaker E3 sat in this table. Both protocols are shown
+    #  because they answer different questions, and both are read from the artifact.
+    lac = A / "label_attention_control.json"
+    if lac.exists():
+        d = json.loads(lac.read_text())
+        fb, tt = d.get("fixed_budget", {}), d.get("tuned_threshold", {})
+        enc = str(d.get("encoder", "?")).replace("_safetensors", "")
+        rows.append([f"Positive control: label-attention (E3b, {enc})",
+                     "fixed 15-code budget (= E1)",
+                     f"{fb.get('micro_f1',0):.4f}", f"{fb.get('precision',0):.4f}", f"{fb.get('recall',0):.4f}"])
+        rows.append(["Positive control: label-attention (E3b)",
+                     f"threshold {tt.get('threshold','?')} selected on validation",
+                     f"{tt.get('micro_f1',0):.4f}", f"{tt.get('precision',0):.4f}", f"{tt.get('recall',0):.4f}"])
     write(rows, out, "table2_reference_points",
           "Table 2. Reference points: note-blind floor and positive controls (Top-50, n = 17,151)")
 
@@ -162,6 +177,18 @@ def main():
         # Per-label-space disclosure: what the task itself becomes as the label set grows.
         n_row, gold_row, ceil_row = ["Test notes (n)"], ["Gold codes/note (mean)"], \
                                     ["Recall ceiling at a 15-code budget"]
+        #  These three rows are also written to an artifact. They are the only numbers in the paper
+        #  that can be derived *only* from the split files, which are clinical text and can never be
+        #  published — so on any machine without them the checks that verify §4.4's cohort figures
+        #  simply do not run, and a check that does not run looks exactly like a check that passed.
+        #  Emitting the aggregates (three scalars per label space, no text, no identifiers) lets the
+        #  guard verify them in the public repository's own layout.
+        disclosure: dict = {"note": ("Aggregates of the test splits behind Table 5's disclosure "
+                                     "rows. Top-50 from the reference partition; Top-100/200 from "
+                                     "the shared-partition rebuild (scripts/51)."),
+                            "splits_root_top50": str(args.splits_root),
+                            "splits_root_scalability": str(splits_scal),
+                            "by_label_space": {}}
         for tn in (50, 100, 200):
             # Top-50 is the reference partition; Top-100/200 were rebuilt on it (scripts/51),
             # so their counts must come from the rebuilt tree, not the superseded splits.
@@ -180,8 +207,22 @@ def main():
             n_row.append(f"{n:,}")
             gold_row.append(f"{tot / max(n, 1):.2f}")
             ceil_row.append(f"{capped / max(tot, 1):.3f}")
+            #  Stored at six decimals, not four. The Top-100 ceiling is 0.98449…, which prints as
+            #  0.984 in the table; rounded to four first it becomes 0.9845, and rounding *that* to
+            #  the three decimals the prose uses gives 0.985. An artifact that is itself pre-rounded
+            #  turns every downstream check into a double rounding.
+            disclosure["by_label_space"][f"top{tn}"] = {
+                "test_notes": n,
+                "gold_codes_per_note": round(tot / max(n, 1), 6),
+                "recall_ceiling_at_15": round(capped / max(tot, 1), 6),
+                "source": str(f),
+            }
         for r in (n_row, gold_row, ceil_row):
             rows.append(r + [""])
+        if disclosure["by_label_space"]:
+            (A / "scalability_disclosure.json").write_text(
+                json.dumps(disclosure, indent=2), encoding="utf-8")
+            print(f"  wrote {A / 'scalability_disclosure.json'}")
         write(rows, out, "table5_scalability",
               "Table 5. Scalability across label spaces (micro-F1, single seed 42, full test split)")
 
